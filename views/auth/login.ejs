@@ -1,0 +1,13 @@
+<%- include('../includes/header.ejs') %>
+<!-- #665eff -->
+<main class="login">
+    <form action="/login" method="post" class="login-form">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Login</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+</main>
+<%- include('../includes/footer.ejs') %>

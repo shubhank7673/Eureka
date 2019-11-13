@@ -30,15 +30,12 @@ const studentSchema = new Schema({
             analytics:{
                 avgQuizSc:{
                     type:Schema.Types.Decimal128,
-                    // require:true
                 },
                 noQuizAtt:{
                     type:Number,
-                    // require:true
                 },
                 noPollAtt:{
                     type:Number,
-                    // require:true
                 }
             }
     }]

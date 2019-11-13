@@ -1,20 +1,21 @@
 const express = require('express');
 
+const studentController = require('../controllers/student');
+const settingsController = require('../controllers/settings');
+
 const router = express.Router();
 
 // settings routes
-router.get('/settings',(req,res,next) => {
-});
-router.get('/settings/changeName',(req,res,next) => {
-});
-router.get('/settings/changePassword',(req,res,next) => {
-});
+router.get('/settings',settingsController.getSettings);
+router.get('/settings/changeName',settingsController.getChangeName);
+router.post('/settings/changeName',settingsController.postChangeName);
+router.get('/settings/changePassword',settingsController.getChangePassword);
+router.post('/settings/changePassword',settingsController.postChangePassword);
 router.get('/settings/changeAvatar',(req,res,next) => {
 });
-router.get('/settings/feedBack',(req,res,next) => {
-});
-router.get('/settings/logout',(req,res,next) => {
-});
+router.get('/settings/feedback',settingsController.getFeedback);
+router.post('/settings/feedback',settingsController.postFeedback);
+router.post('/settings/logout',settingsController.postLogout);
 
 
 // course routes 
