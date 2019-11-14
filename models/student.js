@@ -22,6 +22,10 @@ const studentSchema = new Schema({
         type:String,
         required:true
     },
+    batch:{
+        type:String,
+        // required:true
+    },
     courses:[{
             course:{
                 type:Schema.Types.ObjectId,

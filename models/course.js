@@ -19,8 +19,10 @@ const courseSchema = new Schema({
     courseTeam:[{
         techer:{
             type:Schema.Types.ObjectId,
-            ref:'Teacher'
-        }
+            ref:'Teacher',
+            required:true
+        },
+        batches:[]
     }],
     batches:[{
             name:{

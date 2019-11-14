@@ -1,0 +1,14 @@
+<%- include('../../includes/header.ejs') %>
+</head>
+<body>
+<main>
+    <a href="/settings/changeName">Change Name</a>
+    <a href="/settings/changePassword">Change Password</a>
+    <a href="/settings/chageAvatar">Change Avatar</a>
+    <a href="/settings/feedback">Feedback</a>
+    <form action="/settings/logout" method="post">
+        <button type="submit">Logout</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+</main>
+<%- include('../../includes/footer.ejs') %>

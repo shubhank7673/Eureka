@@ -1,0 +1,13 @@
+<%- include('../../includes/header.ejs') %>
+</head>
+<body>
+<main>
+    <form action="/settings/feedback" method="post">
+        <label for="subject">Subject</label>
+        <input type="text" name="subject" id="subject">
+        <textarea name="feedback" cols="60" rows="20"></textarea>
+        <button type="submit">Submit</button>
+        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+    </form>
+</main>
+<%- include('../../includes/footer.ejs') %>

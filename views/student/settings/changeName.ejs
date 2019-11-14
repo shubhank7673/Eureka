@@ -1,0 +1,16 @@
+<%- include('../../includes/header.ejs') %>
+</head>
+<body>
+<main>
+    <form action="/settings/changeName" method="post">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" value="<%= firstName %>" id="firstName">
+        <label for="middleName">Middle Name</label>
+        <input type="text" name="middleName" value="<%= middleName %>" id="middleName">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" value="<%= lastName %>" id="lastName">
+        <button type="submit">Change</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+</main>
+<%- include('../../includes/footer.ejs') %>

@@ -1,0 +1,212 @@
+a {
+    outline: none;
+    border: none;
+    -moz-outline-style: none;
+  }
+.top-circle{
+    position: absolute;
+    width: 120vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 50%;
+    left: -5vw;
+    top: -10vh;
+    background: #665effff;
+}
+
+.top-circle-container
+{
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 23vh;
+    width: 100vw;
+}
+.course-name{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    font-size: 145%;
+    color: white;
+    margin: 0;
+}
+.left-arrow{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+.analytics-icon{
+    margin: 0;
+    position: absolute;
+    top: 7.5vh;
+    right:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.7s;
+}
+.analytics-icon:active{
+    height: 11vw;
+    width: 11vw;
+}
+.discussion-icon{
+    margin: 0;
+    position: absolute;
+    top: calc(7.5vh + 5px);
+    right:calc(30px + 9vw);
+    height: 9vw;
+    width: 9vw;
+    transition:0.7s;
+}
+.discussion-icon:active{
+    height: 11vw;
+    width: 11vw;
+}
+.middle{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 0 15px;
+    
+}
+.middle{
+    text-decoration: none;
+    color: grey;
+    font-size: calc( 5vw - 2px );
+    /* font-weight: bold; */
+}
+.Active{
+    color:white;
+    padding: 5px;
+    border-radius: 23px;
+    background: #665effff;
+    margin-top: -5px;
+    transition: background 0.5s;
+}
+.class-card{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 6% 10px;
+    padding-top: 4%;
+    border-radius:15px;
+    /* border: 1px solid black; */
+    height: 140px;
+}
+.class-card .left{
+    position: absolute;
+    left: 5%;
+    width: 23%;
+    text-align: center;
+}
+.class-card .left .month{
+    background: #454f63;
+    color: white;
+    padding: 0px 6vw 0px 6vw;
+    font-weight: bold;
+}
+.class-card .left .month>p{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.class-card .left .date{
+    color: #454f63;
+    margin-top: 5px;
+    font-size: 27px;
+    font-weight: bolder;
+}
+.class-card .left .day{
+    color: #454f63;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: bolder;
+}
+.class-card .right{
+    position: absolute;
+    right: 0;
+    width: 64%;
+    padding-left: 8%;
+    text-align: start;
+    height: inherit;
+    /* border: 1px solid black; */
+}
+.class-card .right .title{
+    color: #454f63;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+.activities-info{
+    font-weight: bold;
+    color:#454f63;
+    /* border: 1px solid blanchedalmond; */
+}
+.activities-info img{
+    height: 20px;
+    width: 20px;
+    /* position: absolute; */
+    /* margin-top: 10px; */
+    font-weight: bold;
+    margin-right: 6%;
+}
+.course-description{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    border-radius: 25px;
+    padding: 15px;
+    margin:10px;
+    margin-top: 20px;
+    text-align: center;
+}
+.course-description h3{
+    margin: auto;
+}
+.links{
+    text-align: left;
+}
+.course-team{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    border-radius: 25px;
+    padding: 15px;
+    margin:10px;
+    margin-top: 20px;
+    text-align: center;
+}
+.course-team h3{
+    margin: auto;
+}
+.team-member{
+    display: flex;
+    justify-content: space-between;
+}
+.team-member-info{
+    /* border: 1px solid black; */
+    width: 80%;
+    text-align: center;
+    overflow: hidden;
+}
+p{
+    margin: auto;
+}
+.team-member-info p{
+    margin-top: 5px;
+}
+.team-member-avatar-container{
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.team-member-avatar{
+    height: 50px;
+    width: 50px;
+}
+.info{
+    color:#454f63;
+}

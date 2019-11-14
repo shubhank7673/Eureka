@@ -1,0 +1,96 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto', sans-serif !important;
+    margin: 0px;
+}
+
+.img-forg{
+    z-index: 2;
+    width: 100vw;
+    height: 30vh;
+    position: absolute;
+    background: rgba(102, 94, 255, 0.8);
+    top: 0px;
+} 
+
+.back-img{
+    height: 30vh;
+    width: 100vw;
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    top: 0px;
+}
+
+.avatar{
+    position: absolute;
+    width: 20vw;
+    top: 10px;
+    height: 15vh;
+    z-index: 3;
+    left: 10px;
+}
+
+.name,.email{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+
+.name{
+    margin-top: 16vh;
+    margin-left: 4vw;
+}
+
+.email{
+    margin-top: 20vh;
+    margin-left: 4vw;
+}
+
+.analytics{
+    font-size: 14px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 40px 10px;
+    border-radius: 12px;
+    border: 10px solid rgba(112,112,112,0); 
+    padding: 0px 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.analytics h1{
+    text-align: left;
+}
+
+.analytics h3{
+    margin-left: 20px;
+    font-weight: lighter;
+}
+
+.analytics hr{
+    margin: 4px 0px;
+}
+
+.scores{
+    font-weight: bold;
+}
+.left-arrow{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    height: 9vw;
+    width: 9vw;
+    z-index: 5;
+    /* border:1px solid black; */
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}

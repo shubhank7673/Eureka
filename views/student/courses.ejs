@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/courses.css">
+</head>
+<body>
+    <div class="header">
+    <header>
+        <a href="/settings"><img class="settings-btn" src="images/settings.svg" alt=""></a>
+        <div class="top-left-circle">
+            <img class="logo" src="images/eureka_logo.png" alt="">
+        </div>
+    </header>
+    </div>
+    <div class="courses">
+        <% for(let course of courseList) { %>
+            <a href="course/<%= course._id %>" class="course-link">
+            <div class="course ripple">
+                    <!-- <p><%= course._id %></p> -->
+                    <h3 class="course-courseCode"><%= course.courseCode %></h3>
+                    <div class="course-tab-inner">
+                        <div class="course-avatar">
+                                <img src="images/test-avatar.svg" alt="">
+                        </div>
+                        <div class="course-tab-info">
+                            <h2><%= course.courseName %></h2>
+                            <h3><%= course.courseAdmin %></h3>
+                        </div>
+                    </div>    
+                </div>
+            </a>
+            <%}%>
+    </div>
+</body>
+</html>
