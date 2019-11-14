@@ -17,6 +17,8 @@ router.get('/settings/feedback',settingsController.getFeedback);
 router.post('/settings/feedback',settingsController.postFeedback);
 router.post('/settings/logout',settingsController.postLogout);
 
+//Dummy Route 
+router.get('/analytics',studentController.getAnalytics);
 
 // course routes 
 router.get('/courses',(req,res,next) => {

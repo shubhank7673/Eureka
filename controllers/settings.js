@@ -6,7 +6,7 @@ const Student = require('../models/student');
 
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth:{
-        api_key: 'api_key_is_hidden'
+        api_key: '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'
     }
 }));
 
