@@ -28,12 +28,12 @@
         </div>
         <div class="boys-avatars">
             <% for(let i = 1; i <= 4; i++){ %>
-                <img class="avatar" src="/images/avatars/boy<%= i %>_shade1.svg" onclick="changeAvatar(this)">
+            <img class="avatar" src="/images/avatars/boy<%= i %>_shade1.svg" onclick="changeAvatar(this)">
             <% } %>
         </div>
         <div class="girls-avatars">
             <% for(let i = 1; i <= 4; i++){ %>
-                <img class="avatar" src="/images/avatars/girl<%= i %>_shade1.svg" onclick="changeAvatar(this)">
+            <img class="avatar" src="/images/avatars/girl<%= i %>_shade1.svg" onclick="changeAvatar(this)">
             <% } %>
         </div>
         <form action="/settings/changeAvatar" method="post">
@@ -43,18 +43,17 @@
         </form>
     </main>
     <script>
-        function changeAvatar(ele){
+        function changeAvatar(ele) {
             let sel_avatar = document.querySelector(".sel-avatar");
             sel_avatar.src = ele.src;
             document.querySelector("#update_avatar").value = ele.src;
             let avt = document.querySelector(".sel-avatar");
-            if(avt)
-            {
+            if (avt) {
                 avt.classList.remove("sel-avatar");
             }
             ele.classList.add("sel-avatar");
         }
-        function changeShade(shade){
+        function changeShade(shade) {
             let arr = document.querySelectorAll(".avatar");
             arr.forEach(i => {
                 let src = String(i.src);
