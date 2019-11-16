@@ -69,7 +69,7 @@ app.use(studentRoutes);
 
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(5000,()=>{console.log("server on port 5000")});
+    app.listen(3000);
 }).catch(err => {
     console.log('Database connection error');
 });
