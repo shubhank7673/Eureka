@@ -30,6 +30,7 @@ html{
     width:42px;
     transition:transform 0.5s;
 }
+
 .settings-btn:active {
     transform: rotate(90deg);
  }
@@ -59,12 +60,13 @@ html{
     top:180px;
 }
 .course{
-    margin: 10px;
-    border-radius: 10px;
+    margin: 15px;
+    border-radius: 25px;
     /* padding:1px; */
     margin-top:5px !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
     /* border:1px solid black; */
+    color: #454f63;
 }
 .course-courseCode{
     font-weight: bold;
@@ -78,7 +80,7 @@ html{
     width:70px;
     /* padding-bottom: 30px; */
     float: left;
-    border: 2px solid black;
+    border: 2px solid #454f63;
     border-radius: 50%;
     overflow: hidden;
     text-align: center;

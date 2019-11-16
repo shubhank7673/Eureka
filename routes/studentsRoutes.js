@@ -17,8 +17,7 @@ router.get('/settings/feedback',settingsController.getFeedback);
 router.post('/settings/feedback',settingsController.postFeedback);
 router.get('/settings/aboutus',settingsController.getAboutUs);
 router.post('/settings/logout',settingsController.postLogout);
-
-
+router.get('/settings/aboutus',settingsController.getAboutUs);
 
 // course routes
 router.get('/',studentController.getHome);  
@@ -29,8 +28,7 @@ router.get('/course/:courseId',studentController.getCourse);
 router.get('/course/:courseId/analytics',studentController.getAnalytics);
 router.get('/course/:courseId/discussion',(req,res,next) => {
 });
-router.get('/course/:courseId/class/:classId',(req,res,next) => {
-});
+router.get('/course/:courseId/class/:classId',studentController.getClass);
 router.get('/course/:courseId/class/:classId/:quizId',(req,res,next) => {
     console.log(req.params.courseId,req.params.classId,req.params.quizId);
 });

@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body{
+    background: #665effff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+html{
+    /* background: #665effff; */
+    margin: 0;
+    padding: 0;
+}
+.half-white{
+    height: 100%;
+    width: 50%;
+    left:0;
+    top:0;
+    position: fixed;
+    background: white;
+}
+input:focus{
+    outline:none;
+}
+.logo-div{
+    width: 100vw;
+    height:25vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+}
+.logo-div > .logo{
+    height:16vh;
+    width:16vh;
+}
+.main-login{
+    box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.26);
+    height: 99vh;
+    /* width: 100vw; */
+    background:white;
+    /* border: 1px solid black; */
+    margin:0vh 0vw 0vw 0vw;
+    border-radius: 50px;
+    justify-content: center;
+    color: black;
+    /* text-align: center; */
+    /* display: flex; */
+}
+.login-email{
+    /* padding: 10px; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.17);
+    border: none;
+    border-radius: 10px;
+    height: 48px;
+    width: calc(85vw - 3vw);
+    border-radius: 40px;
+    margin-top: 11vh;
+    /* top: 1vh; */
+    font-size: 20px;
+    padding-left: 5vw;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    /* font-weight: bold; */
+    color:#454f63;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #454f63;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    opacity: 0.5; /* Firefox */
+  }
+.login-passwd{
+    /* padding: 10px; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.17);
+    border: none;
+    border-radius: 10px;
+    /* height: 6vh; */
+    height: 48px;
+    width: calc(85vw - 3vw);
+    border-radius: 40px;
+    margin-top: 6vh;
+    font-size: 20px;
+    padding-left: 5vw;
+    font-family: 'Montserrat', sans-serif;
+    /* font-weight: bold; */
+    color:#454f63;
+    /* top: 1vh; */
+}
+.login-btn{
+    display: flex;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.26);
+    /* justify-content: space-between; */
+    background: #665effff;
+    border:none;
+    color: white;
+    padding:16px 4vw 8px 8vw;
+    border-radius: 30px;
+    font-size: 110%;
+    margin:0 auto;
+    margin-top:9vh;
+}
+.login-btn:focus{
+    outline: none;
+}
+.login-form{
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.login-icon-div{
+    /* position: absolute; */
+    /* right: 0; */
+    /* border: 1px solid black; */
+    padding:0 0 0 5px;
+    margin-left: 5px;
+}
+.login-icon{
+    height: 25px;
+    width: 25px;
+    /* display: none; */
+}
+.login-icon-spinner{
+    height: 25px;
+    width: 25px;
+    -webkit-animation: rotation 0.3s infinite linear;
+    /* display: none; */
+}
+@-webkit-keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(359deg);
+    }
+}
+.incorrect{
+    padding-top: 2vh;
+    color: red;
+    font-weight: bold;
+}

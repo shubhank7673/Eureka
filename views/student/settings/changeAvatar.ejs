@@ -9,7 +9,7 @@
         <img src="<%= curr_avatar %>" class="curr-avatar">
         <h3 class="name">Piyush Jain</h3>
         <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <a href="/settings"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+        <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
     </header>
     <main>
         <div class="heading">
@@ -47,11 +47,11 @@
             let sel_avatar = document.querySelector(".sel-avatar");
             sel_avatar.src = ele.src;
             document.querySelector("#update_avatar").value = ele.src;
-            let avt = document.querySelector(".sel-avatar");
+            let avt = document.querySelector(".foc-avatar");
             if (avt) {
-                avt.classList.remove("sel-avatar");
+                avt.classList.remove("foc-avatar");
             }
-            ele.classList.add("sel-avatar");
+            ele.classList.add("foc-avatar");
         }
         function changeShade(shade) {
             let arr = document.querySelectorAll(".avatar");
@@ -62,5 +62,8 @@
                 i.src = split_src;
             });
         }
+        function goBack() {
+            window.history.back();
+    }
     </script>
     <%- include('../../includes/footer.ejs') %>

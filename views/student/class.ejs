@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Class</title>
+    <link rel="stylesheet" href="/css/class.css">
+    <link rel="stylesheet" href="/css/ripple.css">
+</head>
+<body>
+<%- include('../includes/loader.ejs') %>
+<div id="screen" style="display: none;">
+    <header>
+            <div class="top-circle-container">
+                <div class="top-circle">
+                </div>
+                <h3 class="class-name">class 1</h3>
+                <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
+            </div>
+    </header>
+    <div class="class-card ripple">
+        <div class="top-heading">
+            <h3>schedule</h3>
+        </div>
+        <hr>
+        <div class="left">
+            <div class="month">
+                JAN
+            </div>
+            <div class="date">
+                19
+            </div>
+            <div class="day">
+                    Sat
+            </div>
+        </div>
+        <div class="right">
+            <div class="timing">
+                    09:00 AM - 10:00 AM
+            </div>
+        </div>
+    </div>
+    <div class="course-incharge-container ripple">
+        <div class="top-heading">
+            <h3>Class Incharge</h3>
+        </div>
+        <hr>
+        <div class="course-incharge" style="margin-top: 20px;">
+            <div class="course-incharge-avatar-container">
+                <img class="course-incharge-avatar" src="/images/test-avatar.svg" alt="">
+            </div>
+            <div class="course-incharge-info">
+                <h3>Dr. Mahesh Kumar</h3>
+            </div>
+        </div>
+    </div>
+    <div class="class-activities">
+        <div class="top-heading">
+            <h3>Class Activities</h3>
+        </div>
+        <hr>
+        <div class="quiz ripple">
+                <img src="/images/quiz-icon.svg" alt="">
+                <div style="font-weight: bold;">
+                    Quiz - 1
+                </div>
+                <div class="marks" style="margin-left: 6vw;font-weight: bold;">
+                    40/40
+                </div>
+                <img src="/images/check.svg" style="margin-left: 3vw;height: 40px;width: 30px;" alt="">
+        </div>
+        <div class="quiz poll ripple">
+                <img src="/images/poll-icon.svg" alt="">
+                <div style="font-weight: bold;margin-left: 2vw;margin-right: 2vw;">
+                    Poll - 1
+                </div>
+                <img src="/images/check.svg" style="margin-left: 2vw;" alt="">
+        </div>
+        </div>
+</div>
+</body>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<script>
+        let loader = document.getElementById("loader");
+        loader.style.display="none";
+        let screen = document.getElementById("screen");
+        screen.style.display="block";
+</script>
+</html>

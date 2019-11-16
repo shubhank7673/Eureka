@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<%- include('../includes/loader.ejs') %>
+<div id="screen" style="display: none;">
     <header>
         <div class="top-circle-container">
             <div class="top-circle">
@@ -36,7 +38,7 @@
     <div class="timeline" style="display: block;">
         <div class="class-list">
             <% for (let classInfo of course.classes) {%>
-            <div class="class-card ripple">
+            <div class="class-card ripple" onclick="parent.location='/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
                 <div class="left">
                     <div class="month">
                         <%= classInfo.class.month %>
@@ -110,6 +112,7 @@
                 </div>
         </div>
     </div>
+</div>
 </body>
 <script>
     function openTimeline() {
@@ -139,5 +142,11 @@
         var element2 = document.querySelector(".syllabus-button");
         element2.classList.add("Active");
     }
+</script>
+<script>
+        let loader = document.getElementById("loader");
+        loader.style.display="none";
+        let screen = document.getElementById("screen");
+        screen.style.display="block";
 </script>
 </html>
