@@ -88,8 +88,11 @@ module.exports.getHome = (req,res,next) => {
 module.exports.getCourse = (req,res,next) => {
     res.render('student/course',{title:'course',course:course})
 }
-module.exports.getAnalytics = (req,res,next) =>{
-    res.render('student/analytics',{ pageTitle: 'Analytics' });
+exports.getAnalytics = (req, res, next) => {
+    res.render('student/analytics', {
+        pageTitle: 'Analytics',
+        curr_avatar: req.student.avatar
+    });
 };
 module.exports.getClass = (req,res,next) => {
     // console.log(req.params.courseId,req.params.classId);

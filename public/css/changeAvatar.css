@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 0px;
+    outline: none !important;
+}
+
+.img-forg{
+    z-index: 2;
+    width: 100vw;
+    height: 30vh;
+    position: absolute;
+    background: rgba(102, 94, 255, 0.8);
+    top: 0px;
+} 
+
+.back-img{
+    height: 30vh;
+    width: 100vw;
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    top: 0px;
+}
+
+.curr-avatar{
+    position: absolute;
+    width: 20vw;
+    top: 10px;
+    height: 15vh;
+    z-index: 3;
+    left: 10px;
+}
+
+.name,.email{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+
+.name{
+    margin-top: 16vh;
+    margin-left: 4vw;
+}
+
+.email{
+    margin-top: 20vh;
+    margin-left: 4vw;
+}
+
+.left-arrow{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    height: 9vw;
+    width: 9vw;
+    z-index: 5;
+    /* border:1px solid black; */
+    transition:0.3s;
+}
+
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+/*454f63*/
+main{
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 0px 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 2px solid rgba(112,112,112,0); 
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.heading{
+    display: flex;
+    font-size: 5vw;
+    font-weight: bold;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+
+.main-avatars{
+    display: flex;
+    margin: 0 10px;
+    justify-content: space-between;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.main-avatar{
+    width: 20vw;
+}
+
+.container-hands{
+    display: flex;
+    justify-content: space-between;
+    margin: 4vh 8vw;
+}
+
+.hand{
+    width: 16vw;
+}
+
+.boys-avatars{
+    margin: 15px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.girls-avatars{
+    margin: 15px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.avatar{
+    width: 20vw;
+}
+
+.changeAvatar-btn{
+    font-size: 16px;
+    display: block;
+    margin: 0px auto;
+    margin-top: 12px;
+    color: white;
+    background: rgba(102, 94, 255, 0.8);;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.foc-avatar{
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+}

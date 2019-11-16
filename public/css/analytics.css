@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
 *{
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
 }
 
 body{
-    /* font-family: 'Roboto', sans-serif !important; */
+    font-family: 'Montserrat', sans-serif !important;
     margin: 0px;
 }
 
@@ -54,13 +54,28 @@ body{
     margin-left: 4vw;
 }
 
+.left-arrow{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    height: 9vw;
+    width: 9vw;
+    z-index: 5;
+    /* border:1px solid black; */
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+
 .analytics{
     font-size: 14px;
     background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.17);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
     margin: 40px 10px;
-    border-radius: 25px;
-    /* border: 0px solid rgba(112,112,112,0);  */
+    border-radius: 12px;
+    border: 10px solid rgba(112,112,112,0); 
     padding: 0px 30px;
     padding-top: 20px;
     padding-bottom: 30px;
@@ -81,18 +96,4 @@ body{
 
 .scores{
     font-weight: bold;
-}
-.left-arrow{
-    position: absolute;
-    top: 15px;
-    right:15px;
-    height: 9vw;
-    width: 9vw;
-    z-index: 5;
-    /* border:1px solid black; */
-    transition:0.3s;
-}
-.left-arrow:active{
-    height: 11vw;
-    width: 11vw;
 }

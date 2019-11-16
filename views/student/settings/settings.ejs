@@ -1,14 +1,43 @@
 <%- include('../../includes/header.ejs') %>
+
+<link rel="stylesheet" href="/css/ripple.css">
+<link rel="stylesheet" href="/css/settings.css">
 </head>
+
 <body>
-<main>
-    <a href="/settings/changeName">Change Name</a>
-    <a href="/settings/changePassword">Change Password</a>
-    <a href="/settings/chageAvatar">Change Avatar</a>
-    <a href="/settings/feedback">Feedback</a>
-    <form action="/settings/logout" method="post">
-        <button type="submit">Logout</button>
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    </form>
-</main>
-<%- include('../../includes/footer.ejs') %>
+    <header>
+        <div class="img-forg"></div>
+        <img src="/images/analytics-back.svg" class="back-img">
+        <img src="<%= curr_avatar %>" class="avatar">
+        <h3 class="name">Piyush Jain</h3>
+        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <a href="/"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+    </header>
+
+    <main class="settings">
+        <a href="/settings/changeName" class="settings__option ripple"><img class="settings__img"
+                src="/images/changeName.svg">Change
+            Name</a>
+        <hr>
+        <a href="/settings/changePassword" class="settings__option ripple"><img class="settings__img"
+                src="/images/changePassword.svg">Change Password</a>
+        <hr>
+        <a href="/settings/changeAvatar" class="ripple"><img class="settings__img" src="/images/changeAvatar.svg">Change
+            Avatar</a>
+    </main>
+
+    <section class="feedback settings">
+        <a href="/settings/aboutus" class="ripple"><img class="settings__img" src="/images/aboutus.svg">About Us</a>
+        <hr>
+        <a href="/settings/feedback" class="ripple"><img class="settings__img" src="/images/feedback.svg">Feedback</a>
+    </section>
+
+    <section class="logout settings ripple">
+        <form action="/settings/logout" method="post">
+            <img class="settings__img" src="/images/logout.svg">
+            <button type="submit" class="logout-btn">Logout</button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+    </section>
+
+    <%- include('../../includes/footer.ejs') %>

@@ -12,13 +12,12 @@ router.get('/settings/changeName',settingsController.getChangeName);
 router.post('/settings/changeName',settingsController.postChangeName);
 router.get('/settings/changePassword',settingsController.getChangePassword);
 router.post('/settings/changePassword',settingsController.postChangePassword);
-router.get('/settings/changeAvatar',(req,res,next) => {
-});
+router.get('/settings/changeAvatar',settingsController.getChangeAvatar);
+router.post('/settings/changeAvatar',settingsController.postChangeAvatar);
 router.get('/settings/feedback',settingsController.getFeedback);
 router.post('/settings/feedback',settingsController.postFeedback);
 router.post('/settings/logout',settingsController.postLogout);
-
-
+router.get('/settings/aboutus',settingsController.getAboutUs);
 
 // course routes
 router.get('/',studentController.getHome);  

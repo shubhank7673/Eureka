@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 0px;
+    outline: none !important;
+}
+
+.img-forg{
+    z-index: 2;
+    width: 100vw;
+    height: 30vh;
+    position: absolute;
+    background: rgba(102, 94, 255, 0.8);
+    top: 0px;
+} 
+
+.back-img{
+    height: 30vh;
+    width: 100vw;
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    top: 0px;
+}
+
+.avatar{
+    position: absolute;
+    width: 18vw;
+    top: calc(10px + 4vh);
+    height: 10vh;
+    z-index: 3;
+    left: 10px;
+    background: white;
+    border-radius: 15px;
+}
+
+.name,.email{
+    font-size: 15px;
+    color: white;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+
+.name{
+    margin-top: 16vh;
+    margin-left: 4vw;
+}
+
+.email{
+    margin-top: 20vh;
+    margin-left: 4vw;
+}
+
+.left-arrow{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    height: 9vw;
+    width: 9vw;
+    z-index: 5;
+    /* border:1px solid black; */
+    transition:0.3s;
+}
+
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+/*454f63*/
+
+.settings{
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 0px 10px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 10px solid rgba(112,112,112,0); 
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+a{
+    padding-left: 0px;
+    text-decoration: none;
+    display: block;
+    color: #454f63;
+}
+
+.settings__img{
+    width: 15vw;
+    height: 4vh;    
+    vertical-align: middle;
+}
+
+hr{
+    margin-left: 0px;
+    width: 35%;
+}
+
+.settings__option{
+    margin-bottom: 5px;
+}
+
+.feedback,.logout{
+    margin-top: 20px;
+    padding: 8px 0px;
+}
+
+.logout-btn{
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif !important;
+    color: #454f63;
+    text-align: left;
+    width: 70vw;
+    outline: none;
+    background: white;
+    border: none;
+    font-size: 16px;
+    padding: 0px;
+}
