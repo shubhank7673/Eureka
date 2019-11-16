@@ -22,6 +22,13 @@ const courseSchema = new Schema({
             ref:'Teacher',
             required:true
         },
+        name:{
+            type:String,
+            required:true
+        },
+        role:{
+
+        },
         batches:[]
     }],
     batches:[{
@@ -32,15 +39,48 @@ const courseSchema = new Schema({
     }],
     classes:[{
         class:{
-            type:Schema.Types.ObjectId,
-            ref:'Class',
-            require:true
+            classId:{
+                type:Schema.Types.ObjectId,
+                ref:'Class',
+                require:true
+            },
+            title:{
+                type:String,
+                require:true    
+            },
+            timing:{
+                type:String,
+                require:true
+            },
+            date:{
+                type:String,
+                require:true
+            },
+            month:{
+                type:String,
+                require:true
+            },
+            day:{
+                type:String,
+                require:true
+            }
         },
         batch:{
             type:String,
             require:true
         }
-    }]
+    }],
+    courseTextbooks:[{
+        name:{
+            type:String,
+            required:true
+        },
+        author:{
+            type:String,
+            required:true
+        }
+    }],
+    courseReferences:[]
 })
 
 module.exports = mongoose.model('Course',courseSchema);

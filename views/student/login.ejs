@@ -14,20 +14,27 @@
     </div>
     <div class="main-login">
         <form class="login-form" action="/login" method="POST">
-            <% if(isIncorrect){%>
-                <div class="incorrect">Incorrect email or password</div>
-            <%}%>
-            <input class="login-email" id="emailField" type="email" name="email" placeholder="email" required>
-            <input class="login-passwd" id="passwordField" type="password" name="password" placeholder="password" required>
+            <!-- <div class="login-email"> -->
+                <input class="login-email" id="emailField" type="email" name="email" placeholder="email" required>
+            <!-- </div> -->
+            <!-- <div class="login-passwd"> -->
+                <input class="login-passwd" id="passwordField" type="password" name="password" placeholder="password" required>
+            <!-- </div> -->
             <button class="login-btn not-loading" type="submit" onclick="enableAnimation()" >
-                <div> Login </div><div class="login-icon-div">
-                    <img class="login-icon" src="/images/login.svg" alt="">
-                </div>
+                    <div> Login </div><div class="login-icon-div">
+                        <img class="login-icon" src="/images/login.svg" alt="">
+                    </div>
+                    <!-- <div class="login-icon-div">
+                        <img class="login-spinner" src="/images/login.svg" alt="">
+                    </div> -->
             </button>
             <button class="login-btn loading" type="submit" style="display: none;">
                 <div> Login </div><div class="login-icon-div">
                     <img class="login-icon-spinner" src="/images/spinner.svg" alt="">
                 </div>
+                <!-- <div class="login-icon-div">
+                    <img class="login-spinner" src="/images/login.svg" alt="">
+                </div> -->
             </button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>

@@ -3,26 +3,35 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div class="img-forg"></div>
-    <img src="/images/analytics-back.svg" alt="background" class="back-img">
-    <img src="/images/analytics-avatar.svg" alt="avatar" class="avatar">
-    <h3 class="name">Piyush Jain</h3>
-    <h3 class="email">Piyushjain964349@gmail.com</h3>
-    <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
-</header>
-<main>
-    <section class="analytics">
-        <h1>Quiz<hr></h1>
-        <h3 class="analytics_info">Average Quiz Score  <span class="scores">30.55</span><hr></h3>
-        <h3 class="analytics_info">No. Of Quiz Attempted  <span class="scores">28 of 30</span><hr></h3>
-        <h1>Poll<hr></h1>
-        <h3 class="analytics_info">No. Of Poll Attempted  <span class="scores">0 of 30</span><hr></h3>
-    </section>
-</main>
+<%- include('../includes/loader.ejs') %>
+<div id="screen" style="display: none;">
+    <header>
+        <div class="img-forg"></div>
+        <img src="/images/analytics-back.svg" alt="background" class="back-img">
+        <img src="/images/analytics-avatar.svg" alt="avatar" class="avatar">
+        <h3 class="name">Piyush Jain</h3>
+        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
+    </header>
+    <main>
+        <section class="analytics">
+            <h1>Quiz<hr></h1>
+            <h3 class="analytics_info">Average Quiz Score  <span class="scores">30.55</span><hr></h3>
+            <h3 class="analytics_info">No. Of Quiz Attempted  <span class="scores">28 of 30</span><hr></h3>
+            <h1>Poll<hr></h1>
+            <h3 class="analytics_info">No. Of Poll Attempted  <span class="scores">0 of 30</span><hr></h3>
+        </section>
+    </main>
+</div>
 <script>
     function goBack() {
     window.history.back();
     }
+</script>
+<script>
+        let loader = document.getElementById("loader");
+        loader.style.display="none";
+        let screen = document.getElementById("screen");
+        screen.style.display="block";
 </script>
 <%- include('../includes/footer.ejs') %>

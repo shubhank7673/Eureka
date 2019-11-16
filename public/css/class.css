@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body{
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    color: #454f63;
+}
+.top-circle{
+    position: absolute;
+    width: 120vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 50%;
+    left: -5vw;
+    top: -14vh;
+    background: #665effff;
+}
+
+.top-circle-container
+{
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 23vh;
+    width: 100vw;
+}
+.left-arrow{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+.class-name{
+    position: absolute;
+    top: 15px;
+    right:15px;
+    font-size: 160%;
+    color: white;
+    margin: 0;
+}
+.class-card{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin:0% 10px 6% 10px;
+    padding-top: 4%;
+    border-radius:15px;
+    /* border: 1px solid black; */
+    height: 140px;
+}
+.class-card .left{
+    position: absolute;
+    left: 5%;
+    width: 23%;
+    text-align: center;
+}
+.class-card .left .month{
+    background: #454f63;
+    color: white;
+    padding: 0px 6vw 0px 6vw;
+    font-weight: bold;
+}
+.class-card .left .month>p{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.class-card .left .date{
+    color: #454f63;
+    margin-top: 5px;
+    font-size: 27px;
+    font-weight: bolder;
+}
+.class-card .left .day{
+    color: #454f63;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: bolder;
+}
+.class-card .right{
+    position: absolute;
+    right: 0;
+    width: 64%;
+    padding-left: 8%;
+    text-align: start;
+    height: inherit;
+    /* border: 1px solid black; */
+}
+.class-card .right {
+    color: #454f63;
+    font-size: 20px;
+    /* border: 1px solid black; */
+    margin-bottom: 20px;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 90px; 
+}
+.timing{
+
+}
+h3{
+    margin: auto;
+}
+.top-heading{
+    text-align:center;
+}
+.course-incharge-container{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin:0% 10px 6% 10px;
+    padding-top: 2%;
+    border-radius:15px;
+    /* border: 1px solid black; */
+    height: 120px;   
+}
+.course-incharge{
+    /* padding: 10px 15px; */
+    padding-right: 15px;
+    padding-left: 20px;    
+    display: flex;
+    /* border-radius: 30px; */
+    /* border: 1px solid black; */
+    justify-content: space-between;
+}
+.course-incharge-info{
+    /* border: 1px solid black; */
+    width: 80%;
+    text-align: center;
+    overflow: hidden;
+}
+/* p{
+    margin: auto;
+} */
+.course-incharge-avatar-container{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #454f63;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.course-incharge-avatar{
+    height: 50px;
+    width: 50px;
+}
+.class-activities{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    padding: 10px 0px;
+    border-radius: 15px;
+    margin:0% 10px 4% 10px;
+}
+.quiz{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* border: 1px solid black; */
+    /* width: 50vw; */
+    width: fit-content;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.15);
+    margin:2vh 0vw 2vh 7vw ;
+    padding: 6px;
+    border-radius: 13px;
+}
+.quiz>img{
+    height: 40px;
+    width: 40px;
+}
+.poll>img{
+    height: 40px;
+    width: 30px;
+}

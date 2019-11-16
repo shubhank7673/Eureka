@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://eureka:LOL@eureka-o1gai.mongodb.net/Eureka';
+const MONGODB_URI = 'mongodb+srv://eureka:eureka129@eureka-o1gai.mongodb.net/Eureka';
 const csrf = require('csurf');
 
 const Student = require('./models/student');
+const Course = require('./models/course');
 
 const studentRoutes = require('./routes/studentsRoutes');
 const authRoutes = require('./routes/auth');
@@ -33,6 +34,19 @@ app.use((req, res, next) => {
     next();
 });
 
+// app.use('/test',(req,res,next)=>{
+//     Course.findById("5dcecce6ea1f025153a9fa9d")
+//           .then(res => {
+//               console.log(res);
+//           })
+//           .catch(err => console.log(err));
+// })
+
+// app.use('/',(req,res,next)=>{
+//     res.render('student/class');
+// })
+
+
 app.use(authRoutes);
 
 app.use((req, res, next) => {
@@ -43,6 +57,7 @@ app.use((req, res, next) => {
     else if (req.session.isStudent) {
         Student.findOne({ email: req.session.student.email }).then(student =>{
             req.student = student;
+            // req.student.courses = courses;
             next();
         }).catch(err => {
             console.log(err);

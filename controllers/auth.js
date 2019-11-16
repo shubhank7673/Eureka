@@ -2,14 +2,14 @@ const bcrypt = require('bcryptjs');
 const Student = require('../models/student');
 
 exports.getLogin = (req, res, next) => {
-    res.render('auth/login', { pageTitle: 'Login' });
+    res.render('auth/login', { pageTitle: 'Login',isIncorrect:false });
 };
 
 exports.postLogin = (req, res, next) => {
     Student.findOne({ email: req.body.email }).then((student) => {
         if (!student) {
             // Check for teacher
-            res.redirect('/login');
+            res.render('auth/login',{isIncorrect:true});
         } else {
             bcrypt.compare(req.body.password, student.password).then((doMatch) => {
                 if (doMatch) {
@@ -21,7 +21,7 @@ exports.postLogin = (req, res, next) => {
                         res.redirect('/');
                     });
                 } else {
-                    res.redirect('/login');
+                    res.redirect('/login',{isIncorrect:true});
                 }
             }).catch(err => {
                 console.log(err);
