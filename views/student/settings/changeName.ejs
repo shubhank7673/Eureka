@@ -1,16 +1,24 @@
 <%- include('../../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/changeName.css">
+<link rel="stylesheet" href="/css/ripple.css">
 </head>
+
 <body>
-<main>
-    <form action="/settings/changeName" method="post">
-        <label for="firstName">First Name</label>
-        <input type="text" name="firstName" value="<%= firstName %>" id="firstName">
-        <label for="middleName">Middle Name</label>
-        <input type="text" name="middleName" value="<%= middleName %>" id="middleName">
-        <label for="lastName">Last Name</label>
-        <input type="text" name="lastName" value="<%= lastName %>" id="lastName">
-        <button type="submit">Change</button>
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-    </form>
-</main>
-<%- include('../../includes/footer.ejs') %>
+    <header>
+        <div class="img-forg"></div>
+        <img src="/images/analytics-back.svg" class="back-img">
+        <img src="<%= curr_avatar %>" class="avatar">
+        <h3 class="name">Piyush Jain</h3>
+        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <a href="/settings"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+    </header>
+    <main class="changeName">
+        <form action="/settings/changeName" method="post">
+            <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+            <input type="text" name="middleName" id="middleName" placeholder="Middle Name">
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+            <button type="submit" class="changeName__btn ripple">Change</button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+    </main>
+    <%- include('../../includes/footer.ejs') %>

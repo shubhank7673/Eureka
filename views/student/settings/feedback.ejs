@@ -1,13 +1,23 @@
 <%- include('../../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/feedback.css">
+<link rel="stylesheet" href="/css/ripple.css">
 </head>
+
 <body>
-<main>
-    <form action="/settings/feedback" method="post">
-        <label for="subject">Subject</label>
-        <input type="text" name="subject" id="subject">
-        <textarea name="feedback" cols="60" rows="20"></textarea>
-        <button type="submit">Submit</button>
-        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-    </form>
-</main>
-<%- include('../../includes/footer.ejs') %>
+    <header>
+        <div class="img-forg"></div>
+        <img src="/images/analytics-back.svg" class="back-img">
+        <img src="<%= curr_avatar %>" class="avatar">
+        <h3 class="name">Piyush Jain</h3>
+        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <a href="/settings"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+    </header>
+    <main class="feedback">
+        <form action="/settings/feedback" method="post">
+            <input type="text" name="subject" id="subject" placeholder="Subject">
+            <textarea name="feedback" class="feedback__text" placeholder="Message"></textarea>
+            <button type="submit" class="feedback__btn ripple">Submit</button>
+            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+        </form>
+    </main>
+    <%- include('../../includes/footer.ejs') %>

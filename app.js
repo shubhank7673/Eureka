@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://eureka:LOL@eureka-o1gai.mongodb.net/Eureka';
+const MONGODB_URI = 'mongodb+srv://eureka:hidden@eureka-o1gai.mongodb.net/Eureka';
 const csrf = require('csurf');
 
 const Student = require('./models/student');
@@ -54,7 +54,7 @@ app.use(studentRoutes);
 
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(5000,()=>{console.log("server on port 5000")});
+    app.listen(3000);
 }).catch(err => {
     console.log('Database connection error');
 });

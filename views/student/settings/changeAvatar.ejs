@@ -1,0 +1,67 @@
+<%- include('../../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/changeAvatar.css">
+</head>
+
+<body>
+    <header>
+        <div class="img-forg"></div>
+        <img src="/images/analytics-back.svg" class="back-img">
+        <img src="<%= curr_avatar %>" class="curr-avatar">
+        <h3 class="name">Piyush Jain</h3>
+        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <a href="/settings"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+    </header>
+    <main>
+        <div class="heading">
+            <p>Current Avatar</p>
+            <p>Selected Avatar</p>
+        </div>
+        <div class="main-avatars">
+            <img class="main-avatar" src="<%= curr_avatar %>">
+            <img class="main-avatar sel-avatar" src="<%= curr_avatar %>">
+        </div>
+        <div class="container-hands">
+            <img class="hand" src="/images/avatars/hand_shade1.svg" onclick="changeShade('shade1')">
+            <img class="hand" src="/images/avatars/hand_shade2.svg" onclick="changeShade('shade2')">
+            <img class="hand" src="/images/avatars/hand_shade3.svg" onclick="changeShade('shade3')">
+            <img class="hand" src="/images/avatars/hand_shade4.svg" onclick="changeShade('shade4')">
+        </div>
+        <div class="boys-avatars">
+            <% for(let i = 1; i <= 4; i++){ %>
+                <img class="avatar" src="/images/avatars/boy<%= i %>_shade1.svg" onclick="changeAvatar(this)">
+            <% } %>
+        </div>
+        <div class="girls-avatars">
+            <% for(let i = 1; i <= 4; i++){ %>
+                <img class="avatar" src="/images/avatars/girl<%= i %>_shade1.svg" onclick="changeAvatar(this)">
+            <% } %>
+        </div>
+        <form action="/settings/changeAvatar" method="post">
+            <input type="hidden" name="update_avatar" id="update_avatar" value="<%= curr_avatar %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="changeAvatar-btn">Change</button>
+        </form>
+    </main>
+    <script>
+        function changeAvatar(ele){
+            let sel_avatar = document.querySelector(".sel-avatar");
+            sel_avatar.src = ele.src;
+            document.querySelector("#update_avatar").value = ele.src;
+            let avt = document.querySelector(".sel-avatar");
+            if(avt)
+            {
+                avt.classList.remove("sel-avatar");
+            }
+            ele.classList.add("sel-avatar");
+        }
+        function changeShade(shade){
+            let arr = document.querySelectorAll(".avatar");
+            arr.forEach(i => {
+                let src = String(i.src);
+                split_src = src.split('_');
+                split_src = split_src[0] + "_" + shade + ".svg"
+                i.src = split_src;
+            });
+        }
+    </script>
+    <%- include('../../includes/footer.ejs') %>

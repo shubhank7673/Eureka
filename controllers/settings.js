@@ -5,13 +5,16 @@ const sendGridTransport = require('nodemailer-sendgrid-transport');
 const Student = require('../models/student');
 
 const transporter = nodemailer.createTransport(sendGridTransport({
-    auth:{
-        api_key: 'LOL'
+    auth: {
+        api_key: 'hidden'
     }
 }));
 
 exports.getSettings = (req, res, next) => {
-    res.render('student/settings/settings',{ pageTitle: 'Settings' });
+    res.render('student/settings/settings', {
+        pageTitle: 'Settings',
+        curr_avatar: req.student.avatar
+    });
 };
 
 exports.getChangeName = (req, res, next) => {
@@ -24,7 +27,8 @@ exports.getChangeName = (req, res, next) => {
         pageTitle: 'Change Name',
         firstName: firstName,
         middleName: middleName,
-        lastName: lastName
+        lastName: lastName,
+        curr_avatar: req.student.avatar
     });
 };
 
@@ -43,7 +47,10 @@ exports.postChangeName = (req, res, next) => {
 };
 
 exports.getChangePassword = (req, res, next) => {
-    res.render('student/settings/changePassword', { pageTitle: 'Change Password' });
+    res.render('student/settings/changePassword', {
+        pageTitle: 'Change Password',
+        curr_avatar: req.student.avatar
+    });
 };
 
 exports.postChangePassword = (req, res, next) => {
@@ -63,8 +70,30 @@ exports.postChangePassword = (req, res, next) => {
     }).catch(err => console.log(err));
 };
 
+exports.getChangeAvatar = (req, res, next) => {
+    res.render('student/settings/changeAvatar', {
+        pageTitle: 'Change Avatar',
+        curr_avatar: req.student.avatar
+    });
+};
+
+exports.postChangeAvatar = (req, res, next) => {
+    if (req.student.avatar != req.body.update_avatar) {
+        Student.findOne({ email: req.student.email }).then(student => {
+            student.avatar = req.body.update_avatar;
+            student.save().then(() => {
+                res.redirect("/settings");
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+    } else
+        res.redirect("/settings");
+};
+
 exports.getFeedback = (req, res, next) => {
-    res.render('student/settings/feedback', { pageTitle: 'Feedback' });
+    res.render('student/settings/feedback', {
+        pageTitle: 'Feedback',
+        curr_avatar: req.student.avatar
+    });
 };
 
 exports.postFeedback = (req, res, next) => {
@@ -78,6 +107,10 @@ exports.postFeedback = (req, res, next) => {
         console.log(err);
     });
     res.redirect('/settings');
+};
+
+exports.getAboutUs = (req, res, next) => {
+    res.send("Under Development!");
 };
 
 exports.postLogout = (req, res, next) => {
