@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body{
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+}
+.top{
+    background: #665effff;
+    height: 55px;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    color: white;
+    font-size: 4.5vw;
+}
+.left-arrow{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 30px;
+    width: 30px;
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 5vh;
+    width: 5vh;
+}
+.page{
+    margin: 20px;
+    color: #454f63;
+}
+input:focus{
+    outline:none;
+}
+::placeholder{
+    font-size: 20px;
+    opacity: 0.5;
+}
+.page-c{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.page-c input{
+    font-size: 23px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #454f63;
+    margin-top: 50px;
+    border-radius: 20px;
+    /* padding-right: 20px; */
+    padding: 15px;
+    width: 80vw;
+}
+.page-c textarea{
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #454f63;
+    margin-top: 40px;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 23px;
+    width: 80vw;
+    height: 13vh;
+}
+textarea:focus{
+    outline: none;
+}
+.control-btns{
+    /* position: absolute; */
+    margin-top:30px;
+    bottom: 13vh;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    /* border: 1px solid black; */
+}
+.control-btns button{
+    border: none;
+}
+button:focus{
+    outline: none;
+}
+.right-btn{
+    background: #665effff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* padding: 10px 20px; */
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: white;
+    margin-right: 25vw;
+    transition: 0.5s;
+}
+.left-btn{
+    background: #454f63;
+    /* padding: 10px 20px; */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: white;
+    margin-left: 25vw;
+    transition: 0.5s;
+}
+.right-btn:active{
+    background:rgb(80, 72, 221);
+}
+.left-btn:active{
+    background: #222730;   
+}
+.single-btn{
+    background: #665effff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* padding: 10px 20px; */
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: white;
+    /* margin-right: 25vw; */
+    transition: 0.5s;      
+}
+.single-btn:active{
+    background:rgb(80, 72, 221);
+}
+.page-2{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.add-batch-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.add-batch-container input{
+    width: 35vw;
+    /* display: flex; */
+}
+.add-batch-btn{
+    background: #665effff;
+    border:none;
+    padding: 8px 18px;
+    font-size: 30px;
+    color: white;
+    border-radius: 20px;
+    margin-top:10px;
+    margin-left: 10px;
+}
+.add-batch-btn:active{
+    background:rgb(80, 72, 221);   
+}
+.batches{
+}
+.batch{
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    font-size: 23px;
+    border-radius: 15px;
+    margin: 10px;
+    margin-top: 20px;
+}
+.start-date-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.date-label{
+    font-size: 23px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    /* font-weight: 300; */
+}
+.days-buttons button{
+    background: #665effff;
+    font-size: 30px;
+    color: white;
+    border:none;
+    margin: 5px;
+    border-radius: 10px;
+}
+.select{
+    background: none;
+    border: none;
+    font-size: 23px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border-radius: 15px;
+    margin-right: 5vw;
+}
+.page-4{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.page-4 input{
+    background: none;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+}
+.day-btn{
+    background:none;
+    border:none;
+    font-size: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 10px 12px;
+    margin-right: 5vw;
+    border-radius: 15px;
+}
+.time-input{
+    font-size: 25px;
+}

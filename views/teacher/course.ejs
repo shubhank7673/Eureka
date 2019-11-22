@@ -19,7 +19,7 @@
             <h3 class="course-name"><%= course.courseName %></h3>
             <!-- <p>&nbsp;</p> -->
             <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
-            <img class="analytics-icon" src="/images/analytics.svg" alt="">
+            <img class="analytics-icon" src="/images/students.svg" alt="">
             <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
         </div>
     </header>
@@ -38,7 +38,7 @@
         <div class="class-list" style="text-align: center;">
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
-                    <% if(classInfo.batches.contains(batch)) {%>
+                    <% if(true) {%>
                     <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class.classId %>'">
                         <div class="left">
                             <div class="month">

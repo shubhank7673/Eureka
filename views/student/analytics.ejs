@@ -10,23 +10,23 @@
         <img src="<%= curr_avatar %>" class="avatar">
         <h3 class="name">Piyush Jain</h3>
         <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <a href="/course/1"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+        <img class="left-arrow" onclick="window.history.back();" src="/images/left-arrow.svg">
     </header>
     <main>
         <section class="analytics ripple">
             <h1>Quiz
                 <hr>
             </h1>
-            <h3 class="analytics_info">Average Quiz Score <span class="scores">30.55</span>
+            <h3 class="analytics_info">Average Quiz Score <span class="scores"><%= analytics.avgQuizSc %></span>
                 <hr>
             </h3>
-            <h3 class="analytics_info">No. Of Quiz Attempted <span class="scores">28 of 30</span>
+            <h3 class="analytics_info">No. Of Quiz Attempted <span class="scores"><%= analytics.noQuizAtt %></span>
                 <hr>
             </h3>
             <h1>Poll
                 <hr>
             </h1>
-            <h3 class="analytics_info">No. Of Poll Attempted <span class="scores">0 of 30</span>
+            <h3 class="analytics_info">No. Of Poll Attempted <span class="scores"><%= analytics.noPollAtt %></span>
                 <hr>
             </h3>
         </section>

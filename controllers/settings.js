@@ -6,7 +6,7 @@ const Student = require('../models/student');
 
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth: {
-        api_key: 'LOLZ'
+        api_key: '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'
     }
 }));
 
@@ -58,7 +58,7 @@ exports.postChangePassword = (req, res, next) => {
     const newPassword = req.body.newPassword;
     bcrypt.compare(oldPassword, req.student.password).then(doMatch => {
         if (doMatch) {
-            bcrypt.hash(newPassword, 12).then(password => {
+            bcrypt.hash(newPassword,12).then(password => {
                 req.student.password = password;
                 req.student.save().then(() => {
                     res.redirect('/settings');
@@ -82,7 +82,7 @@ exports.postChangeAvatar = (req, res, next) => {
         Student.findOne({ email: req.student.email }).then(student => {
             student.avatar = req.body.update_avatar;
             student.save().then(() => {
-                res.redirect("/settings");
+                res.redirect("/student/settings");
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     } else

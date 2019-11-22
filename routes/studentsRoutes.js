@@ -20,7 +20,8 @@ router.post('/settings/logout',settingsController.postLogout);
 router.get('/settings/aboutus',settingsController.getAboutUs);
 
 // course routes
-router.get('/',studentController.getHome);  
+router.get('/',studentController.getHome);
+router.post('/joinCourse',studentController.postJoinCourse);  
 router.get('/courses',studentController.getCourses); 
 router.get('/courses/joinByCode',(req,res,next) => {
 }); 

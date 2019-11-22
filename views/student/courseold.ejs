@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>course</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/css/course.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/ripple.css">
@@ -19,7 +19,7 @@
             <h3 class="course-name"><%= course.courseName %></h3>
             <!-- <p>&nbsp;</p> -->
             <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
-            <img class="analytics-icon" src="/images/analytics.svg" alt="">
+            <a href="/student/course/<%= course._id %>/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
             <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
         </div>
     </header>
@@ -38,17 +38,17 @@
         <div class="class-list" style="text-align: center;">
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
-                    <% if(classInfo.batches.contains(batch)) {%>
+                    <% if(classInfo.batch === batch) {%>
                     <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class.classId %>'">
                         <div class="left">
                             <div class="month">
-                                <%= classInfo.class.schedule.month %>
+                                <%= classInfo.class.month %>
                             </div>
                             <div class="date">
-                                <%= classInfo.class.schedule.date %>
+                                <%= classInfo.class.date %>
                             </div>
                             <div class="day">
-                                    <%= classInfo.class.schedule.day %>
+                                    <%= classInfo.class.day %>
                             </div>
                         </div>
                         <div class="right">
@@ -56,7 +56,7 @@
                                     <%= classInfo.class.title %>
                             </div>
                             <div class="title">
-                                    <%= classInfo.class.schedule.time %>
+                                    <%= classInfo.class.timing %>
                             </div>
                             <div class="activities-info">
                                 <img src="/images/activities.svg" alt="">
@@ -68,7 +68,7 @@
                 <% } %>
             
             <%} else{%>
-                <p style="margin-top:6vh;color:#454f63">no classes added in this course </p>
+                <p style="margin-top:6vh;color:#454f63">no classes added yet </p>
             <%}%>
         </div>
     </div>
@@ -114,10 +114,9 @@
                 <hr>
                 <div class="links">
                     <h3>Links</h2>
-                    <% if(course.courseTextbooks.length > 0){%>
                     <%for (let link of course.courseReferences) {%>
                     <p style="margin-left: 20px;"><%= link %></p>
-                    <%} }%>
+                    <%}%>
                 </div>
         </div>
     </div>

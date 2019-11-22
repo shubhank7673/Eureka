@@ -6,13 +6,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/courses.css">
+    <link rel="stylesheet" href="/css/snackbar.css">
 </head>
+<style>
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    margin-top: 10vh;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.24);
+    }
+
+    /* The Close Button */
+    .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+</style>
 <body>
     <%- include('../includes/loader.ejs') %>
     <div id="screen" style="display: none;">
         <div class="header">
         <header>
-            <a href="/settings"><img class="settings-btn" src="images/settings.svg" alt=""></a>
+            <img onclick="parent.location='/student/settings'" class="settings-btn" src="images/settings.svg" alt="">
             <div class="top-left-circle">
                 <img class="logo" src="images/eureka_logo.png" alt="">
             </div>
@@ -21,7 +63,7 @@
         <div class="courses">
             <% for(let course of courseList) { %>
                 <!-- <a href="course/<%= course._id %>" class="course-link"> -->
-                <div class="course ripple" onclick="parent.location='course/<%= course._id %>'">
+                <div class="course ripple" onclick="parent.location='/student/course/<%= course._id %>'">
                         <!-- <p><%= course._id %></p> -->
                         <h3 class="course-courseCode"><%= course.courseCode %></h3>
                         <div class="course-tab-inner">
@@ -30,19 +72,74 @@
                             </div>
                             <div class="course-tab-info">
                                 <h2><%= course.courseName %></h2>
-                                <h3><%= course.courseAdmin %></h3>
+                                <h3><%= course.facultyName %></h3>
                             </div>
                         </div>    
                     </div>
                 <!-- </a> -->
                 <%}%>
         </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="join-course-form" style="margin-top: 2vh;">
+                <form action="/student/joinCourse" method="POST">
+                  <input type="text" placeholder="course code" required name="courseCode" id="">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button>Join</button>
+                </form>
+            </div>
+            </div>
+          </div>
+        <div class="drop-up">
+                <div class="add-btn-container" id="addBtn" onclick="btnClick()">
+                    <img src="/images/add.svg" class="plus-img" alt="" style="height: 35px;width: 35px;">
+                </div>
+        </div>
+        <div id="snackbar" class="<%= snackbar %>">course does not exist</div>
     </div>
     <script>
         let loader = document.getElementById("loader");
         loader.style.display="none";
         let screen = document.getElementById("screen");
         screen.style.display="block";
+        function btnClick(){
+            let e = document.querySelector(".content");   
+            // e.style.display = "block";
+            if(e.style.display == "block"){
+                e.style.display = "none";
+                // e.classList.remove("rotated");
+            }
+            else{
+                // e.classList.add("rotated");
+                e.style.display = "block";
+            }
+        }
+        setTimeout(function(){ document.querySelector("#snackbar").classList = []; }, 2900);
+    </script>
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("addBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
     </script>
 </body>
 </html>

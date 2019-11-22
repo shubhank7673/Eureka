@@ -50,11 +50,35 @@ const course = {
 }
 
 module.exports.getCourses = (req,res,next) => {
-    res.render('student/courses',{title:'courses',courseList:dummyCourses});
+    res.render('student/courses',{title:'courses',courseList:dummyCourses,snackbar:req.query.snackbar});
 }
 module.exports.getHome = (req,res,next) => {
-
-    res.render('student/courses',{title:'courses',courseList:dummyCourses});
+    const courseIds = [];
+    // console.log(req.student.courses);
+    req.student.courses.forEach(item => {
+        // console.log(item);
+        courseIds.push(item.course);
+    });
+    // console.log(courseIds);
+    console.log(req.query.snackbar);
+    Course.find({
+        '_id':{
+            $in:courseIds
+        }
+    },(err,courses) => {
+        // console.log(courses);
+        for(let course of courses)
+        {
+            course.courseTeam.forEach(member => {
+                if(member.batches.includes(req.student.batch))
+                {
+                    course.facultyName = member.name;
+                    // console.log(course.facultyName);
+                }
+            })
+        }
+        res.render('student/courses',{title:'courses',courseList:courses,snackbar:req.query.snackbar});
+    });
     
     // const courses = [];
     // let cnt=0;
@@ -86,15 +110,62 @@ module.exports.getHome = (req,res,next) => {
     //    })
 }
 module.exports.getCourse = (req,res,next) => {
-    res.render('student/course',{title:'course',course:course})
+    // console.log(req.params.courseId);
+    Course.findById(req.params.courseId)
+          .then(course => {
+            //   console.log(course);
+              res.render('student/course',{title:'course',course:course,batch:req.student.batch})
+          })
+          .catch(err => {
+              console.log("failed to fetch the course");
+          })
 }
 exports.getAnalytics = (req, res, next) => {
+    let analytics;
+    req.student.courses.forEach(item => {
+        if(req.params.courseId == item.course)
+        {
+            analytics = item.analytics;
+        }
+    })
+    // console.log(analytics);
     res.render('student/analytics', {
         pageTitle: 'Analytics',
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        analytics:analytics,
+        courseId:req.params.courseId
     });
 };
 module.exports.getClass = (req,res,next) => {
     // console.log(req.params.courseId,req.params.classId);
     res.render('student/class');
+}
+module.exports.postJoinCourse = (req,res,next) => {
+        console.log(req.body.courseCode);
+        Course.findOne({
+            courseCode:req.body.courseCode})
+            .then(result => {
+                if(!result)
+                {
+                    res.redirect('/student?snackbar=show')
+                }
+                else{
+                    res.student.courses.push({
+                        course:result._id,
+                        analytics:{
+                            avgQuizSc:0,
+                            noQuizAtt:0,
+                            noPollAtt:0
+                        }
+                    })
+                    res.student.save()
+                        .then(r => {
+                            res.redirect('/student');
+                        })   
+                        .catch(err => console.log(err));
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
 }

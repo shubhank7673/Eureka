@@ -12,6 +12,14 @@ const classSchema = new Schema({
             type:String,
             required:true
         },
+        day:{
+            type:String,
+            required:true
+        },
+        month:{
+            type:String,
+            required:true
+        },
         time:{
             type:String,
             required:true
@@ -19,7 +27,7 @@ const classSchema = new Schema({
     },
     venue:{
         type:String,
-        required:true
+        // required:true
     },
     feedback:{
         starSum:Number,
@@ -28,3 +36,5 @@ const classSchema = new Schema({
     },
     inClassAct:[]
 })
+
+module.exports = mongoose.model('Class',classSchema);

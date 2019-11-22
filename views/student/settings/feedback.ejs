@@ -10,10 +10,10 @@
         <img src="<%= curr_avatar %>" class="avatar">
         <h3 class="name">Piyush Jain</h3>
         <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <a href="/settings"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+        <img class="left-arrow" onclick="window.history.back()" src="/images/left-arrow.svg">
     </header>
     <main class="feedback">
-        <form action="/settings/feedback" method="post">
+        <form action="/student/settings/feedback" method="post">
             <input type="text" name="subject" id="subject" placeholder="Subject">
             <textarea name="feedback" class="feedback__text" placeholder="Message"></textarea>
             <button type="submit" class="feedback__btn ripple">Submit</button>

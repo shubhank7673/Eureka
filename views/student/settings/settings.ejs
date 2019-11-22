@@ -11,29 +11,29 @@
         <img src="<%= curr_avatar %>" class="avatar">
         <h3 class="name">Piyush Jain</h3>
         <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <a href="/"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+        <img class="left-arrow" onclick="window.history.back()" src="/images/left-arrow.svg">
     </header>
 
     <main class="settings">
-        <a href="/settings/changeName" class="settings__option ripple"><img class="settings__img"
+        <a href="/student/settings/changeName" class="settings__option ripple"><img class="settings__img"
                 src="/images/changeName.svg">Change
             Name</a>
         <hr>
-        <a href="/settings/changePassword" class="settings__option ripple"><img class="settings__img"
+        <a href="/student/settings/changePassword" class="settings__option ripple"><img class="settings__img"
                 src="/images/changePassword.svg">Change Password</a>
         <hr>
-        <a href="/settings/changeAvatar" class="ripple"><img class="settings__img" src="/images/changeAvatar.svg">Change
+        <a href="/student/settings/changeAvatar" class="ripple"><img class="settings__img" src="/images/changeAvatar.svg">Change
             Avatar</a>
     </main>
 
     <section class="feedback settings">
-        <a href="/settings/aboutus" class="ripple"><img class="settings__img" src="/images/aboutus.svg">About Us</a>
+        <a href="/student/settings/aboutus" class="ripple"><img class="settings__img" src="/images/aboutus.svg">About Us</a>
         <hr>
-        <a href="/settings/feedback" class="ripple"><img class="settings__img" src="/images/feedback.svg">Feedback</a>
+        <a href="/student/settings/feedback" class="ripple"><img class="settings__img" src="/images/feedback.svg">Feedback</a>
     </section>
 
     <section class="logout settings ripple">
-        <form action="/settings/logout" method="post">
+        <form action="/student/settings/logout" method="post">
             <img class="settings__img" src="/images/logout.svg">
             <button type="submit" class="logout-btn">Logout</button>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
