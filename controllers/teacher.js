@@ -1,5 +1,6 @@
 const Course = require('../models/course');
 const Class = require('../models/class');
+const Student = require('../models/student');
 module.exports.getHome = (req,res,next) => {
     if(!req.teacher)
     {
@@ -128,11 +129,13 @@ module.exports.postAddCourse = (req,res,next) => {
                                         .then(r => {
                                             res.redirect("/");
                                         })
-                        });
+                        })
+                        .catch(err => console.log(err))
                 })
                 
         }
     })
+    .catch(err => console.log(err))
     
     // co.save()
     //   .then(result => {
@@ -167,12 +170,73 @@ module.exports.getCourse = (req,res,next) => {
 }
 
 module.exports.getCourseStudents = (req,res,next) => {
+    // req.params.courseId
     Course.findById(req.params.courseId)
         .then(course => {
-            res.render('teacher/courseStudents',course);
+            const studentIds = [];
+            Student.find({
+                '_id':{
+                    $in:course.students
+                }
+            },(err,students) => {
+                res.render('teacher/courseStudents',{course:course,students:students});
+            })
         })
 }
+module.exports.postDeleteCourse = (req,res,next) => {
 
+    Course.findById(req.params.courseId)
+        .then(course => {
+            const studentIds = [];
+            Student.find({
+                '_id':{
+                    $in:course.students
+                }
+            },(err,students) => {
+                students.forEach(student => {
+                    let updatedCourses = []; 
+                    student.courses.forEach(item => {
+                        if(item.course.toString() !== course._id.toString())
+                        {
+                            updatedCourses.push(item);
+                        }
+                    })
+                    console.log(updatedCourses);
+                    student.courses = updatedCourses;
+                    console.log(student);
+                    student.save()
+                            .catch(err => console.log(err));
+                })
+                Course.remove({_id:req.params.courseId},(err)=>{
+                    if(err)
+                    {
+                        console.log(err);
+                    }
+                    else{
+                        res.redirect('/');
+                    }
+                });
+            })
+        })
+}
+module.exports.getStudentInfo = (req,res,next) => {
+    // console.log(req.params.studentId);
+    Student.findById(req.params.studentId)
+            .then(student => {
+                let analytics = {};
+                student.courses.forEach(item => {
+                    if(item.course == req.params.courseId)
+                    {
+                        analytics = item.analytics;
+                    }
+                })
+                console.log(student.avatar);
+                res.render('teacher/studentInfo',{student:student,analytics:analytics});
+            })
+            .catch(err => {
+                console.log(err);
+            })
+}
 
 
 

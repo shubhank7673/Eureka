@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/course.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/ripple.css">
+    <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
 <%- include('../includes/loader.ejs') %>
@@ -19,7 +20,7 @@
             <h3 class="course-name"><%= course.courseName %></h3>
             <!-- <p>&nbsp;</p> -->
             <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
-            <img class="analytics-icon" src="/images/students.svg" alt="">
+            <img class="analytics-icon" onclick="parent.location='/teacher/course/<%= course._id %>/students'" src="/images/students.svg" alt="">
             <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
         </div>
     </header>
@@ -120,9 +121,26 @@
                     <%} }%>
                 </div>
         </div>
+        <div style="width:100vw;display: flex;justify-content: center;text-align: center;">
+            <button class="delete-course-btn" id="modalBtn">Delete Course</button>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="join-course-form" style="margin-top: 2vh;">
+            <h3>Are you sure you want to delete <%= course.courseName %></h3>
+            <form action="/teacher/deleteCourse/<%= course._id %>" style="display: flex;justify-content: center;text-align: center;" method="POST">
+              <button style="margin-right: 5vw;background: red;">Yes</button>
+              <button type="button" onclick="hideModal()" style="background: rgb(52, 201, 52);">No</button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </form>
+        </div>
+        </div>
     </div>
 </div>
 </body>
+<script src="/js/modal.js"></script>
 <script>
     function goBack() {
   window.history.back();

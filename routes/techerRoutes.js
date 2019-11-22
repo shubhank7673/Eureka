@@ -5,8 +5,10 @@ const teacherControllers = require('../controllers/teacher')
 router.get('/',teacherControllers.getHome);
 router.get('/addCourse',teacherControllers.getAddCourse);
 router.post('/addCourse',teacherControllers.postAddCourse);
+router.post('/deleteCourse/:courseId',teacherControllers.postDeleteCourse);
 router.get('/course/:courseId',teacherControllers.getCourse);
-router.get('/course/:courseId/students',teacherControllers.getCourse);
-router.post('/course/:courseId/students',teacherControllers.getCourse);
-
+// router.get('/course/:courseId/students',teacherControllers.getCourse);
+// router.post('/course/:courseId/students',teacherControllers.getCourse);
+router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
+router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
 module.exports = router;

@@ -29,6 +29,9 @@ exports.postLogin = (req, res, next) => {
                                             res.redirect('/teacher');
                                         });   
                                      }
+                                     else{
+                                        res.render('auth/login',{isIncorrect:true});
+                                     }
                                  })
                        }
                    })

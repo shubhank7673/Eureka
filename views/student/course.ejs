@@ -38,8 +38,8 @@
         <div class="class-list" style="text-align: center;">
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
-                    <% if(classInfo.batches.contains(batch)) {%>
-                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class.classId %>'">
+                    <% if(classInfo.batches.includes(batch)) {%>
+                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>

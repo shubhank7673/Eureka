@@ -20,14 +20,17 @@
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>
     </div> -->
+
     <div class="students" style="margin-top:5vh;">
-        <div class="student ripple">
+        <% for(let student of students) {%>
+        <div class="student ripple" onclick="parent.location='/teacher/course/<%= course._id%>/students/<%=student._id%>'"> 
             <div class="course-avatar">
-                <img src="/images/test-avatar.svg" alt="">
+                <img src="<%= student.avatar %>" alt="">
             </div>
-            <h3>Shubhank Khare</h3>
+            <h3><%= student.name %></h3>
         </div>
-        <div class="student ripple">
+        <%}%>
+        <!-- <div class="student ripple">
                 <div class="course-avatar">
                     <img src="/images/test-avatar.svg" alt="">
                 </div>
@@ -38,7 +41,7 @@
                     <img src="/images/test-avatar.svg" alt="">
                 </div>
                 <h3>Shubhank Khare</h3>
-        </div>
+        </div> -->
     </div>
 </body>
 </html>

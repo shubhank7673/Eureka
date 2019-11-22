@@ -73,7 +73,7 @@ module.exports.getHome = (req,res,next) => {
                 if(member.batches.includes(req.student.batch))
                 {
                     course.facultyName = member.name;
-                    // console.log(course.facultyName);
+                    // console.log(member,course.facultyName);
                 }
             })
         }
@@ -113,7 +113,7 @@ module.exports.getCourse = (req,res,next) => {
     // console.log(req.params.courseId);
     Course.findById(req.params.courseId)
           .then(course => {
-            //   console.log(course);
+              console.log(course);
               res.render('student/course',{title:'course',course:course,batch:req.student.batch})
           })
           .catch(err => {
@@ -142,25 +142,45 @@ module.exports.getClass = (req,res,next) => {
 }
 module.exports.postJoinCourse = (req,res,next) => {
         console.log(req.body.courseCode);
+        // let check = false;
+        // req.student.courses.forEach(item => {
+        //     if(item.course == req.body.courseCode)
+        //     {
+        //         check = true;
+        //     }
+        // })
         Course.findOne({
-            courseCode:req.body.courseCode})
+            courseCode:req.body.courseCode.toUpperCase()})
             .then(result => {
                 if(!result)
                 {
                     res.redirect('/student?snackbar=show')
                 }
                 else{
-                    res.student.courses.push({
+                    // let facultyName = "";
+                    // result.courseTeam.forEach(teamMember => {
+                    //     if(teamMember.batches.includes(req.student.batch))
+                    //     {
+                    //         facultyName = teamMember.name;
+                    //     }
+                    // })
+                    req.student.courses.push({
                         course:result._id,
+                        // facultyName:facultyName,
                         analytics:{
                             avgQuizSc:0,
                             noQuizAtt:0,
                             noPollAtt:0
-                        }
+                        }   
                     })
-                    res.student.save()
+                    req.student.save()
                         .then(r => {
-                            res.redirect('/student');
+                            result.students.push(req.student._id);
+                            result.save()
+                                  .then(() => {
+                                    res.redirect('/student');
+                                  })
+                                  .catch(err => console.log(err))
                         })   
                         .catch(err => console.log(err));
                 }
