@@ -6,6 +6,7 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
+    // console.log(req.body);
     Student.findOne({ email: req.body.email }).then((student) => {
         if (!student) {
             // Check for teacher

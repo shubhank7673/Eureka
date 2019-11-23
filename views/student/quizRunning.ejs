@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/quizRunning.css">
+    <link rel="stylesheet" href="/css/ripple.css">
+    <title>Quiz</title>
+</head>
+
+<body>
+    <header>
+        <div class="top-circle-container">
+            <div class="top-circle">
+            </div>
+            <h3 class="subject-name">Computer Networks</h3>
+            <h3 class="quiz-name"><%= quizTitle %></h3>
+            <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
+        </div>
+    </header>
+
+    <section class="time-section">
+        <img src="/images/time-left.svg" class="time-img">
+        <p id="timer"></p>
+        <div class="container-btn">
+            <% for(let i = 1; i <= totalProblems; i++){ %>
+                <button onclick="fetchNext(this)" class="question-btn ripple"> <%= i %> </button>
+            <% } %>
+        </div>
+    </section>
+
+    <main class="quiz-card">
+        <h3 class="questionNo">Question <%= currProblemNo + 1 %></h3>
+        <p id="statement"><%= statement %></p>
+        <% for(let i = 0; i < maxOptions; i++){ %>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input options" id="<%= i %>" name="example1" value="<%= options[i]%>">
+                    <label class="custom-control-label labels" for="<%= i %>"><%= options[i]%> </label>
+                </div>
+                 <% if(i != maxOptions - 1){ %>
+                    <hr>
+                <% } %>
+        <% } %>
+    </main>
+    <footer>
+        <form action="/quiz/<%= quizId %>/<%= totalProblems %>" method="POST" id="quizForm">
+            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+            <input type="hidden" value="Not Submitted" name="ans" id="ans">
+            <div class="submit-container">
+                <button id="submit-btn" class="ripple" onclick="submitQuiz()"></button>
+                <img class="tick" src="/images/success.svg" onclick="submitQuiz()">
+            </div>
+        </form>
+    </footer>
+</body>
+
+<script>
+    let actualOptions = "<%= options.length %>";
+    let time = parseInt("<%= remTime %>");
+    document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);
+    setInterval(() => {
+        time--;
+        if (time <= 0) {
+            submitQuiz();
+        }
+        document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);
+    }, 1000);
+    let currProblemNo = "<%= currProblemNo %>";
+    let totalProblems = "<%= totalProblems %>";
+    let csrfToken = "<%= csrfToken %>";
+    let quizId = "<%= quizId %>";
+</script>
+<script src="/js/quizRunning.js"></script>
+
+</html>

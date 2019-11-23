@@ -29,11 +29,13 @@ body{
 
 .avatar{
     position: absolute;
-    width: 20vw;
-    top: 10px;
-    height: 15vh;
+    width: 18vw;
+    top: calc(10px + 4vh);
+    height: 10vh;
     z-index: 3;
     left: 10px;
+    background: white;
+    border-radius: 15px;
 }
 
 .name,.email{

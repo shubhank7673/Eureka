@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 0px;
+}
+
+button:focus{
+    outline: none;
+}
+
+.top-circle{
+    position: absolute;
+    width: 120vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 50%;
+    left: -5vw;
+    top: -14vh;
+    background: #665effff;
+}
+
+.top-circle-container
+{
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 18vh;
+    width: 100vw;
+}
+
+.left-arrow{
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.3s;
+}
+
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+
+.subject-name{
+    vertical-align: middle;
+    position: absolute;
+    top: 15px;
+    right:15px;
+    font-size: 7vw;
+    color: white;
+    margin: 0;
+}
+
+.quiz-name{
+    position: absolute;
+    top: 6vh;
+    right:15px;
+    font-size: 6vw;
+    color: white;
+    margin: 0;
+}
+
+.quiz-summary div{
+    margin: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-summary p{
+    font-size: large;
+    font-weight: bold;
+}
+
+.quiz-summary span{
+    font-size: large;
+    font-weight: bold;
+}
+
+.quiz-card{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin:0% 10px 6% 10px;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius:15px;
+}
+
+.not-submit-tag{
+    margin-top: 10px; 
+    color: red;
+    font-weight: bolder;
+}
+
+.questionNo{
+    font-size: 6vw;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}
+
+.statement{
+    font-size: 5vw;
+}
+
+.labels{
+    display: block;
+}
+
+.custom-checkbox-wrong .custom-control-input-wrong:checked~.custom-control-label-wrong::before{
+    background-color:red;
+}
+
+
