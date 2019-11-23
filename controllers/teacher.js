@@ -16,7 +16,7 @@ module.exports.getHome = (req,res,next) => {
         }},
         (err,courses)=>{
             // console.log(req.snackbar);
-            res.render('teacher/home',{courses:courses,snackbar:req.query.snackbar});
+            res.render('teacher/home',{courses:courses,snackbar:req.query.snackbar,message:req.query.message});
         });
 }
 module.exports.getAddCourse = (req,res,next) => {
@@ -35,7 +35,7 @@ module.exports.postAddCourse = (req,res,next) => {
             // res.render('teacher/home?',{courses:courses,snackbar:"show"});
             // req.snackbar = "show";
             // next();
-            res.redirect('/teacher?snackbar=show')
+            res.redirect('/teacher?snackbar=show&message=course with same code already exist')
         }
         else{
 
@@ -116,7 +116,9 @@ module.exports.postAddCourse = (req,res,next) => {
                         classes:finClasses,
                         courseTextbooks:[],
                         courseReferences:[],
-                        courseDescription:req.body.courseDescription
+                        courseDescription:req.body.courseDescription,
+                        startDate:req.body.startDate,
+                        endDate:req.body.endDate
                     });
                     co.save()
                         .then(cou => {
@@ -240,7 +242,107 @@ module.exports.getStudentInfo = (req,res,next) => {
                 console.log(err);
             })
 }
+module.exports.getJoinExistingCourse = (req,res,next) => {
+    console.log(req.query);
+    Course.findOne({
+        courseCode:req.query.courseCode.toUpperCase()
+    })
+    .then(course => {
+        if(!course)
+        {
+            res.redirect('/teacher?snackbar=show&message=course does not exist');
+        }
+        else
+        {
+            res.render('teacher/joinExistingCourse',{course:course});
+        }
+    })
 
+}
+module.exports.postJoinExistingCourse = (req,res,next) => {
+    console.log(req.body);
+    let teacherBatches = req.body.teacherBatches[1].trim().split(" ");
+    const weekDays = [];
+    const classes = [];
+    const days = ["","MON","TUE","WED","THU","FRI","SAT"];
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    for(let i = 1;i<=6;i++)
+    {
+        if(req.body[i.toString()][0] !== '' && req.body[i.toString()][1] !== '')
+        {
+            weekDays.push(i);
+        }
+    }
+    // console.log(weekDays);
+    // console.log(req.body.startDate,req.body.endDate)
+    let start = new Date(req.body.startDate);
+    let end = new Date(req.body.endDate);
+    let classsn =1;
+    let loop = new Date(start);
+    // console.log(weekDays);
+    // console.log(loop,start,end);
+    while(loop <= end){
+        // console.log(loop.getDay());           
+        if(weekDays.includes(loop.getDay()))
+        {
+            const cls = new Class({
+                title:"class "+classsn.toString(),
+                schedule:{
+                    date:loop.getDate().toString(),
+                    day:days[loop.getDay()],
+                    month:months[loop.getMonth()],
+                    time:req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
+                },
+                venue:"LT-1"
+            });
+            // console.log(cls);
+            classes.push(cls);
+        }
+        let newDate = loop.setDate(loop.getDate() + 1);
+        loop = new Date(newDate);
+    }
+    // console.log(classes);
+    Class.insertMany(classes,(err,result) => {
+        if(!err)
+        {
+            console.log('result',result);
+            const finClasses = [];
+            result.forEach(item => {
+                finClasses.push({
+                    class:item,
+                    batches:teacherBatches
+                })
+            });
+            console.log('finclasses',finClasses);
+            Course.findById(req.body.courseId)
+                .then(course => {
+                    course.classes = course.classes.concat(finClasses);
+                    console.log('course.classes',course.classes);
+                    course.courseTeam.push({
+                        batches:teacherBatches,
+                        name:req.teacher.name,
+                        role:"team member"
+                    })
+                    course.save()
+                          .then(resCourse => {
+                              req.teacher.courses.push({
+                                  batches:teacherBatches,
+                                  courseId:resCourse._id,
+                                  role:"team member"
+                              })
+                              console.log(req.teacher);
+                              req.teacher.save()
+                                .then(() => {
+                                    res.redirect('/');
+                                })
+                                .catch(err => console.log(err));
+                          })
+                          .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err));
+        }
+    })
+}
 
 
 

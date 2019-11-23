@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/teacher/home.css">
     <link rel="stylesheet" href="/css/ripple.css">
     <link rel="stylesheet" href="/css/snackbar.css">
+    <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
     <div class="header">
@@ -37,13 +38,27 @@
         <div class="content" style="display: none;">
             <a href="/teacher/addCourse">Add Course</a>
             <!-- <hr> -->
-            <a href="/teacher/joinExistingCourse">Join Existing</a>
+            <button class="link" id="modalBtn">Join Existing</button>
         </div>
         <div class="add-btn-container" onclick="btnClick()">
             <img src="/images/add.svg" class="plus-img" alt="" style="height: 35px;width: 35px;">
         </div>
     </div>
-    <div id="snackbar" class="<%= snackbar %>">course with same code already exists</div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="join-course-form" style="margin-top: 2vh;">
+            <h3>Join Existing Course</h3>
+            <form action="/teacher/joinExistingCourse" class="join-course-form" method="GET">
+                <input type="text" name="courseCode" placeholder="course code" id="" class="course-code-input">
+                <button>Join</button>
+                <!-- <input type="hidden" name="_csrf" value="<%= csrfToken %>"> -->
+            </form>
+        </div>
+        </div>
+    </div>
+    <div id="snackbar" class="<%= snackbar %>"><%= message %></div>
+    <script src="/js/modal.js"></script>
     <script>
         function btnClick(){
             let e = document.querySelector(".content");   

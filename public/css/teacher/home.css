@@ -156,3 +156,48 @@ margin-bottom: 2px;
     color: white;
     background: #665effff;
 }
+.link{
+    display: block;
+    padding: 10px;
+    /* padding-top: 0; */
+    text-decoration: none;
+    color: white;
+    background: #665effff;
+    border: none;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 100%;
+}
+button{
+    outline: none;
+}
+.join-course-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color:#454f63;
+}
+.join-course-form input{
+    border:none;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.35);
+    margin: 10px;
+    font-size: 20px;
+    outline: none;
+    padding: 10px;
+    border-radius: 15px;
+}
+::placeholder{
+    opacity: 0.5;
+}
+.join-course-form button{
+    border:none;
+    background: #665effff;
+    font-size: 23px;
+    color: white;
+    width: 30vw;
+    padding: 9px;
+    border-radius: 15px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.35);
+}

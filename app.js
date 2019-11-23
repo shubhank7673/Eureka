@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 // })
 
 // app.use('/',(req,res,next) => {
-//     res.render('teacher/studentInfo');
+//     res.render('teacher/joinExistingCourse');
 // })
 
 app.use(authRoutes);

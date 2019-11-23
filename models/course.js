@@ -78,7 +78,13 @@ const courseSchema = new Schema({
         type:String,
         required:true
     },
-    students:[]
+    students:[],
+    startDate:{
+        type:String
+    },
+    endDate:{
+        type:String
+    }
 })
 
 module.exports = mongoose.model('Course',courseSchema);
