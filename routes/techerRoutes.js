@@ -13,4 +13,9 @@ router.get('/course/:courseId',teacherControllers.getCourse);
 // router.post('/course/:courseId/students',teacherControllers.getCourse);
 router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
 router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
+
+/***********************  Testing Only *********/
+router.get("/startQuiz/:quizId",teacherControllers.getStartQuiz);
+router.post("/startQuiz/:quizId",teacherControllers.postStartQuiz);
+
 module.exports = router;

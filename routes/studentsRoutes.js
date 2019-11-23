@@ -2,7 +2,6 @@ const express = require('express');
 
 const studentController = require('../controllers/student');
 const settingsController = require('../controllers/settings');
-const urlProtector = require('../utils/url_protect');
 
 const router = express.Router();
 
@@ -16,6 +15,7 @@ router.get('/settings/changeAvatar',settingsController.getChangeAvatar);
 router.post('/settings/changeAvatar',settingsController.postChangeAvatar);
 router.get('/settings/feedback',settingsController.getFeedback);
 router.post('/settings/feedback',settingsController.postFeedback);
+router.get('/settings/aboutus',settingsController.getAboutUs);
 router.post('/settings/logout',settingsController.postLogout);
 router.get('/settings/aboutus',settingsController.getAboutUs);
 
@@ -30,9 +30,8 @@ router.get('/course/:courseId/analytics',studentController.getAnalytics);
 router.get('/course/:courseId/discussion',(req,res,next) => {
 });
 router.get('/course/:courseId/class/:classId',studentController.getClass);
-router.get('/course/:courseId/class/:classId/:quizId',(req,res,next) => {
-    console.log(req.params.courseId,req.params.classId,req.params.quizId);
-});
+router.get('/quiz/:quizId',studentController.getQuiz);
+router.post('/quiz/:quizId/:problemNo',studentController.postQuiz);
 router.get('/course/:courseId/class/:classId/feedback',(req,res,next) => {
 });
 router.get('/course/:courseId/class/:classId/:pollId',(req,res,next) => {

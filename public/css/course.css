@@ -1,8 +1,8 @@
 a {
     outline: none;
     border: none;
-    -moz-outline-style: none;
-  }
+}
+
 .top-circle{
     position: absolute;
     width: 120vw;

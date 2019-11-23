@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 0px;
+}
+
+button:focus{
+    outline: none;
+}
+
+.top-circle{
+    position: absolute;
+    width: 120vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 50%;
+    left: -5vw;
+    top: -14vh;
+    background: #665effff;
+}
+
+.top-circle-container
+{
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 18vh;
+    width: 100vw;
+}
+
+.left-arrow{
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.3s;
+}
+
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+
+.subject-name{
+    vertical-align: middle;
+    position: absolute;
+    top: 15px;
+    right:15px;
+    font-size: 7vw;
+    color: white;
+    margin: 0;
+}
+
+.quiz-name{
+    position: absolute;
+    top: 6vh;
+    right:15px;
+    font-size: 6vw;
+    color: white;
+    margin: 0;
+}
+
+.time-section{
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.time-img{
+    width: 10vw;
+    vertical-align: middle;
+}
+
+#timer{
+    vertical-align: middle;
+    color: red;
+    display: inline;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 6vw;
+}
+
+.container-btn{
+    margin-top: 15px;
+    height: 6vh;
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.question-btn{
+    flex: 0 0 12vw;
+    border-radius: 50%;
+    border: 3px solid black;
+    color: black;
+    background: white;
+    font-weight: bold;
+    font-size: 6vw;
+    outline: none;
+    margin-right:10px;
+}
+
+.quiz-card{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin:0% 10px 6% 10px;
+    padding: 20px;
+    padding-top: 20px;
+    border-radius:15px;
+}
+
+.questionNo{
+    font-size: 6vw;
+    font-weight: bolder;
+    padding-bottom: 5px;
+}
+
+#statement{
+    font-size: 5vw;
+}
+
+.labels{
+    display: block;
+}
+
+.submit-container{
+    display: flex !important;
+    position: relative !important;
+    justify-content: center !important;
+    top: 2vh !important;
+}
+
+#submit-btn{
+    position: absolute;
+    display: none;
+    width: 85vw;
+    height: 6vh;
+    border: none;
+    background: #00ff08;
+    box-shadow: 0 4px 16px rgba(69, 91, 99, 0.2);
+    border-radius: 12px;
+}
+
+.tick{
+    position: absolute;
+    top: 1vh;
+}

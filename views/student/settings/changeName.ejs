@@ -8,10 +8,11 @@
         <div class="img-forg"></div>
         <img src="/images/analytics-back.svg" class="back-img">
         <img src="<%= curr_avatar %>" class="avatar">
-        <h3 class="name">Piyush Jain</h3>
-        <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <img class="left-arrow" onclick="window.history.back()" src="/images/left-arrow.svg">
+        <h3 class="name"><%= name  %></h3>
+        <h3 class="email"><%= email %></h3>
+        <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
     </header>
+
     <main class="changeName">
         <form action="/student/settings/changeName" method="post">
             <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
@@ -21,4 +22,10 @@
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </form>
     </main>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <%- include('../../includes/footer.ejs') %>

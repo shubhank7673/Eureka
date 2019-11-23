@@ -30,11 +30,13 @@ body{
 
 .curr-avatar{
     position: absolute;
-    width: 20vw;
-    top: 10px;
-    height: 15vh;
+    width: 18vw;
+    top: calc(10px + 4vh);
+    height: 10vh;
     z-index: 3;
     left: 10px;
+    background: white;
+    border-radius: 15px;
 }
 
 .name,.email{
@@ -72,6 +74,7 @@ body{
 }
 /*454f63*/
 main{
+
     font-size: 16px;
     font-weight: bold;
     background: white;
@@ -145,7 +148,6 @@ main{
     border-radius: 20px;
     outline: none;
 }
-
 .foc-avatar{
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.18);
     border-radius: 10px;

@@ -6,29 +6,25 @@ const Student = require('../models/student');
 
 const transporter = nodemailer.createTransport(sendGridTransport({
     auth: {
-        api_key: 'LOL'
+        api_key: 'hidden'
     }
 }));
 
 exports.getSettings = (req, res, next) => {
     res.render('student/settings/settings', {
         pageTitle: 'Settings',
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        name: req.student.name,
+        email: req.student.email,
     });
 };
 
 exports.getChangeName = (req, res, next) => {
-    const studentName = req.student.name.split(" ");
-    const firstName = studentName[0];
-    const middleName = studentName.length == 3 ? studentName[1] : "";
-    const lastName = studentName.length == 3 ? studentName[2] : studentName[1];
-
-    res.render('student/settings/changeName', {
+    res.render('student/settings/changeName', { 
         pageTitle: 'Change Name',
-        firstName: firstName,
-        middleName: middleName,
-        lastName: lastName,
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        name: req.student.name,
+        email: req.student.email,
     });
 };
 
@@ -49,7 +45,9 @@ exports.postChangeName = (req, res, next) => {
 exports.getChangePassword = (req, res, next) => {
     res.render('student/settings/changePassword', {
         pageTitle: 'Change Password',
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        name: req.student.name,
+        email: req.student.email
     });
 };
 
@@ -73,7 +71,9 @@ exports.postChangePassword = (req, res, next) => {
 exports.getChangeAvatar = (req, res, next) => {
     res.render('student/settings/changeAvatar', {
         pageTitle: 'Change Avatar',
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        name: req.student.name,
+        email: req.student.email,
     });
 };
 
@@ -92,7 +92,9 @@ exports.postChangeAvatar = (req, res, next) => {
 exports.getFeedback = (req, res, next) => {
     res.render('student/settings/feedback', {
         pageTitle: 'Feedback',
-        curr_avatar: req.student.avatar
+        curr_avatar: req.student.avatar,
+        name: req.student.name,
+        email: req.student.email,
     });
 };
 
