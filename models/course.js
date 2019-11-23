@@ -14,61 +14,54 @@ const courseSchema = new Schema({
     courseAdmin:{
         type:Schema.Types.ObjectId,
         ref:'Teacher',
-        required:true
+        // required:true
     },
     courseTeam:[{
-        techer:{
-            type:Schema.Types.ObjectId,
-            ref:'Teacher',
-            required:true
-        },
+        // techer:{
+        //     type:Schema.Types.ObjectId,
+        //     ref:'Teacher',
+        //     required:true
+        // },
         name:{
             type:String,
             required:true
         },
         role:{
-
+            type:String,
+            required:true
         },
         batches:[]
     }],
-    batches:[{
-            name:{
-            type:String,
-            require:true
-        }
-    }],
+    batches:[],
     classes:[{
         class:{
-            classId:{
-                type:Schema.Types.ObjectId,
-                ref:'Class',
-                require:true
-            },
-            title:{
-                type:String,
-                require:true    
-            },
-            timing:{
-                type:String,
-                require:true
-            },
-            date:{
-                type:String,
-                require:true
-            },
-            month:{
-                type:String,
-                require:true
-            },
-            day:{
-                type:String,
-                require:true
-            }
+            // classId:{
+            //     type:Schema.Types.ObjectId,
+            //     ref:'Class',
+            //     require:true
+            // },
+            // title:{
+            //     type:String,
+            //     require:true    
+            // },
+            // timing:{
+            //     type:String,
+            //     require:true
+            // },
+            // date:{
+            //     type:String,
+            //     require:true
+            // },
+            // month:{
+            //     type:String,
+            //     require:true
+            // },
+            // day:{
+            //     type:String,
+            //     require:true
+            // }
         },
-        batch:{
-            type:String,
-            require:true
-        }
+        batches:[]
     }],
     courseTextbooks:[{
         name:{
@@ -80,7 +73,18 @@ const courseSchema = new Schema({
             required:true
         }
     }],
-    courseReferences:[]
+    courseReferences:[],
+    courseDescription:{
+        type:String,
+        required:true
+    },
+    students:[],
+    startDate:{
+        type:String
+    },
+    endDate:{
+        type:String
+    }
 })
 
 module.exports = mongoose.model('Course',courseSchema);

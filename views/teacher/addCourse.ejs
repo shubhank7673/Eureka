@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add-course</title>
+    <link rel="stylesheet" href="/css/teacher/addCourse.css">
+</head>
+<body>
+    <!-- <form action="/teacher/addCourse" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button>submit</button>
+    </form> -->
+    <div class="top">
+        <img onclick="window.history.back()" src="/images/left-arrow.svg" class="left-arrow" alt="">
+        <h3>Add Course</h3>
+    </div>
+    <form action="/teacher/addCourse" method="POST">
+    <div class="page">
+        <div class="page-c page-1" style="display:flex;">
+            <input type="text" name="courseCode" required  placeholder="course code" >
+            <input type="text" name="courseName" required placeholder="course name">
+            <textarea name="courseDescription" required id="" placeholder="course description"></textarea>
+            <div class="control-btns">
+                <!-- <button class="left-btn"> < </button>
+                <button class="right-btn"> > </button> -->
+                <button onclick="openPage2()" type="button" class="single-btn">></button>
+            </div>
+        </div>
+        <div class="page-c page-2" style="display:none;">
+            <h2>Course Batches</h2>
+            <div class="add-batch-container">
+                <input type="text" name="courseBatches" required id="courseBatchInput" style="margin-top: 10px;" placeholder="Batch name">
+                <button onclick="addCourseBatch()" type="button" class="add-batch-btn">+</button>
+                <button onclick="resetCourseBatches()" type="button" class="add-batch-btn reset-batch-btn" style="background: red;">R</button>
+            </div>
+            <div class="course-batches">
+            </div>
+            <input type="hidden" style="text-transform:uppercase" name="allBatches" id="allBatches">
+            <div style="margin-top: 5vh;">
+                <h2>Batches you Teach</h2>
+                <div class="add-batch-container">
+                    <input type="text" name="teacherBatches" required id="teacherBatchInput" style="margin-top: 10px;" placeholder="Batch name">
+                    <button onclick="addTeacherBatch()" type="button" class="add-batch-btn">+</button>
+                    <button onclick="resetTeacherBatches()" type="button" class="add-batch-btn reset-batch-btn" style="background: red;">R</button>
+                </div>
+                <div class="teacher-batches">
+                </div>
+                <input type="hidden" style="text-transform:uppercase" name="teacherBatches" id="teacherBatches">
+            </div>
+            <div class="control-btns" style="justify-content: space-between;margin-top: 10vh;">
+                    <button onclick="openPage1()" type="button" class="left-btn"> < </button>
+                    <button onclick="openPage3()" type="button" class="right-btn"> > </button>
+                    <!-- <button onclick="openPage2()" class="single-btn">></button> -->
+            </div>
+        </div>
+        <div class="page-c page-3" style="display: none;">
+            <div class="start-date-container" style="margin-top: 5vh;">
+                <label for="startDate" class="date-label">Start date</label>
+                <input type="date" name="startDate" required id="date-input" style="margin-top: 0;">
+            </div>
+            <div class="start-date-container" style="margin-top: 5vh;">
+                    <label for="startDate" class="date-label">End date</label>
+                    <input type="date" name="endDate" required id="date-input" style="margin-top: 0;">
+            </div>
+            <div class="control-btns" style="justify-content: space-between;margin-top: 10vh;">
+                    <button onclick="openPage2()" type="button" class="left-btn"> < </button>
+                    <button onclick="openPage4()" type="button" class="right-btn"> > </button>
+                    <!-- <button onclick="openPage2()" class="single-btn">></button> -->
+            </div>
+        </div>
+        <div class="page-4" style="display: none;">
+            <h2 style="margin-top: 5px;">Weekly Schedule</h2>
+            <div style="display: flex;margin-top: 3vh;">
+                <button type="button" class="day-btn">Mon</button>
+                <input type="time" class="time-input" name="1" style="width: 25vw;"  id="">
+                <input type="time" class="time-input" name="1" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <div style="display: flex;margin-top: 3vh;">
+                    <button type="button" class="day-btn">Tue</button>
+                    <input type="time" class="time-input" name="2" style="width: 25vw;"  id="">
+                    <input type="time" class="time-input" name="2" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <div style="display: flex;margin-top: 3vh;">
+                    <button type="button" class="day-btn">Wed</button>
+                    <input type="time" class="time-input" name="3" style="width: 25vw;"  id="">
+                    <input type="time" class="time-input" name="3" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <div style="display: flex;margin-top: 3vh;">
+                    <button type="button" class="day-btn">Thu</button>
+                    <input  type="time" class="time-input" name="4" style="width: 25vw;"  id="">
+                    <input type="time" class="time-input" name="4" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <div style="display: flex;margin-top: 3vh;">
+                    <button type="button" class="day-btn">Fri</button>
+                    <input type="time" class="time-input" name="5" style="width: 25vw;"  id="">
+                    <input type="time" class="time-input" name="5" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <div style="display: flex;margin-top: 3vh;">
+                    <button type="button" class="day-btn">Sat</button>
+                    <input type="time" class="time-input" name="6" style="width: 25vw;"  id="">
+                    <input type="time" class="time-input" name="6" style="width: 25vw;margin-left: 2vw;"  id="">
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">  
+            <div class="control-btns" style="justify-content: space-between;margin-top: 10vh;">
+                    <button type="button" onclick="openPage3()" class="left-btn"> < </button>
+                    <button type="submit" style="background: rgb(84, 202, 84);" class="right-btn"> > </button>
+                    <!-- <button onclick="openPage2()" class="single-btn">></button> -->
+            </div>
+        </div>
+    </div>
+    </form>
+    <script>
+        function openPage1(){
+            document.querySelector(".page-1").style.display = "flex";
+            document.querySelector(".page-2").style.display = "none";
+        }
+        function openPage2(){
+            document.querySelector(".page-1").style.display = "none";
+            document.querySelector(".page-3").style.display = "none";
+            document.querySelector(".page-2").style.display = "flex";
+        }
+        function openPage3(){
+            document.querySelector(".page-2").style.display = "none";
+            document.querySelector(".page-4").style.display = "none";
+            document.querySelector(".page-3").style.display = "flex";
+        }
+        function openPage4(){
+            document.querySelector(".page-3").style.display = "none";
+            document.querySelector(".page-4").style.display = "flex";
+        }
+        function addCourseBatch()
+        {
+            if(document.getElementById("courseBatchInput").value.trim() != "")
+            {
+                let b = document.querySelector(".course-batches");
+                let ele = document.createElement('div');
+                ele.className="batch";
+                ele.textContent = document.getElementById("courseBatchInput").value;
+                document.getElementById("allBatches").value = document.getElementById("allBatches").value + " " + document.getElementById("courseBatchInput").value.toString().toUpperCase();
+                console.log(document.getElementById("allBatches").value); 
+                b.appendChild(ele);
+            }
+        }
+        function resetCourseBatches()
+        {
+            let e = document.querySelector(".course-batches");    
+            //e.firstElementChild can be used. 
+            let child = e.lastElementChild;  
+            while (child) { 
+                e.removeChild(child); 
+                child = e.lastElementChild; 
+            }
+            document.getElementById("allBatches").value = "";
+        }
+        function addTeacherBatch()
+        {
+            if(document.getElementById("teacherBatchInput").value.trim() != "")
+            {
+                let b = document.querySelector(".teacher-batches");
+                let ele = document.createElement('div');
+                ele.className="batch";
+                ele.textContent = document.getElementById("teacherBatchInput").value;
+                document.getElementById("teacherBatches").value = document.getElementById("teacherBatches").value + " " + document.getElementById("teacherBatchInput").value.toString().toUpperCase();
+                console.log(document.getElementById("teacherBatches").value); 
+                b.appendChild(ele);
+            }
+        }
+        function resetTeacherBatches()
+        {
+            let e = document.querySelector(".teacher-batches");    
+            //e.firstElementChild can be used. 
+            let child = e.lastElementChild;  
+            while (child) { 
+                e.removeChild(child); 
+                child = e.lastElementChild; 
+            }
+            document.getElementById("teacherBatches").value = "";
+        }
+    </script>
+</body>
+</html>

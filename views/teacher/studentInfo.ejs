@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>student-info</title>
+    <link rel="stylesheet" href="/css/teacher/studentInfo.css">
+</head>
+<body>
+    <div class="top">
+            <img onclick="window.history.back()" src="/images/left-arrow.svg" class="left-arrow" alt="">
+            <h3>Student Info</h3>
+    </div>
+    <div class="all">
+        <div class="student-info">
+                <div class="student-avatar">
+                        <img style="height: 100%;width: 100%;" src="<%= student.avatar %>" alt="">
+                </div>
+                <h3><%= student.name %></h3>
+                <h3 style="margin-top:auto">Batch - <%= student.batch %></h3>
+                <h3 style="margin-top:auto"><%= student.email %></h3>
+        </div>
+        <div class="analytics ripple">
+                <h2>Quiz
+                    <hr>
+                </h2>
+                <h3 class="analytics_info">Average Quiz Score <span class="scores"><%= analytics.avgQuizSc %></span>
+                    <hr>
+                </h3>
+                <h3 class="analytics_info">No. Of Quiz Attempted <span class="scores"><%= analytics.noQuizAtt %></span>
+                    <hr>
+                </h3>
+                <h2>Poll
+                    <hr>
+                </h2>
+                <h3 class="analytics_info">No. Of Poll Attempted <span class="scores"><%= analytics.noPollAtt %></span>
+                    <hr>
+                </h3>
+        </div>
+    </div>
+</body>
+</html>

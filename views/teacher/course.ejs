@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,35 +8,19 @@
     <link rel="stylesheet" href="/css/course.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/ripple.css">
+    <link rel="stylesheet" href="/css/modal.css">
 </head>
-
 <body>
-    <%- include('../includes/loader.ejs') %>
-    <div id="screen" style="display: none;">
-        <header>
-            <div class="top-circle-container">
-                <div class="top-circle">
-                </div>
-                <h3 class="course-name"><%= course.courseName %></h3>
-                <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
-                <a href="/course/1/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
-                <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
-            </div>
-        </header>
-        <div class="middle">
-            <div class="timeline-button Active" onclick="openTimeline()">
-                TIMELINE
-            </div>
-            <div class="info-button" onclick="openInfo()">
-                INFO
-            </div>
-            <div class="syllabus-button" onclick="openSyllabus()">
-                SYLLABUS
+<%- include('../includes/loader.ejs') %>
+<div id="screen" style="display: none;">
+    <header>
+        <div class="top-circle-container">
+            <div class="top-circle">
             </div>
             <h3 class="course-name"><%= course.courseName %></h3>
             <!-- <p>&nbsp;</p> -->
             <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
-            <img class="analytics-icon" src="/images/analytics.svg" alt="">
+            <img class="analytics-icon" onclick="parent.location='/teacher/course/<%= course._id %>/students'" src="/images/students.svg" alt="">
             <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
         </div>
     </header>
@@ -56,8 +39,8 @@
         <div class="class-list" style="text-align: center;">
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
-                    <% if(classInfo.batches.includes(batch)) {%>
-                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
+                    <% if(true) {%>
+                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class.classId %>'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>
@@ -89,27 +72,28 @@
                 <p style="margin-top:6vh;color:#454f63">no classes added in this course </p>
             <%}%>
         </div>
-        <div class="info" style="display: none;">
-            <div class="course-description">
-                <h3>Course Description</h3>
-                <hr>
-                <p>
-                    <%= course.courseDescription %>
-                </p>
-            </div>
-            <div class="course-team">
+    </div>
+    <div class="info" style="display: none;">
+        <div class="course-description">
+            <h3>Course Description</h3>
+            <hr>
+            <p>
+                <%= course.courseDescription %>
+            </p>
+        </div>
+        <div class="course-team">
                 <h3>Course Team</h3>
                 <hr>
                 <%for (let teammember of course.courseTeam) {%>
-                <div class="team-member" style="margin-top: 20px;">
-                    <div class="team-member-avatar-container">
-                        <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
+                    <div class="team-member" style="margin-top: 20px;">
+                        <div class="team-member-avatar-container">
+                            <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
+                        </div>
+                        <div class="team-member-info">
+                            <h3><%= teammember.name %></h3>
+                            <p><%= teammember.role %></p>
+                        </div>
                     </div>
-                    <div class="team-member-info">
-                        <h3><%= teammember.name %></h3>
-                        <p><%= teammember.role %></p>
-                    </div>
-                </div>
                 <%}%>
         </div>
         <div class="course-textbook course-description">
@@ -137,45 +121,65 @@
                     <%} }%>
                 </div>
         </div>
+        <div style="width:100vw;display: flex;justify-content: center;text-align: center;">
+            <button class="delete-course-btn" id="modalBtn">Delete Course</button>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="join-course-form" style="margin-top: 2vh;">
+            <h3>Are you sure you want to delete <%= course.courseName %></h3>
+            <form action="/teacher/deleteCourse/<%= course._id %>" style="display: flex;justify-content: center;text-align: center;" method="POST">
+              <button style="margin-right: 5vw;background: red;">Yes</button>
+              <button type="button" onclick="hideModal()" style="background: rgb(52, 201, 52);">No</button>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </form>
+        </div>
+        </div>
     </div>
 </div>
 </body>
+<script src="/js/modal.js"></script>
 <script>
-    function openTimeline() {
-        let element = document.querySelector(".Active");
-        element.classList.remove("Active");
-        var element2 = document.querySelector(".timeline-button");
-        element2.classList.add("Active");
-        let info = document.querySelector(".info");
-        let timeline = document.querySelector(".timeline");
-        timeline.style.display = "block";
-        info.style.display = "none";
-
-    }
-    function openInfo() {
-        var element = document.querySelector(".Active");
-        element.classList.remove("Active");
-        var element2 = document.querySelector(".info-button");
-        element2.classList.add("Active");
-        let info = document.querySelector(".info");
-        let timeline = document.querySelector(".timeline");
-        timeline.style.display = "none";
-        info.style.display = "block";
-    }
-    function openSyllabus() {
-        var element = document.querySelector(".Active");
-        element.classList.remove("Active");
-        var element2 = document.querySelector(".syllabus-button");
-        element2.classList.add("Active");
-    }
     function goBack() {
-        window.history.back();
-    }
+  window.history.back();
+}
+function openTimeline()
+{
+    let element = document.querySelector(".Active");
+    element.classList.remove("Active");
+    var element2 = document.querySelector(".timeline-button");
+    element2.classList.add("Active");
+    let info = document.querySelector(".info");
+    let timeline = document.querySelector(".timeline");
+    timeline.style.display = "block";
+    info.style.display = "none";
+
+}
+function openInfo()
+{
+    var element = document.querySelector(".Active");
+    element.classList.remove("Active");
+    var element2 = document.querySelector(".info-button");
+    element2.classList.add("Active");
+    let info = document.querySelector(".info");
+    let timeline = document.querySelector(".timeline");
+    timeline.style.display = "none";
+    info.style.display = "block";
+}
+function openSyllabus()
+{
+    var element = document.querySelector(".Active");
+    element.classList.remove("Active");
+    var element2 = document.querySelector(".syllabus-button");
+    element2.classList.add("Active");
+}
 </script>
 <script>
-    let loader = document.getElementById("loader");
-    loader.style.display = "none";
-    let screen = document.getElementById("screen");
-    screen.style.display = "block";
+        let loader = document.getElementById("loader");
+        loader.style.display="none";
+        let screen = document.getElementById("screen");
+        screen.style.display="block";
 </script>
 </html>

@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body{
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+}
+.top{
+    background: #665effff;
+    height: 55px;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    color: white;
+    font-size: 4.5vw;
+}
+.left-arrow{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 30px;
+    width: 30px;
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 5vh;
+    width: 5vh;
+}
+.add-student{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.add-student button{
+    background: none;
+    border:none;
+    font-size: 23px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    padding: 15px 26px;
+    margin-left: 4vw;
+    background: #665effff;
+    border-radius: 15px;
+    color: white;
+}
+::placeholder{
+    opacity: 0.5;
+}
+.student-email{
+    font-size: 23px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #454f63;
+    margin-top: 50px;
+    border-radius: 20px 0px 0px 20px;
+    /* padding-right: 20px; */
+    padding: 15px;
+    width: 60vw;
+}
+input:focus{
+    outline: none;
+}
+.students{
+    color: #454f63;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    align-items: center;
+}
+.student{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-right: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin: 5vw;
+    margin-top:-1vh;
+    border-radius: 20px;
+    /* width: fit-content; */
+    width: 85vw;
+}
+.course-avatar{
+    height:50px;
+    width:50px;
+    /* padding-bottom: 30px; */
+    /* float: left; */
+    border: 2px solid #454f63;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    margin: 10px;
+    margin-top: 1;
+}
+.course-avatar img{
+    margin-top:2px;
+    /* height:68px;
+    width:68px; */
+    height: 100%;
+    width: 100%;
+}

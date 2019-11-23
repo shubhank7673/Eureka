@@ -1,10 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const teacherControllers = require('../controllers/teacher')
 
-const teacherController = require('../controllers/teacher.js');
+router.get('/',teacherControllers.getHome);
+router.get('/addCourse',teacherControllers.getAddCourse);
+router.get('/joinExistingCourse',teacherControllers.getJoinExistingCourse);
+router.post('/joinExistingCourse',teacherControllers.postJoinExistingCourse);
+router.post('/addCourse',teacherControllers.postAddCourse);
+router.post('/deleteCourse/:courseId',teacherControllers.postDeleteCourse);
+router.get('/course/:courseId',teacherControllers.getCourse);
+// router.get('/course/:courseId/students',teacherControllers.getCourse);
+// router.post('/course/:courseId/students',teacherControllers.getCourse);
+router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
+router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
 
 /***********************  Testing Only *********/
-router.get("/startQuiz/:quizId",teacherController.getStartQuiz);
-router.post("/startQuiz/:quizId",teacherController.postStartQuiz);
+router.get("/startQuiz/:quizId",teacherControllers.getStartQuiz);
+router.post("/startQuiz/:quizId",teacherControllers.postStartQuiz);
 
 module.exports = router;

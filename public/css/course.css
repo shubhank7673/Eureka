@@ -210,3 +210,39 @@ p{
 .info{
     color:#454f63;
 }
+.delete-course-btn{
+    background: red;
+    color: white;
+    font-size: 23px;
+    padding: 10px;
+    border:none;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 12px 0px;
+    width:60vw;
+}
+button{
+    outline: none;
+}
+.join-course-form input{
+    font-size: 23px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #454f63;
+    margin-top: 30px;
+    border-radius: 20px;
+    /* padding-right: 20px; */
+    padding: 15px;
+    width: 70vw;   
+}
+.join-course-form button{
+    background: #665effff;
+    border: none;
+    padding: 12px;
+    font-size: 23px;
+    color: white;
+    border-radius: 15px;
+    margin-top: 2vh;
+    width: 20vw;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}

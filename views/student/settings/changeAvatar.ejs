@@ -36,7 +36,7 @@
             <img class="avatar" src="/images/avatars/girl<%= i %>_shade1.svg" onclick="changeAvatar(this)">
             <% } %>
         </div>
-        <form action="/settings/changeAvatar" method="post">
+        <form action="/student/settings/changeAvatar" method="post">
             <input type="hidden" name="update_avatar" id="update_avatar" value="<%= curr_avatar %>">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button type="submit" class="changeAvatar-btn">Change</button>
