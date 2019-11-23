@@ -142,13 +142,7 @@ module.exports.getClass = (req,res,next) => {
 }
 module.exports.postJoinCourse = (req,res,next) => {
         console.log(req.body.courseCode);
-        // let check = false;
-        // req.student.courses.forEach(item => {
-        //     if(item.course == req.body.courseCode)
-        //     {
-        //         check = true;
-        //     }
-        // })
+        // console.log(check);
         Course.findOne({
             courseCode:req.body.courseCode.toUpperCase()})
             .then(result => {
@@ -164,23 +158,44 @@ module.exports.postJoinCourse = (req,res,next) => {
                     //         facultyName = teamMember.name;
                     //     }
                     // })
-                    req.student.courses.push({
-                        course:result._id,
-                        // facultyName:facultyName,
-                        analytics:{
-                            avgQuizSc:0,
-                            noQuizAtt:0,
-                            noPollAtt:0
-                        }   
+                    
+                    let check = false;
+                    const updatedCourses1 = [];
+                    req.student.courses.forEach(item => {
+                        if(item.course.toString() === result._id.toString())
+                        {
+                            check = true;
+                            item.analytics = {
+                                avgQuizSc :0,
+                                noQuizAtt:0,
+                                noPollAtt:0
+                            }
+                        }
+                        updatedCourses1.push(item);
                     })
+                    if(!check)
+                    {
+                        req.student.courses.push({
+                            course:result._id,
+                            // facultyName:facultyName,
+                            analytics:{
+                                avgQuizSc:0,
+                                noQuizAtt:0,
+                                noPollAtt:0
+                            }   
+                        })
+                    }
+                    else{
+                        req.student.courses = updatedCourses1;
+                    }
                     req.student.save()
                         .then(r => {
                             result.students.push(req.student._id);
                             result.save()
-                                  .then(() => {
+                                    .then(() => {
                                     res.redirect('/student');
-                                  })
-                                  .catch(err => console.log(err))
+                                    })
+                                    .catch(err => console.log(err))
                         })   
                         .catch(err => console.log(err));
                 }

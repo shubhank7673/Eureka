@@ -205,6 +205,9 @@ module.exports.postDeleteCourse = (req,res,next) => {
                     student.courses = updatedCourses;
                     console.log(student);
                     student.save()
+                            .then(() => {
+                                   
+                            })
                             .catch(err => console.log(err));
                 })
                 Course.remove({_id:req.params.courseId},(err)=>{
