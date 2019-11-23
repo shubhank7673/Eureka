@@ -12,94 +12,95 @@
 </head>
 
 <body>
-<%- include('../includes/loader.ejs') %>
-<div id="screen" style="display: none;">
-    <header>
-        <div class="top-circle-container">
-            <div class="top-circle">
+    <%- include('../includes/loader.ejs') %>
+    <div id="screen" style="display: none;">
+        <header>
+            <div class="top-circle-container">
+                <div class="top-circle">
+                </div>
+                <h3 class="course-name"><%= course.courseName %></h3>
+                <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
+                <a href="/course/1/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
+                <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
             </div>
-            <h3 class="course-name"><%= course.courseName %></h3>
-            <a href="/"><img class="left-arrow" src="/images/left-arrow.svg"></a>
-            <a href="/course/1/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
-            <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
-        </div>
-    </header>
-    <div class="middle">
-        <div class="timeline-button Active" onclick="openTimeline()">
-            TIMELINE
-        </div>
-        <div class="info-button" onclick="openInfo()">
-            INFO
-        </div>
-        <div class="syllabus-button" onclick="openSyllabus()">
-            SYLLABUS
-        </div>
-    </div>
-    <div class="timeline" style="display: block;">
-        <div class="class-list">
-            <% for (let classInfo of course.classes) {%>
-            <div class="class-card ripple" onclick="parent.location='/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
-                <div class="left">
-                    <div class="month">
-                        <%= classInfo.class.month %>
-                    </div>
-                    <div class="date">
-                        <%= classInfo.class.date %>
-                    </div>
-                    <div class="day">
-                        <%= classInfo.class.day %>
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="title">
-                        <%= classInfo.class.title %>
-                    </div>
-                    <div class="title">
-                        <%= classInfo.class.timing %>
-                    </div>
-                    <div class="activities-info">
-                        <img src="/images/activities.svg" alt="">
-                        Activities
-                    </div>
-                </div>
+        </header>
+        <div class="middle">
+            <div class="timeline-button Active" onclick="openTimeline()">
+                TIMELINE
             </div>
-            <% } %>
-        </div>
-    </div>
-    <div class="info" style="display: none;">
-        <div class="course-description">
-            <h3>Course Description</h3>
-            <hr>
-            <p>
-                <%= course.courseDescription %>
-            </p>
-        </div>
-        <div class="course-team">
-            <h3>Course Team</h3>
-            <hr>
-            <%for (let teammember of course.courseTeam) {%>
-            <div class="team-member" style="margin-top: 20px;">
-                <div class="team-member-avatar-container">
-                    <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
-                </div>
-                <div class="team-member-info">
-                    <h3><%= teammember.name %></h3>
-                    <p><%= teammember.role %></p>
-                </div>
+            <div class="info-button" onclick="openInfo()">
+                INFO
             </div>
-            <%}%>
+            <div class="syllabus-button" onclick="openSyllabus()">
+                SYLLABUS
+            </div>
+        </div>
+        <div class="timeline" style="display: block;">
+            <div class="class-list">
+                <% for (let classInfo of course.classes) {%>
+                <div class="class-card ripple"
+                    onclick="parent.location='/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
+                    <div class="left">
+                        <div class="month">
+                            <%= classInfo.class.month %>
+                        </div>
+                        <div class="date">
+                            <%= classInfo.class.date %>
+                        </div>
+                        <div class="day">
+                            <%= classInfo.class.day %>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="title">
+                            <%= classInfo.class.title %>
+                        </div>
+                        <div class="title">
+                            <%= classInfo.class.timing %>
+                        </div>
+                        <div class="activities-info">
+                            <img src="/images/activities.svg" alt="">
+                            Activities
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="info" style="display: none;">
+            <div class="course-description">
+                <h3>Course Description</h3>
+                <hr>
+                <p>
+                    <%= course.courseDescription %>
+                </p>
+            </div>
+            <div class="course-team">
+                <h3>Course Team</h3>
+                <hr>
+                <%for (let teammember of course.courseTeam) {%>
+                <div class="team-member" style="margin-top: 20px;">
+                    <div class="team-member-avatar-container">
+                        <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
+                    </div>
+                    <div class="team-member-info">
+                        <h3><%= teammember.name %></h3>
+                        <p><%= teammember.role %></p>
+                    </div>
+                </div>
+                <%}%>
         </div>
         <div class="course-textbook course-description">
                 <h3>Course Textbook</h3>
                 <hr>
                 <%for (let book of course.textbooks) {%>
-            <div style="margin-top: 20px;">
-                <h4><%= book.name %></h4>
-                <p>
-                    <%= book.author %>
-                </p>
-            </div>
-            <%}%>
+                <div style="margin-top: 20px;">
+                    <h4><%= book.name %></h4>
+                    <p>
+                        <%= book.author %>
+                    </p>
+                </div>
+                <%}%>
         </div>
         <div class="course-references course-description">
                 <h3>Course References</h3>
@@ -107,8 +108,8 @@
                 <div class="links">
                     <h3>Links</h2>
                     <%for (let link of course.links) {%>
-            <p style="margin-left: 20px;"><%= link %></p>
-            <%}%>
+                <p style="margin-left: 20px;"><%= link %></p>
+                <%}%>
                 </div>
         </div>
     </div>
@@ -142,11 +143,14 @@
         var element2 = document.querySelector(".syllabus-button");
         element2.classList.add("Active");
     }
+    function goBack() {
+        window.history.back();
+    }
 </script>
 <script>
-        let loader = document.getElementById("loader");
-        loader.style.display="none";
-        let screen = document.getElementById("screen");
-        screen.style.display="block";
+    let loader = document.getElementById("loader");
+    loader.style.display = "none";
+    let screen = document.getElementById("screen");
+    screen.style.display = "block";
 </script>
 </html>

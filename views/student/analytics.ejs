@@ -10,7 +10,7 @@
         <img src="<%= curr_avatar %>" class="avatar">
         <h3 class="name">Piyush Jain</h3>
         <h3 class="email">Piyushjain964349@gmail.com</h3>
-        <a href="/course/1"><img class="left-arrow" src="/images/left-arrow.svg"></a>
+        <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
     </header>
     <main>
         <section class="analytics ripple">
@@ -31,4 +31,9 @@
             </h3>
         </section>
     </main>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <%- include('../includes/footer.ejs') %>

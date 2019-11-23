@@ -3,35 +3,44 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const quizSchema = new Schema({
-    title:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
-    duration:{
-        type:String,
-        required:true
+    startTime:{
+        type: Date
     },
-    problems:[{
-        statement:{
-            type:String,
-            required:true
+    duration: {
+        type: Date,
+        required: true
+    },
+    problems: [{
+        statement: {
+            type: String,
+            required: true
         },
-        options:[],
-        correct:{
-            type:Number,
-            required:true
-        },
-        responses:[{
-            student:{
-                type:Schema.Types.ObjectId,
-                ref:'Student'
+        options: [],
+        correct: [{
+            type: String,
+            required: true
+        }],
+        responses: [{
+            student: {
+                type: Schema.Types.ObjectId,
+                ref: 'Student'
             },
-            response:{
-             type:Number   
+            response: {
+                type: Number
             }
         }]
     }],
-
+    isFinish:{
+        type: Boolean,
+        required: true
+    },
+    maxOptions:{
+        type:Number
+    }
 })
 
-module.exports = mongoose.model('Quiz',quizSchema);
+module.exports = mongoose.model('Quiz', quizSchema);

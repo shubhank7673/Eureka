@@ -29,9 +29,8 @@ router.get('/course/:courseId/analytics',studentController.getAnalytics);
 router.get('/course/:courseId/discussion',(req,res,next) => {
 });
 router.get('/course/:courseId/class/:classId',studentController.getClass);
-router.get('/course/:courseId/class/:classId/:quizId',(req,res,next) => {
-    console.log(req.params.courseId,req.params.classId,req.params.quizId);
-});
+router.get('/quiz/:quizId',studentController.getQuiz);
+router.post('/quiz/:quizId/:problemNo',studentController.postQuiz);
 router.get('/course/:courseId/class/:classId/feedback',(req,res,next) => {
 });
 router.get('/course/:courseId/class/:classId/:pollId',(req,res,next) => {

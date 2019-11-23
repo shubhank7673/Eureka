@@ -7,8 +7,8 @@
         <div class="img-forg"></div>
         <img src="/images/analytics-back.svg" class="back-img">
         <img src="<%= curr_avatar %>" class="curr-avatar">
-        <h3 class="name">Piyush Jain</h3>
-        <h3 class="email">Piyushjain964349@gmail.com</h3>
+        <h3 class="name"><%= name  %></h3>
+        <h3 class="email"><%= email %></h3>
         <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
     </header>
     <main>
@@ -46,7 +46,7 @@
         function changeAvatar(ele) {
             let sel_avatar = document.querySelector(".sel-avatar");
             sel_avatar.src = ele.src;
-            document.querySelector("#update_avatar").value = ele.src;
+            document.querySelector("#update_avatar").value = '/images' + ele.src.split("/images")[1];
             let avt = document.querySelector(".foc-avatar");
             if (avt) {
                 avt.classList.remove("foc-avatar");
@@ -64,6 +64,6 @@
         }
         function goBack() {
             window.history.back();
-    }
+        }
     </script>
     <%- include('../../includes/footer.ejs') %>
