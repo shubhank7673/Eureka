@@ -81,7 +81,7 @@ module.exports.getHome = (req,res,next) => {
                 }
             })
         }
-        res.render('student/courses',{title:'courses',courseList:courses,snackbar:req.query.snackbar});
+        res.render('student/courses',{title:'courses',courseList:courses,snackbar:req.query.snackbar,message:req.query.message});
     });
 }
 module.exports.getCourse = (req,res,next) => {
@@ -94,6 +94,70 @@ module.exports.getCourse = (req,res,next) => {
           .catch(err => {
               console.log("failed to fetch the course");
           })
+}
+module.exports.postJoinCourse = (req,res,next) => {
+    console.log(req.body.courseCode);
+    // console.log(check);
+    Course.findOne({
+        courseCode:req.body.courseCode.toUpperCase()})
+        .then(result => {
+            if(!result)
+            {
+                res.redirect('/student?snackbar=show&message=course does not exist')
+            }
+            else{
+                // let facultyName = "";
+                // result.courseTeam.forEach(teamMember => {
+                //     if(teamMember.batches.includes(req.student.batch))
+                //     {
+                //         facultyName = teamMember.name;
+                //     }
+                // })
+                
+                let check = false;
+                const updatedCourses1 = [];
+                req.student.courses.forEach(item => {
+                    if(item.course.toString() === result._id.toString())
+                    {
+                        check = true;
+                        item.analytics = {
+                            avgQuizSc :0,
+                            noQuizAtt:0,
+                            noPollAtt:0
+                        }
+                    }
+                    updatedCourses1.push(item);
+                })
+                if(!check)
+                {
+                    req.student.courses.push({
+                        course:result._id,
+                        // facultyName:facultyName,
+                        analytics:{
+                            avgQuizSc:0,
+                            noQuizAtt:0,
+                            noPollAtt:0
+                        }   
+                    })
+                }
+                else{
+                    req.student.courses = updatedCourses1;
+                }
+                req.student.save()
+                    .then(r => {
+                        result.students.push(req.student._id);
+                        result.save()
+                                .then(() => {
+                                res.redirect('/student');
+                                })
+                                .catch(err => console.log(err))
+                    })   
+                    .catch(err => console.log(err));
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
 exports.getAnalytics = (req, res, next) => {
     let analytics;
@@ -135,7 +199,7 @@ module.exports.getQuiz = (req, res, next) => {
         if (quiz == undefined) {
             Quiz.findById(req.params.quizId).then(quiz => {
                 if (quiz.startTime == undefined) {
-                    return res.redirect("/course/3/class/1");
+                    return res.redirect("/student?snackbar=show&message=quiz not started yet");
                 } else {
                     let responses = new Array(quiz.problems.length).fill(new Array("Not Submitted"));
                     req.student.quiz.push({
@@ -177,70 +241,6 @@ module.exports.getQuiz = (req, res, next) => {
             }).catch(err => console.log(err));
         }
     }
-}
-module.exports.postJoinCourse = (req,res,next) => {
-        console.log(req.body.courseCode);
-        // console.log(check);
-        Course.findOne({
-            courseCode:req.body.courseCode.toUpperCase()})
-            .then(result => {
-                if(!result)
-                {
-                    res.redirect('/student?snackbar=show')
-                }
-                else{
-                    // let facultyName = "";
-                    // result.courseTeam.forEach(teamMember => {
-                    //     if(teamMember.batches.includes(req.student.batch))
-                    //     {
-                    //         facultyName = teamMember.name;
-                    //     }
-                    // })
-                    
-                    let check = false;
-                    const updatedCourses1 = [];
-                    req.student.courses.forEach(item => {
-                        if(item.course.toString() === result._id.toString())
-                        {
-                            check = true;
-                            item.analytics = {
-                                avgQuizSc :0,
-                                noQuizAtt:0,
-                                noPollAtt:0
-                            }
-                        }
-                        updatedCourses1.push(item);
-                    })
-                    if(!check)
-                    {
-                        req.student.courses.push({
-                            course:result._id,
-                            // facultyName:facultyName,
-                            analytics:{
-                                avgQuizSc:0,
-                                noQuizAtt:0,
-                                noPollAtt:0
-                            }   
-                        })
-                    }
-                    else{
-                        req.student.courses = updatedCourses1;
-                    }
-                    req.student.save()
-                        .then(r => {
-                            result.students.push(req.student._id);
-                            result.save()
-                                    .then(() => {
-                                    res.redirect('/student');
-                                    })
-                                    .catch(err => console.log(err))
-                        })   
-                        .catch(err => console.log(err));
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
 }
 
 module.exports.postQuiz = (req, res, next) => {

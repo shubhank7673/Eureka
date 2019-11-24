@@ -103,16 +103,16 @@ app.use('/student',studentRoutes);
 app.use('/teacher',teacherRoutes);
 app.use('/',(req,res,next) =>{
     if(req.session.isTeacher){
-        res.redirect('/teacher');
+        res.redirect('/teacher?snackbar=show&message=Something went wrong');
     }
     else{
-        res.redirect('/student');
+        res.redirect('/student?snackbar=show&message=Something went wrong');
     }
 })
 
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(3000);
+    app.listen(5000);
 }).catch(err => {
     console.log('Database connection error');
 });

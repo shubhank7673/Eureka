@@ -11,7 +11,7 @@
     <title>Start Quiz</title>
 </head>
 <body>
-    <form action="/startQuiz/5dd13534c0f5e16c6ea46141" method="post">
+    <form action="/teacher/startQuiz/<%= quizId %>" method="post">
         <button type"submit"> Start </button>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     </form>

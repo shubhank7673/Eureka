@@ -62,7 +62,7 @@ function fetchNext(ele) {
         nextProblemNo = (+ele.textContent - 1) ;    
     }
     let options = document.querySelectorAll(".options");
-    xhttp.open("POST", "/quiz/" + quizId + "/" + nextProblemNo, true);
+    xhttp.open("POST", "/student/quiz/" + quizId + "/" + nextProblemNo, true);
     xhttp.setRequestHeader('Csrf-Token', csrfToken);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     let ans = [];

@@ -385,13 +385,15 @@ module.exports.postJoinExistingCourse = (req,res,next) => {
 // });
 
 exports.getStartQuiz = (req,res,next) =>{
-    res.render("teacher/startQuiz");
+    res.render("teacher/startQuiz",{quizId:req.params.quizId});
 }
 
 exports.postStartQuiz = (req,res,next) => {
+    console.log(req.params.quizId);
     Quiz.findById(req.params.quizId).then(quiz =>{
         let d = new Date();
         quiz.startTime = d;
+        console.log(quiz);
         quiz.markModified("startTime");
         quiz.save().then(() => {
             console.log("Quiz Started!");
