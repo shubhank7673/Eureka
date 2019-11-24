@@ -64,7 +64,7 @@ module.exports.getHome = (req,res,next) => {
         courseIds.push(item.course);
     });
     // console.log(courseIds);
-    console.log(req.query.snackbar);
+    // console.log(req.query.snackbar);
     Course.find({
         '_id':{
             $in:courseIds
@@ -88,7 +88,7 @@ module.exports.getCourse = (req,res,next) => {
     // console.log(req.params.courseId);
     Course.findById(req.params.courseId)
           .then(course => {
-              console.log(course);
+            //   console.log(course);
               res.render('student/course',{title:'course',course:course,batch:req.student.batch})
           })
           .catch(err => {

@@ -20,11 +20,11 @@
                 </div>
                 <h3 class="course-name"><%= course.courseName %></h3>
                 <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
-                <a href="/course/1/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
+                <a href="/student/course/<%= course._id %>/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
                 <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
             </div>
         </header>
-        <div class="middle">
+        <!-- <div class="middle">
             <div class="timeline-button Active" onclick="openTimeline()">
                 TIMELINE
             </div>
@@ -35,11 +35,10 @@
                 SYLLABUS
             </div>
             <h3 class="course-name"><%= course.courseName %></h3>
-            <!-- <p>&nbsp;</p> -->
             <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg" alt="">
             <img class="analytics-icon" src="/images/analytics.svg" alt="">
             <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
-        </div>
+        </div> -->
     </header>
     <div class="middle">
         <div class="timeline-button Active" onclick="openTimeline()">
@@ -89,54 +88,54 @@
                 <p style="margin-top:6vh;color:#454f63">no classes added in this course </p>
             <%}%>
         </div>
-        <div class="info" style="display: none;">
-            <div class="course-description">
-                <h3>Course Description</h3>
-                <hr>
-                <p>
-                    <%= course.courseDescription %>
-                </p>
+    </div>
+    <div class="info" style="display: none;">
+        <div class="course-description">
+            <h3>Course Description</h3>
+            <hr>
+            <p>
+                <%= course.courseDescription %>
+            </p>
+        </div>
+        <div class="course-team">
+            <h3>Course Team</h3>
+            <hr>
+            <%for (let teammember of course.courseTeam) {%>
+            <div class="team-member" style="margin-top: 20px;">
+                <div class="team-member-avatar-container">
+                    <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
+                </div>
+                <div class="team-member-info">
+                    <h3><%= teammember.name %></h3>
+                    <p><%= teammember.role %></p>
+                </div>
             </div>
-            <div class="course-team">
-                <h3>Course Team</h3>
-                <hr>
-                <%for (let teammember of course.courseTeam) {%>
-                <div class="team-member" style="margin-top: 20px;">
-                    <div class="team-member-avatar-container">
-                        <img class="team-member-avatar" src="/images/test-avatar.svg" alt="">
+            <%}%>
+    </div>
+    <div class="course-textbook course-description">
+            <h3>Course Textbook</h3>
+            <hr>
+            <% if(course.courseTextbooks.length > 0){%>
+                <%for (let book of course.courseTextbooks) {%>
+                    <div style="margin-top: 20px;">
+                    <h4><%= book.name %></h4>
+                    <p>
+                        <%= book.author %>
+                    </p>
                     </div>
-                    <div class="team-member-info">
-                        <h3><%= teammember.name %></h3>
-                        <p><%= teammember.role %></p>
-                    </div>
-                </div>
                 <%}%>
-        </div>
-        <div class="course-textbook course-description">
-                <h3>Course Textbook</h3>
-                <hr>
+            <%}%>
+    </div>
+    <div class="course-references course-description">
+            <h3>Course References</h3>
+            <hr>
+            <div class="links">
+                <h3>Links</h2>
                 <% if(course.courseTextbooks.length > 0){%>
-                    <%for (let book of course.courseTextbooks) {%>
-                        <div style="margin-top: 20px;">
-                        <h4><%= book.name %></h4>
-                        <p>
-                            <%= book.author %>
-                        </p>
-                        </div>
-                    <%}%>
-                <%}%>
-        </div>
-        <div class="course-references course-description">
-                <h3>Course References</h3>
-                <hr>
-                <div class="links">
-                    <h3>Links</h2>
-                    <% if(course.courseTextbooks.length > 0){%>
-                    <%for (let link of course.courseReferences) {%>
-                    <p style="margin-left: 20px;"><%= link %></p>
-                    <%} }%>
-                </div>
-        </div>
+                <%for (let link of course.courseReferences) {%>
+                <p style="margin-left: 20px;"><%= link %></p>
+                <%} }%>
+            </div>
     </div>
 </div>
 </body>

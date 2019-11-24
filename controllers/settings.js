@@ -36,7 +36,7 @@ exports.postChangeName = (req, res, next) => {
         newName = req.body.firstName + " " + req.body.lastName;
     req.student.name = newName;
     req.student.save().then(() => {
-        res.redirect('/settings');
+        res.redirect('/student/settings');
     }).catch(err => {
         console.log(err);
     });
@@ -59,11 +59,11 @@ exports.postChangePassword = (req, res, next) => {
             bcrypt.hash(newPassword,12).then(password => {
                 req.student.password = password;
                 req.student.save().then(() => {
-                    res.redirect('/settings');
+                    res.redirect('/student/settings');
                 });
             }).catch(err => console.log(err));
         } else {
-            res.redirect('/settings/changePassword');
+            res.redirect('/student/settings/changePassword');
         }
     }).catch(err => console.log(err));
 };
@@ -86,7 +86,7 @@ exports.postChangeAvatar = (req, res, next) => {
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
     } else
-        res.redirect("/settings");
+        res.redirect("/student/settings");
 };
 
 exports.getFeedback = (req, res, next) => {
@@ -108,7 +108,7 @@ exports.postFeedback = (req, res, next) => {
     }).catch(err => {
         console.log(err);
     });
-    res.redirect('/settings');
+    res.redirect('/student/settings');
 };
 
 exports.getAboutUs = (req, res, next) => {

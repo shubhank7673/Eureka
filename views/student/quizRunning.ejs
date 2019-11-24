@@ -47,7 +47,7 @@
         <% } %>
     </main>
     <footer>
-        <form action="/quiz/<%= quizId %>/<%= totalProblems %>" method="POST" id="quizForm">
+        <form action="/student/quiz/<%= quizId %>/<%= totalProblems %>" method="POST" id="quizForm">
             <input type="hidden" value="<%= csrfToken %>" name="_csrf">
             <input type="hidden" value="Not Submitted" name="ans" id="ans">
             <div class="submit-container">
