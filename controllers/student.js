@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-
+const Class = require('../models/class');
 const Course = require('../models/course');
 const Quiz = require('../models/quiz');
 const quizMap = new Map();
-const getRemaingTime = require('../utils/timeRemaining');
+const getRemainingTime = require('../utils/timeRemaining');
 
 const path = require('path')
 const dummyCourses = [{ _id: 1, courseName: "Operating Systems", courseCode: "14B11CI121", courseAdmin: "Dr. Anju Shukla" },
@@ -175,8 +175,20 @@ exports.getAnalytics = (req, res, next) => {
         courseId:req.params.courseId
     });
 };
+
 module.exports.getClass = (req, res, next) => {
-    res.render('student/class');
+    Class.findById(req.params.classId)
+        .populate('classIncharge')
+        .populate('inClassAct.quiz')
+        .then(reqClass => {
+            res.render('student/class',{
+            title: reqClass.title,
+            classIncharge: reqClass.classIncharge.name,
+            teacherAvatar: reqClass.classIncharge.avatar,
+            schedule: reqClass.schedule,
+            quizes: reqClass.inClassAct.quiz,
+        });
+    }).catch(err => console.log(err));
 };
 
 module.exports.getQuiz = (req, res, next) => {
@@ -207,6 +219,14 @@ module.exports.getQuiz = (req, res, next) => {
                         responses: responses
                     });
                     quizMap.set(req.params.quizId, quiz);
+                    const timerId = setTimeout(() => {
+                        quizMap.delete(req.params.quizId);
+                        quiz.isFinish = true;
+                        quiz.save(() => {
+                            console.log('Quiz Ended and Delted from Map!');
+                            clearTimeout(timerId);
+                        })
+                    },(quiz.duration + 10)*1000);
                     req.student.save().then(() => {
                         res.render('student/quizRunning', {
                             quizTitle: quiz.title,
@@ -215,7 +235,7 @@ module.exports.getQuiz = (req, res, next) => {
                             totalProblems: quiz.problems.length,
                             currProblemNo: 0,
                             quizId: quiz._id,
-                            remTime: (quiz.duration - getRemaingTime(quiz.startTime)),
+                            remTime: (quiz.duration - getRemainingTime(quiz.startTime)),
                             maxOptions: quiz.maxOptions
                         });
                     }).catch(err => console.log(err));
@@ -235,7 +255,7 @@ module.exports.getQuiz = (req, res, next) => {
                     totalProblems: quiz.problems.length,
                     currProblemNo: 0,
                     quizId: quiz._id,
-                    remTime: (quiz.duration - getRemaingTime(quiz.startTime)),
+                    remTime: (quiz.duration - getRemainingTime(quiz.startTime)),
                     maxOptions: quiz.maxOptions
                 });
             }).catch(err => console.log(err));
@@ -265,9 +285,15 @@ module.exports.postQuiz = (req, res, next) => {
     } else {
         req.student.quiz[index].responses[+req.params.problemNo - 1] = req.body.ans.split(",");
         req.student.quiz[index].isSubmited = true;
-        req.student.markModified('quiz');
-        req.student.save().then(() => {
-            res.redirect("/quiz/" + req.params.quizId);
-        }).catch(err => console.log(err));
+        quiz.responses.push({
+            studentId: req.student._id,
+            response: req.student.quiz[index].responses
+        });
+        quiz.save().then(() => {
+            req.student.markModified('quiz');
+            req.student.save().then(() => {
+                res.redirect("/quiz/" + req.params.quizId);
+            }).catch(err => console.log(err));    
+        });
     }
 };

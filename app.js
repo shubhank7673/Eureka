@@ -36,14 +36,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use('/test',(req,res,next)=>{
-//     Course.findById("5dcecce6ea1f025153a9fa9d")
-//           .then(res => {
-//               console.log(res);
-//           })
-//           .catch(err => console.log(err));
-// })
-
 // app.use('/',(req,res,next)=>{
 //     res.render('student/class');
 // })
@@ -98,21 +90,30 @@ app.use('/add-class',(req,res,next) => {
         console.log(res);
     })
     .catch(err => console.log(err));
-})
+});
+
 app.use('/student',studentRoutes);
 app.use('/teacher',teacherRoutes);
-app.use('/',(req,res,next) =>{
+app.use('/',(req,res,next) => {
+    if(req.session.isTeacher){
+        res.redirect('/teacher');
+    }
+    else{
+        res.redirect('/student');
+    }
+});
+app.use('/invalid',(req,res,next) => {
     if(req.session.isTeacher){
         res.redirect('/teacher?snackbar=show&message=Something went wrong');
     }
     else{
         res.redirect('/student?snackbar=show&message=Something went wrong');
     }
-})
+});
 
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(5000);
+    app.listen(3000);
 }).catch(err => {
     console.log('Database connection error');
 });

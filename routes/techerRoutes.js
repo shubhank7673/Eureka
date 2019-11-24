@@ -13,9 +13,9 @@ router.get('/course/:courseId',teacherControllers.getCourse);
 // router.post('/course/:courseId/students',teacherControllers.getCourse);
 router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
 router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
-
+router.get('/course/:courseId/class/:classId',teacherControllers.getClass);
+router.get('/quiz/:quizId',teacherControllers.getQuiz);
 /***********************  Testing Only *********/
-router.get("/startQuiz/:quizId",teacherControllers.getStartQuiz);
 router.post("/startQuiz/:quizId",teacherControllers.postStartQuiz);
 
 module.exports = router;

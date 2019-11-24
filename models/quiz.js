@@ -11,8 +11,6 @@ const quizSchema = new Schema({
         type: Date
     },
     duration: {
-        type: Date,
-        required: true
     },
     problems: [{
         statement: {
@@ -23,16 +21,14 @@ const quizSchema = new Schema({
         correct: [{
             type: String,
             required: true
-        }],
-        responses: [{
-            student: {
-                type: Schema.Types.ObjectId,
-                ref: 'Student'
-            },
-            response: {
-                type: Number
-            }
         }]
+    }],
+    responses: [{
+        studentId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student'
+        },
+        response: []
     }],
     isFinish:{
         type: Boolean,

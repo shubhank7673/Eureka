@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Class</title>
-    <link rel="stylesheet" href="/css/class.css">
+    <link rel="stylesheet" href="/css/teacher/class.css">
     <link rel="stylesheet" href="/css/ripple.css">
 </head>
 
@@ -23,33 +22,33 @@
             </div>
         </header>
         <div class="class-card ripple">
-            <div class="top-heading">
-                <h3>Schedule</h3>
+        <div class="top-heading">
+            <h3>Schedule</h3>
+        </div>
+        <hr>
+        <div class="left">
+            <div class="month">
+                <%= schedule.month %>
             </div>
-            <hr>
-            <div class="left">
-                <div class="month">
-                    <%= schedule.month %>
-                </div>
-                <div class="date">
-                    <%= schedule.date %>
-                </div>
-                <div class="day">
-                    <%= schedule.day %>
-                </div>
+            <div class="date">
+                <%= schedule.date %>
             </div>
-            <div class="right">
-                <div class="timing">
-                    <%= schedule.time %>
-                </div>
+            <div class="day">
+                <%= schedule.day %>
             </div>
         </div>
+        <div class="right">
+            <div class="timing">
+                <%= schedule.time %>
+            </div>
+        </div>
+    </div>
         <div class="course-incharge-container ripple">
             <div class="top-heading">
                 <h3>Class Incharge</h3>
             </div>
             <hr>
-            <div class="course-incharge" style="margin-top: 20px;">
+            <div class="course-incharge" style="margin-top: 10px;">
                 <div class="course-incharge-avatar-container">
                     <img class="course-incharge-avatar" src="<%= teacherAvatar %>" alt="">
                 </div>
@@ -65,7 +64,7 @@
             <hr>
             <% for(quiz of quizes){ %>
                 <div style="display: flex; align-items: center; justify-content: space-around;">
-                    <a href="/student/quiz/<%= quiz._id %>" style="text-decoration: none; color:#454f63;">
+                    <a href="/teacher/quiz/<%= quiz._id %>" style="text-decoration: none; color:#454f63;">
                         <div class="quiz ripple">
                             <img src="/images/quiz-icon.svg" alt="">
                             <div style="font-weight: bold;">
@@ -75,6 +74,12 @@
                     </a>
                     <% if(quiz.isFinish){ %>
                         <img src="/images/check.svg" style="height: 40px;width: 18vw;" alt="">
+                    <% } else { %>
+                        <img src="/images/check.svg" style="height: 40px;width: 18vw; display: none;" id="img-<%= quiz._id %>"
+                            alt="">
+                        <button class="quiz-start-btn" id="btn-<%= quiz._id %>" onclick="startQuiz('<%= quiz._id %>')"> Start
+                        </button>
+                        <p id="timer-<%= quiz._id %>" class="timer" style="display: none;"></p>
                     <% } %>
                 </div>
             <% } %>
@@ -85,12 +90,12 @@
     function goBack() {
         window.history.back();
     }
-</script>
-<script>
     let loader = document.getElementById("loader");
     loader.style.display = "none";
     let screen = document.getElementById("screen");
     screen.style.display = "block";
+    let csrfToken = "<%= csrfToken %>";
 </script>
+<script src="/js/teacher/startQuiz.js"></script>
 
 </html>
