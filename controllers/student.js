@@ -220,15 +220,21 @@ module.exports.getQuiz = (req, res, next) => {
                         quizId: req.params.quizId,
                         responses: responses
                     });
-                    quizMap.set(req.params.quizId, quiz);
+                    if(quiz.isFinish){
+                        return req.student.save(() => {
+                            res.render('student/quizEnd', {
+                                quizTitle: quiz.title,
+                                responses: req.student.quiz[index].responses,
+                                problems: quiz.problems,
+                                startTime: String(quiz.startTime).split("GMT")[0]
+                            });
+                        });
+                    }
                     const timerId = setTimeout(() => {
                         quizMap.delete(req.params.quizId);
-                        quiz.isFinish = true;
-                        quiz.save(() => {
-                            console.log('Quiz Ended and Delted from Map!');
-                            clearTimeout(timerId);
-                        })
-                    },(quiz.duration + 10)*1000);
+                    },(quiz.duration + 5)*1000);
+                    
+                    quizMap.set(req.params.quizId, quiz);
                     req.student.save().then(() => {
                         res.render('student/quizRunning', {
                             quizTitle: quiz.title,

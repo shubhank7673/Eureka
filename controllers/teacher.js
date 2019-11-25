@@ -451,6 +451,13 @@ exports.postStartQuiz = (req,res,next) => {
     /****************** Uncomment this line to start quiz *********/
         quiz.startTime = d;
         quiz.markModified("startTime");
+        const timerId = setTimeout(() => {
+            quiz.isFinish = true;
+            quiz.save(() => {
+                console.log('Quiz Ended');
+                clearTimeout(timerId);
+            })
+        },(quiz.duration + 5)*1000);
         quiz.save().then(quiz => {
             console.log("Quiz Started!");
             res.send({
