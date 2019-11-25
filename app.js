@@ -111,10 +111,10 @@ app.use('/invalid',(req,res,next) => {
         res.redirect('/student?snackbar=show&message=Something went wrong');
     }
 });
-
+const PORT = process.env.PORT || 5000;
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(5000);
+    app.listen(PORT,()=>{console.log(`running on port ${PORT}`)});
 }).catch(err => {
     console.log('Database connection error');
 });
