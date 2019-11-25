@@ -3,7 +3,7 @@ const Student = require('../models/student');
 const Teacher = require('../models/teacher');
 
 exports.getLogin = (req, res, next) => {
-    res.render('auth/login', { pageTitle: 'Login',isIncorrect:false });
+    res.render('auth/login', { pageTitle: 'Login', isIncorrect: false });
 };
 
 exports.postLogin = (req, res, next) => {
@@ -11,32 +11,30 @@ exports.postLogin = (req, res, next) => {
     Student.findOne({ email: req.body.email }).then((student) => {
         if (!student) {
             // Check for teacher
-            Teacher.findOne({ email:req.body.email })
-                   .then((teacher) => {
-                       if(!teacher)
-                       {
-                           res.render('auth/login',{isIncorrect:true});
-                       }
-                       else{
-                           bcrypt.compare(req.body.password,teacher.password)
-                                 .then((domatch) =>{
-                                     if(domatch)
-                                     {
-                                        req.session.isLoggedIn = true;
-                                        req.session.isTeacher = true;
-                                        req.session.teacher = teacher;
-                                        req.session.save((err) => {
-                                            console.log('Error while logging in -: ', err);
-                                            res.redirect('/teacher');
-                                        });   
-                                     }
-                                     else{
-                                        res.render('auth/login',{isIncorrect:true});
-                                     }
-                                 })
-                       }
-                   })
-                   .catch(err => console.log("some error during fetching teacher",err));
+            Teacher.findOne({ email: req.body.email })
+                .then((teacher) => {
+                    if (!teacher) {
+                        res.render('auth/login', { isIncorrect: true });
+                    }
+                    else {
+                        bcrypt.compare(req.body.password, teacher.password)
+                            .then((domatch) => {
+                                if (domatch) {
+                                    req.session.isLoggedIn = true;
+                                    req.session.isTeacher = true;
+                                    req.session.teacher = teacher;
+                                    req.session.save((err) => {
+                                        console.log('Error while logging in -: ', err);
+                                        res.redirect('/teacher');
+                                    });
+                                }
+                                else {
+                                    res.render('auth/login', { isIncorrect: true });
+                                }
+                            })
+                    }
+                })
+                .catch(err => console.log("some error during fetching teacher", err));
         } else {
             bcrypt.compare(req.body.password, student.password).then((doMatch) => {
                 if (doMatch) {
@@ -48,7 +46,7 @@ exports.postLogin = (req, res, next) => {
                         res.redirect('/student');
                     });
                 } else {
-                    res.redirect('/login',{isIncorrect:true});
+                    res.redirect('/login', { isIncorrect: true });
                 }
             }).catch(err => {
                 console.log(err);
@@ -56,7 +54,7 @@ exports.postLogin = (req, res, next) => {
             });
         }
     }).catch(err => {
-        console.log('error',err);
+        console.log('error', err);
         res.redirect('/invalid');
     });
 };

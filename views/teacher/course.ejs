@@ -39,9 +39,13 @@
         <div class="class-list" style="text-align: center;">
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
-                    <% if(true) {%>
+                    <% 
+                        let check = classInfo.batches.every(val => tBatches.includes(val));
+                        if(check)
+                        {
+                    %>
                     <!-- Dummy Route -->
-                    <div class="class-card ripple" onclick="parent.location='/teacher/course/5dd7ca6a64db90206a39d73a/class/5ddaf6b1f8f7265acf1d6bf2'">
+                    <div class="class-card ripple" onclick="parent.location='/teacher/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>
@@ -118,7 +122,7 @@
                     <h3>Links</h2>
                     <% if(course.courseTextbooks.length > 0){%>
                     <%for (let link of course.courseReferences) {%>
-                    <p style="margin-left: 20px;"><%= link %></p>
+                    <p style="margin-left: 20px; margin-top: 10px;"><%= link %></p>
                     <%} }%>
                 </div>
         </div>

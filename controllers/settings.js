@@ -20,7 +20,7 @@ exports.getSettings = (req, res, next) => {
 };
 
 exports.getChangeName = (req, res, next) => {
-    res.render('student/settings/changeName', { 
+    res.render('student/settings/changeName', {
         pageTitle: 'Change Name',
         curr_avatar: req.student.avatar,
         name: req.student.name,
@@ -56,7 +56,7 @@ exports.postChangePassword = (req, res, next) => {
     const newPassword = req.body.newPassword;
     bcrypt.compare(oldPassword, req.student.password).then(doMatch => {
         if (doMatch) {
-            bcrypt.hash(newPassword,12).then(password => {
+            bcrypt.hash(newPassword, 12).then(password => {
                 req.student.password = password;
                 req.student.save().then(() => {
                     res.redirect('/student/settings');

@@ -169,6 +169,8 @@ exports.getAnalytics = (req, res, next) => {
     })
     // console.log(analytics);
     res.render('student/analytics', {
+        name: req.student.name,
+        email: req.student.email,
         pageTitle: 'Analytics',
         curr_avatar: req.student.avatar,
         analytics:analytics,

@@ -108,7 +108,7 @@ module.exports.postAddCourse = (req, res, next) => {
                         courseCode: req.body.courseCode,
                         courseTeam: [{
                             name: req.teacher.name,
-                            role: "team member",
+                            role: "Team member",
                             batches: teacherBatches,
                         }],
                         batches: allBatches,
@@ -123,7 +123,7 @@ module.exports.postAddCourse = (req, res, next) => {
                         .then(cou => {
                             req.teacher.courses.push({
                                 courseId: cou._id,
-                                role: "team member",
+                                role: "Team member",
                                 batches: teacherBatches
                             });
                             req.teacher.save()
@@ -157,7 +157,15 @@ module.exports.getCourse = (req, res, next) => {
     Course.findById(req.params.courseId)
         .then(course => {
             // console.log(course);
-            res.render('teacher/course', { course: course });
+            let tBatches = [];
+            req.teacher.courses.forEach(item => {
+                if(item.courseId.toString() === course._id.toString())
+                {
+                    tBatches = item.batches;
+                }
+            }) ;
+            //console.log(tBatches);             
+            res.render('teacher/course', { course: course,teacher:req.teacher,tBatches:tBatches });
         })
         .catch(err => console.log(err));
 }
@@ -304,14 +312,14 @@ module.exports.postJoinExistingCourse = (req, res, next) => {
                     course.courseTeam.push({
                         batches: teacherBatches,
                         name: req.teacher.name,
-                        role: "team member"
+                        role: "Team member"
                     })
                     course.save()
                         .then(resCourse => {
                             req.teacher.courses.push({
                                 batches: teacherBatches,
                                 courseId: resCourse._id,
-                                role: "team member"
+                                role: "Team member"
                             })
                             console.log(req.teacher);
                             req.teacher.save()
@@ -453,5 +461,5 @@ exports.postStartQuiz = (req,res,next) => {
 }
 
 exports.getQuiz = (req,res,next) => {
-
+    res.send("Under Development");
 };
