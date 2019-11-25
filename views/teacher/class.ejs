@@ -74,12 +74,23 @@
                     </a>
                     <% if(quiz.isFinish){ %>
                         <img src="/images/check.svg" style="height: 40px;width: 18vw;" alt="">
-                    <% } else { %>
+                    <% } else if(quiz.startTime == undefined) { %>
                         <img src="/images/check.svg" style="height: 40px;width: 18vw; display: none;" id="img-<%= quiz._id %>"
                             alt="">
                         <button class="quiz-start-btn" id="btn-<%= quiz._id %>" onclick="startQuiz('<%= quiz._id %>')"> Start
                         </button>
                         <p id="timer-<%= quiz._id %>" class="timer" style="display: none;"></p>
+                    <% } else { %>
+                        <% let d = new Date(); %>
+                        <% 
+                            let remTime = Math.floor((d - quiz.startTime)/1000);
+                            remTime = quiz.duration - remTime;
+                            let remSeconds = remTime;
+                            remTime = Math.floor(remTime / 60) + " : " + (remTime % 60);
+                        %>
+                        <img src="/images/check.svg" style="height: 40px;width: 18vw; display: none;" id="img-<%= quiz._id %>">
+                        <span id="timer-sec-<%= quiz._id %>" style="display: none;"><%= remSeconds %></span>
+                        <p id="timer-<%= quiz._id %>" class="timer running"> <%= remTime %> </p>
                     <% } %>
                 </div>
             <% } %>
@@ -95,6 +106,20 @@
     let screen = document.getElementById("screen");
     screen.style.display = "block";
     let csrfToken = "<%= csrfToken %>";
+    let timers = document.querySelectorAll('.running');
+    for(let timer of timers){
+        let quizId = timer.id.split("-")[1];
+        let remTime = parseInt(document.querySelector("#timer-sec-"+quizId).innerHTML);
+        let timerId = setInterval(() => {
+                remTime--;
+                if (remTime <= 0) {
+                    timer.style.display = "none";
+                    document.querySelector("#img-"+quizId).style.display = "block";
+                    clearInterval(timerId);
+                }
+                document.querySelector("#timer-"+quizId).innerHTML = Math.floor(remTime / 60) + " : " + (remTime % 60);
+            }, 1000);
+    }
 </script>
 <script src="/js/teacher/startQuiz.js"></script>
 

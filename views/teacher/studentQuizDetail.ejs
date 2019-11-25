@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/quizEnd.css">
+    <title>Quiz</title>
+</head>
+
+<body>
+    <header>
+        <div class="top-circle-container">
+            <div class="top-circle"></div>
+            <h3 class="subject-name">Computer Networks</h3>
+            <h3 class="quiz-name"><%= quizTitle %></h3>
+            <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
+        </div>
+    </header>
+    <div class="quiz-summary">
+        <div>
+            <p>Due</p>
+            <span> <%= startTime %> </span>        
+        </div>
+        <div>
+            <p>Score</p>
+            <span  id="score"></span>
+        </div>
+        <% let score = 0; %>
+    </div>
+    <main>
+        <% for(let i = 0; i < problems.length; i++){ %>
+                <section class="quiz-card">
+                <h3 class="questionNo">Question <%= i + 1 %></h3>
+                <p class="statement"><%= problems[i].statement %></p>
+                
+                <% let correctLookup = new Map(); %>
+                <% let responseLookup = new Map(); %>
+                <% problems[i].correct.forEach(ele => {
+                    correctLookup.set(String(ele),1);
+                }); %>
+                <% responses[i].forEach(ele => {
+                    responseLookup.set(String(ele),1);
+                }); %>
+
+                <% let correctCount = 0, submitted = 0; %>
+                <% for(let option of problems[i].options){ %>
+                    <!-- <%= responseLookup.get(option) %> -->
+                    <% if(responseLookup.get(option) && correctLookup.get(option)){ %>
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input options" checked="true" readonly>
+                                <label class="custom-control-label labels"><%= option %> </label>
+                        </div>
+                        <% submitted ++ %>
+                        <% correctCount++ %>
+                    <% }else if(responseLookup.get(option)){ %>
+                        <div class="custom-control custom-checkbox custom-checkbox-wrong">
+                                <input type="checkbox" class="custom-control-input custom-control-input-wrong options wrongAns" checked="true" readonly>
+                                <label class="custom-control-label custom-control-label-wrong labels"><%= option %> </label>
+                        </div>
+                        <% submitted ++ %>
+                    <% }else if(correctLookup.get(option)){ %>
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input options" checked="true" readonly>
+                                <label class="custom-control-label labels"><%= option %> </label>
+                        </div>
+                    <% } else { %>
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input options" readonly>
+                                <label class="custom-control-label labels"><%= option %> </label>
+                        </div>
+                    <% } %>
+                <% } %>
+                <% if(submitted == 0){ %>
+                    <p class="not-submit-tag">Not Submitted!</p>
+                <% } %>   
+                <% if(correctCount == problems[i].correct.length && responses[i].length == problems[i].correct.length){ %>
+                    <% score +=5; %>
+                <% } %>
+
+                <% if(i != problems[i].options.length - 1){ %>
+                    <hr>
+                <% } %>
+            </section>
+            <% } %>
+    </main>
+</body>
+<script>
+    let score = "<%= score %>";
+    document.querySelector("#score").innerHTML = score;
+    function goBack(){
+        window.history.back();
+    }
+</script>
+</html>

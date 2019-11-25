@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 0px;
+}
+
+button:focus{
+    outline: none;
+}
+
+.top-circle{
+    position: absolute;
+    width: 120vw;
+    height: 30vh;
+    margin: 0 auto;
+    border-radius: 50%;
+    left: -5vw;
+    top: -14vh;
+    background: #665effff;
+}
+
+.top-circle-container
+{
+    /* border: 1px solid black; */
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 18vh;
+    width: 100vw;
+}
+
+.left-arrow{
+    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 9vw;
+    width: 9vw;
+    transition:0.3s;
+}
+
+.left-arrow:active{
+    height: 11vw;
+    width: 11vw;
+}
+
+.subject-name{
+    vertical-align: middle;
+    position: absolute;
+    top: 15px;
+    right:15px;
+    font-size: 7vw;
+    color: white;
+    margin: 0;
+}
+
+.quiz-name{
+    position: absolute;
+    top: 6vh;
+    right:15px;
+    font-size: 6vw;
+    color: white;
+    margin: 0;
+}
+
+.quiz-summary div{
+    margin: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-summary p{
+    font-size: large;
+    font-weight: bold;
+}
+
+.quiz-summary span{
+    font-size: large;
+    font-weight: bold;
+}
+
+.student-card{
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.26);
+    margin: 2vh 3vw;
+    padding: 15px 3vw; 
+    border-radius: 15px;
+}
+
+.student-card:hover,
+.student-card:active{
+    text-decoration: none;
+    color: #212529;
+}
+
+.student-avatar{
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-container{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #454f63;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.student-name{
+    font-weight: bold;
+    font-size: x-large;
+    margin-left: 10px;
+    color: #212529;
+}
+
+.student-score-abv-avg{
+    font-size: x-large;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgb(20, 167, 20);
+}
+
+.student-score-bel-avg{
+    font-size: x-large;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgb(235, 13, 13);
+}

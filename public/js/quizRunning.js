@@ -42,6 +42,7 @@ function fetchNext(ele) {
             for (let i = 0; i < options.length; i++) {
                 labels[i].textContent = newProblem.options[i];
                 options[i].value = newProblem.options[i];
+                options[i].checked = false;
                 if (savedAns.get(options[i].value)) {
                     options[i].checked = true;
                 }
@@ -69,7 +70,6 @@ function fetchNext(ele) {
     for (let i = 0; i < options.length; i++) {
         if (options[i].checked == true) {
             ans.push(options[i].value);
-            options[i].checked = false;
         }
     }
     xhttp.send("ans=" + ans.toString() + "&currProblemNo=" + currProblemNo);
@@ -81,7 +81,6 @@ function goBack() {
 
 var submitQuiz = function(){
     let ans = [];
-    console.log(this);
     let options = document.querySelectorAll(".options");
     for (let i = 0; i < options.length; i++) {
         if (options[i].checked) {

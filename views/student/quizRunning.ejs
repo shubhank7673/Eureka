@@ -62,10 +62,11 @@
     let actualOptions = "<%= options.length %>";
     let time = parseInt("<%= remTime %>");
     document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);
-    setInterval(() => {
+    const timerId = setInterval(() => {
         time--;
         if (time <= 0) {
             submitQuiz();
+            clearInterval(timerId);
         }
         if(time >= 0){
             document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);

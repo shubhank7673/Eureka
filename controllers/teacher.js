@@ -61,38 +61,37 @@ module.exports.postAddCourse = (req, res, next) => {
                 let end = new Date(req.body.endDate);
                 let classsn = 1;
                 let loop = new Date(start);
-                while(loop <= end){           
-                if(weekDays.includes(loop.getDay()))
-                {
-                    const cls = new Class({
-                        title:"class "+classsn.toString(),
-                        schedule:{
-                            date:loop.getDate().toString(),
-                            day:days[loop.getDay()],
-                            month:months[loop.getMonth()],
-                            time:req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
-                        },
-                        venue:"LT-1",
-                        classIncharge:req.teacher._id
-                    });
-                    classes.push(cls);
-                    // cls.save()
-                    //     .then(cls => {
-                    //         classes.push({
-                    //             class:cls,
-                    //             batch:teacherBatches
-                    //         });
-                    //     })
-                    // const obj = {
-                    //     title:"class",
-                    //     timing:req.body[loop.getDay().toString()],
-                    //     date:loop.getDate(),
-                    //     month:loop.getMonth()+1,
-                    //     day:days[loop.getDay()]
-                    // }
-                }
-                let newDate = loop.setDate(loop.getDate() + 1);
-                loop = new Date(newDate);
+                while (loop <= end) {
+                    if (weekDays.includes(loop.getDay())) {
+                        const cls = new Class({
+                            title: "class " + classsn.toString(),
+                            schedule: {
+                                date: loop.getDate().toString(),
+                                day: days[loop.getDay()],
+                                month: months[loop.getMonth()],
+                                time: req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
+                            },
+                            venue: "LT-1",
+                            classIncharge: req.teacher._id
+                        });
+                        classes.push(cls);
+                        // cls.save()
+                        //     .then(cls => {
+                        //         classes.push({
+                        //             class:cls,
+                        //             batch:teacherBatches
+                        //         });
+                        //     })
+                        // const obj = {
+                        //     title:"class",
+                        //     timing:req.body[loop.getDay().toString()],
+                        //     date:loop.getDate(),
+                        //     month:loop.getMonth()+1,
+                        //     day:days[loop.getDay()]
+                        // }
+                    }
+                    let newDate = loop.setDate(loop.getDate() + 1);
+                    loop = new Date(newDate);
                 }
                 Class.insertMany(classes, (err, result) => {
                     console.log(result);
@@ -159,13 +158,12 @@ module.exports.getCourse = (req, res, next) => {
             // console.log(course);
             let tBatches = [];
             req.teacher.courses.forEach(item => {
-                if(item.courseId.toString() === course._id.toString())
-                {
+                if (item.courseId.toString() === course._id.toString()) {
                     tBatches = item.batches;
                 }
-            }) ;
+            });
             //console.log(tBatches);             
-            res.render('teacher/course', { course: course,teacher:req.teacher,tBatches:tBatches });
+            res.render('teacher/course', { course: course, teacher: req.teacher, tBatches: tBatches });
         })
         .catch(err => console.log(err));
 }
@@ -284,8 +282,8 @@ module.exports.postJoinExistingCourse = (req, res, next) => {
                     month: months[loop.getMonth()],
                     time: req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
                 },
-                venue:"LT-1",
-                classIncharge:req.teacher._id
+                venue: "LT-1",
+                classIncharge: req.teacher._id
             });
             // console.log(cls);
             classes.push(cls);
@@ -340,7 +338,7 @@ exports.getClass = (req, res, next) => {
         .populate('classIncharge')
         .populate('inClassAct.quiz')
         .then(reqClass => {
-            res.render('teacher/class',{
+            res.render('teacher/class', {
                 title: reqClass.title,
                 classIncharge: reqClass.classIncharge.name,
                 teacherAvatar: reqClass.classIncharge.avatar,
@@ -350,37 +348,37 @@ exports.getClass = (req, res, next) => {
         }).catch(err => console.log(err));
 };
 
-module.exports.getCreateQuiz = (req,res,next) => {
+module.exports.getCreateQuiz = (req, res, next) => {
     res.render('teacher/createQuiz');
 }
 
-module.exports.postCreateQuiz = (req,res,next) => {
-    console.log(req.body.title,req.body.duration)
+module.exports.postCreateQuiz = (req, res, next) => {
+    console.log(req.body.title, req.body.duration)
     let quiz = new Quiz({
-        title:req.body.title,
-        duration:req.body.duration,
-        maxOptions:"4",
-        isFinish:false,
-        problems:[{
-            statement:"",
-            options:["","","",""],
-            correct:[""],
-            correctOptions:[]
+        title: req.body.title,
+        duration: req.body.duration,
+        maxOptions: "4",
+        isFinish: false,
+        problems: [{
+            statement: "",
+            options: ["", "", "", ""],
+            correct: [""],
+            correctOptions: []
         }],
-        responses:[]
+        responses: []
     })
     quiz.save()
-    .then((quiz)=>{
-        res.render('teacher/addQuizQuestions',{totalProblems:quiz.problems.length,quiz:quiz,problem:quiz.problems[0],problemIndex:0});
-    })
-    .catch(err => console.log(err));
+        .then((quiz) => {
+            res.render('teacher/addQuizQuestions', { totalProblems: quiz.problems.length, quiz: quiz, problem: quiz.problems[0], problemIndex: 0 });
+        })
+        .catch(err => console.log(err));
 }
 
-module.exports.getFinish = (req,res,next) => {
+module.exports.getFinish = (req, res, next) => {
     res.redirect('/');
 }
 
-module.exports.postProblem = (req,res,next) => {
+module.exports.postProblem = (req, res, next) => {
     // console.log(req.params.quizId);
     console.log(req.body);
     // console.log(req.body.buttonClicked.toString());
@@ -388,7 +386,7 @@ module.exports.postProblem = (req,res,next) => {
         .then(quiz => {
             quiz.problems[+req.body.currentProblem].statement = req.body.statement;
             // console.log(req.body.A);
-            let options = [req.body.A,req.body.B,req.body.C,req.body.D];
+            let options = [req.body.A, req.body.B, req.body.C, req.body.D];
             console.log(options);
             quiz.problems[+req.body.currentProblem].options = options;
             // quiz.problems[+req.body.currentProblem].options[1] = req.body.B;
@@ -398,40 +396,38 @@ module.exports.postProblem = (req,res,next) => {
             quiz.problems[+req.body.currentProblem].correctOptions = req.body.correctOptions.split(",");
             quiz.save()
                 .then((qui) => {
-                    if(req.body.buttonClicked==="end")
-                    {
+                    if (req.body.buttonClicked === "end") {
                         res.send();
                     }
-                    else if(req.body.buttonClicked.trim()=="" ||req.body.buttonClicked.trim()=="+")
-                    {
+                    else if (req.body.buttonClicked.trim() == "" || req.body.buttonClicked.trim() == "+") {
                         qui.problems.push({
-                            options:["","","",""],
-                            correct:[],
-                            statement:"",
-                            correctOptions:[]   
+                            options: ["", "", "", ""],
+                            correct: [],
+                            statement: "",
+                            correctOptions: []
                         });
                         qui.save()
-                            .then(qu =>{
+                            .then(qu => {
                                 res.send({
-                                    totalProblems:qu.problems.length,
-                                    quiz:qu,
-                                    problem:qu.problems[qu.problems.length-1],
-                                    problemIndex:qu.problems.length-1,
-                                    added:true,
-                                    correctOptions:qu.problems[qu.problems.length-1].correctOptions
+                                    totalProblems: qu.problems.length,
+                                    quiz: qu,
+                                    problem: qu.problems[qu.problems.length - 1],
+                                    problemIndex: qu.problems.length - 1,
+                                    added: true,
+                                    correctOptions: qu.problems[qu.problems.length - 1].correctOptions
                                 })
                             })
-                            .catch(err=>console.log(err));
+                            .catch(err => console.log(err));
                     }
-                    else{
+                    else {
                         console.log("here");
                         res.send({
-                            totalProblems:qui.problems.length,
-                            quiz:qui,
-                            problem:qui.problems[+req.body.buttonClicked-1],
-                            problemIndex:+req.body.buttonClicked-1,
-                            added:false,
-                            correctOptions:qui.problems[+req.body.buttonClicked-1].correctOptions
+                            totalProblems: qui.problems.length,
+                            quiz: qui,
+                            problem: qui.problems[+req.body.buttonClicked - 1],
+                            problemIndex: +req.body.buttonClicked - 1,
+                            added: false,
+                            correctOptions: qui.problems[+req.body.buttonClicked - 1].correctOptions
                         })
                     }
                 })
@@ -444,11 +440,10 @@ module.exports.postProblem = (req,res,next) => {
     // console.log(req.body);
 }
 
-exports.postStartQuiz = (req,res,next) => {
-    console.log(req.params.quizId);
-    Quiz.findById(req.params.quizId).then(quiz =>{
+exports.postStartQuiz = (req, res, next) => {
+    Quiz.findById(req.params.quizId).then(quiz => {
         let d = new Date();
-    /****************** Uncomment this line to start quiz *********/
+        /****************** Uncomment this line to start quiz *********/
         quiz.startTime = d;
         quiz.markModified("startTime");
         const timerId = setTimeout(() => {
@@ -457,7 +452,7 @@ exports.postStartQuiz = (req,res,next) => {
                 console.log('Quiz Ended');
                 clearTimeout(timerId);
             })
-        },(quiz.duration + 5)*1000);
+        }, (quiz.duration + 5) * 1000);
         quiz.save().then(quiz => {
             console.log("Quiz Started!");
             res.send({
@@ -467,6 +462,101 @@ exports.postStartQuiz = (req,res,next) => {
     });
 }
 
-exports.getQuiz = (req,res,next) => {
-    res.send("Under Development");
+exports.getQuiz = (req, res, next) => {
+    Quiz.findById(req.params.quizId)
+        .then(quiz => {
+            if(!quiz.isFinish){
+                res.send("Wait for the quiz to end!");
+            }
+            if (quiz.summaryPresent) {
+                quiz.populate("summary.studentsPerf.studentId").execPopulate().then(quiz => {
+                    res.render("teacher/quizEnd", {
+                        quizId: quiz._id,
+                        avgClassScore: quiz.summary.avgClassScore,
+                        minScore: quiz.summary.minScore,
+                        maxScore: quiz.summary.maxScore,
+                        startTime: String(quiz.startTime).split("GMT")[0],
+                        quizTitle: quiz.title,
+                        studentsPerf: quiz.summary.studentsPerf
+                    });
+                });
+            } else {
+                let studentScore = new Map();
+                for (let i = 0; i < quiz.problems.length; i++) {
+                    let correctMap = new Map();
+                    for (let j = 0; j < quiz.problems[i].correct.length; j++) {
+                        correctMap.set(quiz.problems[i].correct[j], 1);
+                    }
+                    for (let j = 0; j < quiz.responses.length; j++) {
+                        let currStudentScore = studentScore.get(quiz.responses[j].studentId) || 0;
+                        let correctCount = 0, selectCount = 0;
+                        for (let setOption of quiz.responses[j].response[i]) {
+                            if (correctMap.get(setOption)) {
+                                correctCount++;
+                                selectCount++;
+                            } else
+                                selectCount++;
+                        }
+                        if (quiz.problems[i].correct.length == selectCount && selectCount == correctCount) {
+                            currStudentScore += 5;
+                        }
+                        studentScore.set(quiz.responses[j].studentId, currStudentScore);
+                    }
+                }
+                let studentsPerf = [];
+                let maxScore = 0;
+                let minScore = 5 * quiz.problems.length;
+                let avgClassScore = 0;
+                studentScore.forEach((score, studentId) => {
+                    studentsPerf.push({
+                        studentId: studentId,
+                        score: score
+                    });
+                    maxScore = Math.max(score, maxScore);
+                    minScore = Math.min(score, minScore);
+                    avgClassScore += score;
+                });
+                avgClassScore = avgClassScore / studentScore.size;
+                studentsPerf.sort((a, b) => {
+                    return a.score < b.score
+                });
+                quiz.summary = {
+                    avgClassScore: avgClassScore,
+                    minScore: minScore,
+                    maxScore: maxScore,
+                    studentsPerf: studentsPerf,
+                };
+                quiz.summaryPresent = true;
+                return quiz.save(() => {
+                    quiz.populate("summary.studentsPerf.studentId").execPopulate().then(quiz => {
+                        res.render("teacher/quizEnd", {
+                            quizId: quiz._id,
+                            avgClassScore: quiz.summary.avgClassScore,
+                            minScore: quiz.summary.minScore,
+                            maxScore: quiz.summary.maxScore,
+                            startTime: String(quiz.startTime).split("GMT")[0],
+                            quizTitle: quiz.title,
+                            studentsPerf: quiz.summary.studentsPerf
+                        });
+                    }).catch(err => console.log(err));
+                });
+            }
+        }).catch(err => console.log(err));
+};
+
+exports.getStudentQuizDetail = (req, res, next) => {
+    Student.findById(req.params.studentId)
+        .then(student => {
+            let index = student.quiz.findIndex(ele => {
+                return ele.quizId == req.params.quizId;
+            });
+            Quiz.findById(req.params.quizId).then(quiz => {
+                return res.render('teacher/studentQuizDetail', {
+                    quizTitle: quiz.title,
+                    responses: student.quiz[index].responses,
+                    problems: quiz.problems,
+                    startTime: String(quiz.startTime).split("GMT")[0]
+                });
+            }).catch(err => console.log(err));
+        });
 };

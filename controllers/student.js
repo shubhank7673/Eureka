@@ -230,9 +230,11 @@ module.exports.getQuiz = (req, res, next) => {
                             });
                         });
                     }
+                    
                     const timerId = setTimeout(() => {
+                        console.log("Quiz deleted from map!");
                         quizMap.delete(req.params.quizId);
-                    },(quiz.duration + 5)*1000);
+                    },(quiz.duration + 120)*1000);
                     
                     quizMap.set(req.params.quizId, quiz);
                     req.student.save().then(() => {
