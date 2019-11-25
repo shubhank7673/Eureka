@@ -46,9 +46,9 @@ const classSchema = new Schema({
         //     required: true
         // }]
     },
-    classIncharge: {
-        type: Schema.Types.ObjectId,
-        ref: 'Teacher'
+    classIncharge:{
+        type:Schema.Types.ObjectId,
+        ref:'Teacher'
     }
 });
 

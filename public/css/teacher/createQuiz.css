@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body{
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    color: #454f63;
+}
+.top{
+    background: #665effff;
+    height: 55px;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    color: white;
+    font-size: 4vw;
+}
+.left-arrow{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left:15px;
+    height: 30px;
+    width: 30px;
+    transition:0.3s;
+}
+.left-arrow:active{
+    height: 5vh;
+    width: 5vh;
+}
+
+.container-btn{
+    padding:2px 0 2px 3px;
+    margin-top: 15px;
+    height: 50px;
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    /* border: 1px solid #454f63; */
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.18);
+}
+
+.question-btn{
+    /* flex: 0 0 12vw; */
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    border: 3px solid #454f63;
+    color: black;
+    background: white;
+    font-weight: bold;
+    font-size: 6vw;
+    outline: none;
+    margin-right:10px;
+}
+button:focus{
+    outline: none;
+}
+.plus-btn{
+    border: 3px solid #665effff;
+    color: #665effff;
+}
+.question{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* text-align: center; */
+    /* align-items: center; */
+    padding: 10px;
+}
+.question h4{
+    margin: auto;
+}
+label{
+    font-size: 20px !important;
+}
+.problem-statement{
+    /* width: 100%; */
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:5px 6px 5px 6px;
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18); */
+}
+.problem-statement-input{
+    /* width: 100%; */
+    border: 1px solid #454f63;
+    padding:10px;
+    /* height: 12vh; */
+    margin: 10px 0 15px 0;
+    height: 100px;
+    color: #454f63;
+    font-size: 18px;
+    resize: none;
+    outline: none;
+    border-radius: 15px 15px 15px 15px;
+}
+.option{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:5px 6px 5px 6px;   
+}
+.option textarea{
+    height: 60px;
+}
+.done-btn{
+    border: 3px solid green;
+    color: green;   
+}

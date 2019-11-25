@@ -15,6 +15,10 @@ router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
 router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
 router.get('/course/:courseId/class/:classId',teacherControllers.getClass);
 router.get('/quiz/:quizId',teacherControllers.getQuiz);
+router.post('/quiz/:quizId/update',teacherControllers.postProblem);
+router.get('/quiz/:quizId/finishAdding',teacherControllers.getFinish);
+router.get('/quiz/CreateQuiz',teacherControllers.getCreateQuiz);
+router.post('/quiz/CreateQuiz',teacherControllers.postCreateQuiz);
 /***********************  Testing Only *********/
 router.post("/startQuiz/:quizId",teacherControllers.postStartQuiz);
 
