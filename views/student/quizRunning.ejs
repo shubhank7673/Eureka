@@ -67,7 +67,9 @@
         if (time <= 0) {
             submitQuiz();
         }
-        document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);
+        if(time >= 0){
+            document.querySelector("#timer").innerHTML = Math.floor(time / 60) + " : " + (time % 60);
+        }
     }, 1000);
     let currProblemNo = "<%= currProblemNo %>";
     let totalProblems = "<%= totalProblems %>";
