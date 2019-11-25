@@ -114,7 +114,7 @@ app.use('/invalid',(req,res,next) => {
 
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(3000);
+    app.listen(5000);
 }).catch(err => {
     console.log('Database connection error');
 });
