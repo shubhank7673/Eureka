@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://eureka:eureka129@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://eureka:LOLZ@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
 const csrf = require('csurf');
 
 const Student = require('./models/student');
