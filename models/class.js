@@ -45,6 +45,10 @@ const classSchema = new Schema({
         //     ref: 'Poll',
         //     required: true
         // }]
+    },
+    classIncharge:{
+        type:Schema.Types.ObjectId,
+        ref:'Teacher'
     }
 });
 
