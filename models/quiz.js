@@ -22,9 +22,15 @@ const quizSchema = new Schema({
         options: [],
         correct: [{
             type: String,
-            // required: true
-        }],
-        correctOptions:[]
+            required: true
+        }]
+    }],
+    responses: [{
+        studentId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student'
+        },
+        response: []
     }],
     isFinish:{
         type: Boolean,

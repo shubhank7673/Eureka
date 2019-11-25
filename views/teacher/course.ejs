@@ -40,7 +40,8 @@
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
                     <% if(true) {%>
-                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class.classId %>'">
+                    <!-- Dummy Route -->
+                    <div class="class-card ripple" onclick="parent.location='/teacher/course/5dd7ca6a64db90206a39d73a/class/5ddaf6b1f8f7265acf1d6bf2'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>
