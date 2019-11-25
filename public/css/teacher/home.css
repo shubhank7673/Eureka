@@ -132,9 +132,7 @@ html{
     -webkit-transform:rotate(45deg);
     transform:rotate(45deg);
 }
-.plus-img:active{
 
-}
 .drop-up{
     position: fixed;
     bottom:20px;
