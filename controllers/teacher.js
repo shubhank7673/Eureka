@@ -76,7 +76,8 @@ module.exports.postAddCourse = (req,res,next) => {
                             month:months[loop.getMonth()],
                             time:req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
                         },
-                        venue:"LT-1"
+                        venue:"LT-1",
+                        classIncharge:req.teacher._id
                     });
                     classes.push(cls);
                     // cls.save()
@@ -295,7 +296,8 @@ module.exports.postJoinExistingCourse = (req,res,next) => {
                     month:months[loop.getMonth()],
                     time:req.body[loop.getDay().toString()][0] + " - " + req.body[loop.getDay().toString()][1]
                 },
-                venue:"LT-1"
+                venue:"LT-1",
+                classIncharge:req.teacher._id
             });
             // console.log(cls);
             classes.push(cls);
@@ -346,43 +348,99 @@ module.exports.postJoinExistingCourse = (req,res,next) => {
     })
 }
 
+module.exports.getCreateQuiz = (req,res,next) => {
+    res.render('teacher/createQuiz');
+}
+module.exports.postCreateQuiz = (req,res,next) => {
+    console.log(req.body.title,req.body.duration)
+    let quiz = new Quiz({
+        title:req.body.title,
+        duration:req.body.duration,
+        maxOptions:"4",
+        isFinish:false,
+        problems:[{
+            statement:"",
+            options:["","","",""],
+            correct:[""],
+            correctOptions:[]
+        }],
+        responses:[]
+    })
+    quiz.save()
+    .then((quiz)=>{
+        res.render('teacher/addQuizQuestions',{totalProblems:quiz.problems.length,quiz:quiz,problem:quiz.problems[0],problemIndex:0});
+    })
+    .catch(err => console.log(err));
+}
 
+module.exports.getFinish = (req,res,next) => {
+    res.redirect('/');
+}
 
+module.exports.postProblem = (req,res,next) => {
+    // console.log(req.params.quizId);
+    console.log(req.body);
+    // console.log(req.body.buttonClicked.toString());
+    Quiz.findById(req.params.quizId)
+        .then(quiz => {
+            quiz.problems[+req.body.currentProblem].statement = req.body.statement;
+            // console.log(req.body.A);
+            let options = [req.body.A,req.body.B,req.body.C,req.body.D];
+            console.log(options);
+            quiz.problems[+req.body.currentProblem].options = options;
+            // quiz.problems[+req.body.currentProblem].options[1] = req.body.B;
+            // quiz.problems[+req.body.currentProblem].options[2] = req.body.C;
+            // quiz.problems[+req.body.currentProblem].options[3] = req.body.D;
+            quiz.problems[+req.body.currentProblem].correct = req.body.correct.split(",");
+            quiz.problems[+req.body.currentProblem].correctOptions = req.body.correctOptions.split(",");
+            quiz.save()
+                .then((qui) => {
+                    if(req.body.buttonClicked==="end")
+                    {
+                        res.send();
+                    }
+                    else if(req.body.buttonClicked.trim()=="" ||req.body.buttonClicked.trim()=="+")
+                    {
+                        qui.problems.push({
+                            options:["","","",""],
+                            correct:[],
+                            statement:"",
+                            correctOptions:[]   
+                        });
+                        qui.save()
+                            .then(qu =>{
+                                res.send({
+                                    totalProblems:qu.problems.length,
+                                    quiz:qu,
+                                    problem:qu.problems[qu.problems.length-1],
+                                    problemIndex:qu.problems.length-1,
+                                    added:true,
+                                    correctOptions:qu.problems[qu.problems.length-1].correctOptions
+                                })
+                            })
+                            .catch(err=>console.log(err));
+                    }
+                    else{
+                        console.log("here");
+                        res.send({
+                            totalProblems:qui.problems.length,
+                            quiz:qui,
+                            problem:qui.problems[+req.body.buttonClicked-1],
+                            problemIndex:+req.body.buttonClicked-1,
+                            added:false,
+                            correctOptions:qui.problems[+req.body.buttonClicked-1].correctOptions
+                        })
+                    }
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    // console.log(+req.body.currentProblem);
+    // console.log(+req.body.buttonClicked);
+    // console.log(req.body.correct.split(","));
+    // console.log(req.body);
+}
 
-
-
-
-
-
-// const co = new Course({
-//     courseName:req.body.courseName,
-//     courseCode:req.body.courseCode,
-//     courseTeam:[{
-//         name:req.teacher.name,
-//         role:"team member",
-//         batches:teacherBatches,
-//     }],
-//     batches:allBatches,
-//     classes:[
-//         {
-//             class:{
-//             classId:"5dd12a9d1c9d440000c99151",
-//             title:"class",
-//             timing:"09:00 - 10:00",
-//             date:"15",
-//             month:"NOV",
-//             day:"SAT",
-//             },
-//             batch:"B5"
-//         }
-//     ],
-//     courseTextbooks:[{
-//         name:"Comp net",
-//         author:"author author"
-//     }],
-//     courseReferences:["dummy1","dummy2"],
-//     courseDescription:"very nice course"
-// });
 
 exports.getStartQuiz = (req,res,next) =>{
     res.render("teacher/startQuiz",{quizId:req.params.quizId});

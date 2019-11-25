@@ -36,20 +36,13 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use('/test',(req,res,next)=>{
-//     Course.findById("5dcecce6ea1f025153a9fa9d")
-//           .then(res => {
-//               console.log(res);
-//           })
-//           .catch(err => console.log(err));
-// })
 
 // app.use('/',(req,res,next)=>{
 //     res.render('student/class');
 // })
 
-// app.use('/',(req,res,next) => {
-//     res.render('teacher/joinExistingCourse');
+// app.use('/createQuiz',(req,res,next) => {
+//     res.render('teacher/createQuiz');
 // })
 
 app.use(authRoutes);

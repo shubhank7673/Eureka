@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>createQuiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/teacher/createQuiz.css">
+    <link rel="stylesheet" href="/css/ripple.css">
+</head>
+<style>
+        #Form{
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                width: 100%;
+                /* border: 1px solid black; */
+        }
+        .submit-btn{
+                background: rgb(22, 243, 22);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                padding: 8px 5px;
+                margin-bottom: 5px;
+        }
+</style>
+<body>
+    <div class="top">
+            <img onclick="window.history.back()" src="/images/left-arrow.svg" class="left-arrow" alt="">
+            <h4>Create Quiz</h4>
+    </div>
+    <div style="margin-top: 10px;">
+            <div class="container-btn">
+                <% for(let i = 1; i <= totalProblems; i++){ %>
+                        <button onclick="fetchProblem(this)" class="question-btn ripple"> <%= i %> </button>
+                <% } %>
+                    <!-- <button onclick="fetchNext(this)" class="question-btn ripple"> 1 </button> -->
+                    <button onclick="fetchProblem(this)" class="question-btn plus-btn ripple">+</button>
+                    <!-- <button onclick="fetchProblem(this)" class="question-btn done-btn ripple">&#x2714;</button> -->
+            </div>
+            <!-- <hr> -->
+            <div class="question">
+                <h4 class="question-number">Question <%= problemIndex + 1%></h4>
+                <div class="problem-statement">
+                    <label style="margin-top: 2vh;" for="problemStatement">Problem Statement</label>
+                    <textarea type="text" name="problemStatement" class="problem-statement-input" id=""><%= problem.statement %></textarea>
+                </div>
+                <div class="option">
+                    <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="1" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Option A</label>
+                    </div>
+                    <textarea type="text" name="problemStatement" class="optionA" id=""><%= problem.options[0] %></textarea>
+                </div>
+                <div class="option">
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="2" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">Option B</label>
+                        </div>
+                        <textarea type="text" name="problemStatement" class="optionB" id=""><%= problem.options[1] %></textarea>
+                </div>
+                <div class="option">
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="3" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">Option C</label>
+                        </div>
+                        <textarea type="text" name="problemStatement" class="optionC" id=""><%= problem.options[2] %></textarea>
+                </div>
+                <div class="option">
+                        <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="4" id="customCheck4">
+                                <label class="custom-control-label" for="customCheck4">Option D</label>
+                        </div>
+                        <textarea type="text" name="problemStatement" class="optionD" id=""><%= problem.options[3] %></textarea>
+                </div>
+            </div>
+            <input type="hidden" name="" id="problemIndex" value="<%= problemIndex %>">
+            <form action="/teacher/quiz/<%= quiz._id %>/finishAdding" id="Form" method="GET">
+                <button type="button" onclick="submitForm()" class="submit-btn">No more problems to add</button>
+            </form>
+    </div>
+<script>
+    function fetchProblem(ele)
+    {
+            let xhttp = new XMLHttpRequest();
+            let problemIndex = document.querySelector("#problemIndex").value;
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                        let responseData = JSON.parse(this.responseText);
+                        console.log(responseData);
+                        if(responseData.added === true)
+                        {
+                                document.querySelector(".plus-btn").remove();
+                                let newBtn = document.createElement('button');
+                                newBtn.classList = ["question-btn ripple"];
+                                newBtn.textContent = responseData.totalProblems;
+                                newBtn.onclick = function(){fetchProblem(newBtn)};
+                                let plusBtn = document.createElement('button');
+                                plusBtn.classList = ["question-btn ripple plus-btn"];
+                                plusBtn.textContent = "+";
+                                plusBtn.onclick = function(){fetchProblem(plusBtn)};
+                                document.querySelector(".container-btn").appendChild(newBtn);
+                                document.querySelector(".container-btn").appendChild(plusBtn);
+                        }
+                        console.log(responseData.problem.statement);
+                        document.querySelector(".question-number").textContent = "Question "+(responseData.problemIndex+1).toString();
+                        let c1 = document.querySelector('#customCheck1');
+                        let c2 = document.querySelector('#customCheck2');
+                        let c3 = document.querySelector('#customCheck3');
+                        let c4 = document.querySelector('#customCheck4');
+                        c1.checked = false;
+                        c2.checked = false;
+                        c3.checked = false;
+                        c4.checked = false;
+                        responseData.problem.correctOptions.forEach(item => {
+                                if(item!=="")
+                                {
+                                        document.querySelector('#customCheck'+(+item+1).toString()).checked=true;
+                                }
+                        })
+                        document.querySelector("#problemIndex").value = responseData.problemIndex;
+                        document.querySelector(".problem-statement-input").value = responseData.problem.statement.toString();
+                        document.querySelector(".optionA").value = responseData.problem.options[0];
+                        document.querySelector(".optionB").value = responseData.problem.options[1];
+                        document.querySelector(".optionC").value = responseData.problem.options[2];
+                        document.querySelector(".optionD").value = responseData.problem.options[3];
+                }
+            }
+            console.log(ele);
+            let problemStatement = document.querySelector(".problem-statement-input").value;
+            let optionA = document.querySelector(".optionA").value;
+            let optionB = document.querySelector(".optionB").value;
+            let optionC = document.querySelector(".optionC").value;
+            let optionD = document.querySelector(".optionD").value;
+            let correct = [];
+            let correctOptions = [];
+            if(document.querySelector('#customCheck1').checked)
+            {
+                    correct.push(optionA);
+                    correctOptions.push(0);
+            }
+            if(document.querySelector('#customCheck2').checked)
+            {
+                    correct.push(optionB);
+                    correctOptions.push(1);
+            }
+            if(document.querySelector('#customCheck3').checked)
+            {
+                    correct.push(optionC);
+                    correctOptions.push(2);
+            }
+            if(document.querySelector('#customCheck4').checked)
+            {
+                    correct.push(optionD);
+                    correctOptions.push(3);
+            }
+            xhttp.open("POST","/teacher/quiz/"+"<%= quiz._id %>"+"/update",true);
+            xhttp.setRequestHeader('Csrf-Token', "<%= csrfToken %>");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("buttonClicked="+ele.textContent+"&currentProblem="+problemIndex+"&statement="+problemStatement
+                        +"&A="+optionA+"&B="+optionB+"&C="+optionC+"&D="+optionD+"&correct="+correct.toString()+"&correctOptions="+correctOptions.toString());
+    }
+    function submitForm()
+    {
+        let xhttp = new XMLHttpRequest();
+        let problemIndex = document.querySelector("#problemIndex").value;
+        let problemStatement = document.querySelector(".problem-statement-input").value;
+        let optionA = document.querySelector(".optionA").value;
+        let optionB = document.querySelector(".optionB").value;
+        let optionC = document.querySelector(".optionC").value;
+        let optionD = document.querySelector(".optionD").value;
+        let correct = [];
+        let correctOptions = [];
+        if(document.querySelector('#customCheck1').checked)
+        {
+                correct.push(optionA);
+                correctOptions.push(0);
+        }
+        if(document.querySelector('#customCheck2').checked)
+        {
+                correct.push(optionB);
+                correctOptions.push(1);
+        }
+        if(document.querySelector('#customCheck3').checked)
+        {
+                correct.push(optionC);
+                correctOptions.push(2);
+        }
+        if(document.querySelector('#customCheck4').checked)
+        {
+                correct.push(optionD);
+                correctOptions.push(3);
+        }
+        xhttp.open("POST","/teacher/quiz/"+"<%= quiz._id %>"+"/update",true);
+        xhttp.setRequestHeader('Csrf-Token', "<%= csrfToken %>");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("buttonClicked="+"end"+"&currentProblem="+problemIndex+"&statement="+problemStatement
+                +"&A="+optionA+"&B="+optionB+"&C="+optionC+"&D="+optionD+"&correct="+correct.toString()+"&correctOptions="+correctOptions.toString());
+        document.querySelector("#Form").submit();
+    }
+</script>
+</body>
+</html>

@@ -11,28 +11,20 @@ const quizSchema = new Schema({
         type: Date
     },
     duration: {
-        type: Date,
+        type: Number,
         required: true
     },
     problems: [{
         statement: {
             type: String,
-            required: true
+            // required: true
         },
         options: [],
         correct: [{
             type: String,
-            required: true
+            // required: true
         }],
-        responses: [{
-            student: {
-                type: Schema.Types.ObjectId,
-                ref: 'Student'
-            },
-            response: {
-                type: Number
-            }
-        }]
+        correctOptions:[]
     }],
     isFinish:{
         type: Boolean,
@@ -40,7 +32,14 @@ const quizSchema = new Schema({
     },
     maxOptions:{
         type:Number
-    }
+    },
+    responses: [{
+        studentId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student'
+        },
+        response:[]
+    }]
 })
 
 module.exports = mongoose.model('Quiz', quizSchema);
