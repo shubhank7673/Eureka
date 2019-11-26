@@ -45,7 +45,30 @@ const quizSchema = new Schema({
             ref: 'Student'
         },
         response:[]
-    }]
+    }],
+    summaryPresent: {
+        type: Boolean
+    },
+    summary: {
+        avgClassScore: {
+            type: Number
+        },
+        minScore: {
+            type: Number
+        },
+        maxScore: {
+            type: Number
+        },
+        studentsPerf: [{
+            studentId: {
+                type: Schema.Types.ObjectId,
+                ref: 'Student'
+            },
+            score: {
+                type: Number
+            }
+        }]
+    }
 })
 
 module.exports = mongoose.model('Quiz', quizSchema);

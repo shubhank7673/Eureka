@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/teacher/quizEnd.css">
+    <link rel="stylesheet" href="/css/ripple.css">
+</head>
+<body>
+    <header>
+        <div class="top-circle-container">
+            <div class="top-circle"></div>
+            <h3 class="subject-name">Computer Networks</h3>
+            <h3 class="quiz-name"><%= quizTitle %></h3>
+            <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
+        </div>
+    </header>
+    <div class="quiz-summary">
+        <div>
+            <p>Due</p>
+            <span> <%= startTime %> </span>        
+        </div>
+        <div>
+            <p>Average score</p>
+            <span  id="score"><%= avgClassScore %></span>
+        </div>
+        <div>
+            <p>Highest score</p>
+            <span  id="score"><%= maxScore %></span>
+        </div>
+        <div>
+            <p>Lowest score</p>
+            <span  id="score"><%= minScore %></span>
+        </div>
+    </div>
+    <main>
+        <% for(student of studentsPerf){ %>
+            <a class="student-card ripple" href="/teacher/quiz/<%= quizId %>/studentQuizDetail/<%= student.studentId._id %>">
+                <div class="avatar-container">
+                    <img src="<%= student.studentId.avatar%>" class="student-avatar">
+                </div>
+                <span class="student-name"><%= student.studentId.name %></span>
+                <% if(student.score >= avgClassScore ){ %>
+                    <span class="student-score-abv-avg"><%= student.score %></span>
+                <% } else{ %>
+                    <span class="student-score-bel-avg"><%= student.score %></span>
+                <% } %>
+            </a>
+        <% } %>
+    </main>
+</body>
+<script>
+    function goBack(){
+        window.history.back();
+    }
+</script>
+</html>
