@@ -7,6 +7,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const MONGODB_URI = 'mongodb+srv://eureka:LOL@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
 const csrf = require('csurf');
 
+
 const Student = require('./models/student');
 const Course = require('./models/course');
 const Teacher = require('./models/teacher');
