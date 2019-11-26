@@ -45,7 +45,7 @@
             <img onclick="window.history.back()" src="/images/left-arrow.svg" class="left-arrow" alt="">
             <h2>Create Quiz</h2>
     </div>
-    <form action="/teacher/quiz/createQuiz" method="POST">
+    <form action="/teacher/quiz/createQuiz?classId=<%= classId %>" method="POST">
         <div class="input-div">
             <input type="text" style="margin-top: 10vh;" placeholder="Quiz title" name="title" id="">
             <input type="number" placeholder="Quiz duration(seconds)" name="duration" id="">

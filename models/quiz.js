@@ -22,8 +22,9 @@ const quizSchema = new Schema({
         options: [],
         correct: [{
             type: String,
-            required: true
-        }]
+            // required: true
+        }],
+        correctOptions:[]
     }],
     responses: [{
         studentId: {
@@ -68,7 +69,7 @@ const quizSchema = new Schema({
                 type: Number
             }
         }]
-    }
+    },
 })
 
 module.exports = mongoose.model('Quiz', quizSchema);

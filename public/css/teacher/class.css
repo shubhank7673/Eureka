@@ -221,3 +221,14 @@ h3{
     height: 11vw;
     width: 11vw;
 }
+.add-quiz-btn{
+    font-size: 15px;
+    color: white;
+    width: 26vw;
+    margin-left: 7vw;
+    background: rgba(102, 94, 255, 0.8);;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;   
+}

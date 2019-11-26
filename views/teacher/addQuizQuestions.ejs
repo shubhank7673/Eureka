@@ -78,7 +78,7 @@
                 </div>
             </div>
             <input type="hidden" name="" id="problemIndex" value="<%= problemIndex %>">
-            <form action="/teacher/quiz/<%= quiz._id %>/finishAdding" id="Form" method="GET">
+            <form action="/teacher/quiz/<%= quiz._id %>/finishAdding/<%= classId %>" id="Form" method="GET">
                 <button type="button" onclick="submitForm()" class="submit-btn">No more problems to add</button>
             </form>
     </div>
@@ -102,6 +102,7 @@
                                 plusBtn.classList = ["question-btn ripple plus-btn"];
                                 plusBtn.textContent = "+";
                                 plusBtn.onclick = function(){fetchProblem(plusBtn)};
+                                document.querySelector("#problemIndex").value = responseData.problemIndex;
                                 document.querySelector(".container-btn").appendChild(newBtn);
                                 document.querySelector(".container-btn").appendChild(plusBtn);
                         }

@@ -357,7 +357,8 @@ module.exports.getClassReviews = (req,res,next) => {
 }
 
 module.exports.getCreateQuiz = (req, res, next) => {
-    res.render('teacher/createQuiz');
+    // console.log(req.query.classId);
+    res.render('teacher/createQuiz',{classId:req.query.classId});
 }
 
 module.exports.postCreateQuiz = (req, res, next) => {
@@ -377,13 +378,24 @@ module.exports.postCreateQuiz = (req, res, next) => {
     })
     quiz.save()
         .then((quiz) => {
-            res.render('teacher/addQuizQuestions', { totalProblems: quiz.problems.length, quiz: quiz, problem: quiz.problems[0], problemIndex: 0 });
+            console.log(req.query.classId);
+            res.render('teacher/addQuizQuestions', { classId:req.query.classId,totalProblems: quiz.problems.length, quiz: quiz, problem: quiz.problems[0], problemIndex: 0 });
         })
         .catch(err => console.log(err));
 }
 
 module.exports.getFinish = (req, res, next) => {
-    res.redirect('/');
+    console.log(req.params.classId)
+    Class.findById(req.params.classId)
+        .then(cls => {
+            cls.inClassAct.quiz.push(req.params.quizId);
+            cls.save()
+                .then(()=>{
+                    res.redirect('/');
+                })
+                .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
 }
 
 module.exports.postProblem = (req, res, next) => {

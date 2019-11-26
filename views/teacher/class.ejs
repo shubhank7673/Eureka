@@ -63,6 +63,7 @@
                 <h3>Class Activities</h3>
             </div>
             <hr>
+            <div style="width: 100%;display: flex;"><button onclick="parent.location='/teacher/quiz/CreateQuiz?classId=<%= classId %>'" class="add-quiz-btn">Add Quiz</button></div>
             <% for(quiz of quizes){ %>
                 <div style="display: flex; align-items: center; justify-content: space-around;">
                     <a href="/teacher/quiz/<%= quiz._id %>" style="text-decoration: none; color:#454f63;">
