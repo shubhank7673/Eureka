@@ -63,6 +63,7 @@ input:focus{
     font-family: 'Montserrat', sans-serif;
     /* font-weight: bold; */
     color:#454f63;
+    
 }
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #454f63;
@@ -137,4 +138,28 @@ input:focus{
     padding-top: 2vh;
     color: red;
     font-weight: bold;
+}
+
+.sign-up-form{
+    text-align: center;
+}
+
+.sign-up-form input{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.17);
+    border: none;
+    border-radius: 10px;
+    height: 48px;
+    width: calc(85vw - 3vw);
+    border-radius: 40px;
+    margin-top: 3.5vh;
+    /* top: 1vh; */
+    font-size: 20px;
+    padding-left: 5vw;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    /* font-weight: bold; */
+    color:#454f63;
+}
+.sign-up-form button{
+    margin-top: 3.5vh;
 }

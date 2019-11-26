@@ -14,13 +14,34 @@
     </div>
     <div class="main-login">
         <form class="login-form" action="/login" method="POST">
-            <% if(isIncorrect){%>
-                <div class="incorrect">Incorrect email or password</div>
-            <%}%>
             <input class="login-email" id="emailField" type="email" name="email" placeholder="email" required>
             <input class="login-passwd" id="passwordField" type="password" name="password" placeholder="password" required>
             <button class="login-btn not-loading" type="submit" onclick="enableAnimation()" >
                 <div> Login </div><div class="login-icon-div">
+                    <img class="login-icon" src="/images/login.svg" alt="">
+                </div>
+            </button>
+            <button class="login-btn loading" type="submit" style="display: none;">
+                <div> Login </div><div class="login-icon-div">
+                    <img class="login-icon-spinner" src="/images/spinner.svg" alt="">
+                </div>
+            </button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+    </div>
+    <div class="main-login sign-up-student" style="display: none;">
+        <form class="sign-up-form" action="/login" method="POST">
+            <% if(isIncorrect){%>
+                <div class="incorrect">Incorrect email or password</div>
+            <%}%>
+            <input class="login-email" id="fnameField" type="email" name="fname" placeholder="first name" required>
+            <input class="login-email" id="lnameField" type="email" name="lname" placeholder="last name" required>
+            <input class="login-email" id="emailField" type="email" name="email" placeholder="email" required>
+            <input class="login-email" id="batchField" type="email" name="email" placeholder="batch" required>
+            <input class="login-email" id="universityField" type="email" name="email" placeholder="University" required>
+            <input class="login-passwd" id="passwordField" type="password" name="password" placeholder="password" required>
+            <button class="login-btn not-loading" type="submit" onclick="enableAnimation()" >
+                <div> Signup </div><div class="login-icon-div">
                     <img class="login-icon" src="/images/login.svg" alt="">
                 </div>
             </button>
