@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/css/modal.css">
 </head>
 <body>
+<%- include('../includes/spinner.ejs') %>
+<div id="screen">
     <div class="header">
         <header>
             <img onclick="parent.location='/logout'" class="settings-btn" src="images/settings.svg" alt="">
@@ -21,7 +23,7 @@
     </div>
     <div class="courses">
         <% for(let course of courses) {%>
-            <div class="course ripple" onclick="parent.location='/teacher/course/<%= course._id %>'">
+            <div class="course ripple" onclick="spinner();parent.location='/teacher/course/<%= course._id %>'">
                 <div class="course-tab-inner">
                     <div class="course-avatar">
                         <img src="images/test-avatar.svg" alt="">
@@ -51,13 +53,14 @@
             <h3>Join Existing Course</h3>
             <form action="/teacher/joinExistingCourse" class="join-course-form" method="GET">
                 <input type="text" name="courseCode" placeholder="course code" id="" class="course-code-input">
-                <button>Join</button>
+                <button onclick="spinner()">Join</button>
                 <!-- <input type="hidden" name="_csrf" value="<%= csrfToken %>"> -->
             </form>
         </div>
         </div>
     </div>
     <div id="snackbar" class="<%= snackbar %>"><%= message %></div>
+</div>
     <script src="/js/modal.js"></script>
     <script>
         function btnClick(){

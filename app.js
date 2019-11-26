@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://eureka:eureka129@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://eureka:LOL@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
 const csrf = require('csurf');
 
 const Student = require('./models/student');
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 // app.use('/',(req,res,next)=>{
-//     res.render('student/class');
+//     res.render('includes/spinner');
 // })
 
 // app.use('/createQuiz',(req,res,next) => {

@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/ripple.css">
     <link rel="stylesheet" href="/css/modal.css">
+    <!-- <link rel="stylesheet" href="/css/spinner.css"> -->
 </head>
 <body>
-<%- include('../includes/loader.ejs') %>
-<div id="screen" style="display: none;">
+<%- include('../includes/spinner.ejs') %>
+
+<div id="screen">
     <header>
         <div class="top-circle-container">
             <div class="top-circle">
@@ -45,7 +47,7 @@
                         {
                     %>
                     <!-- Dummy Route -->
-                    <div class="class-card ripple" onclick="parent.location='/teacher/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
+                    <div class="class-card ripple" onclick="spinner();parent.location='/teacher/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>

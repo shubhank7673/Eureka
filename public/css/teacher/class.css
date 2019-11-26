@@ -195,3 +195,29 @@ h3{
     height: 40px;
     width: 30px;
 }
+/* .review-btn{
+    border: none;
+    background: #665effff;
+    width: 95vw;
+    padding: 1.5vh 0vh;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    font-size: 20px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.26);
+    outline: none;
+} */
+.review-btn{
+    margin: 0;
+    position: absolute;
+    top: 7.5vh;
+    right:35px;
+    height: 8vw;
+    width: 8vw;
+    transition:0.7s;
+}
+.review-btn:active{
+    height: 11vw;
+    width: 11vw;
+}

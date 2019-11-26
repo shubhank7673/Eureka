@@ -12,15 +12,15 @@
 </head>
 
 <body>
-    <%- include('../includes/loader.ejs') %>
-    <div id="screen" style="display: none;">
+<%- include('../includes/spinner.ejs') %>
+    <div id="screen">
         <header>
             <div class="top-circle-container">
                 <div class="top-circle">
                 </div>
                 <h3 class="course-name"><%= course.courseName %></h3>
                 <img class="left-arrow" onclick="goBack()" src="/images/left-arrow.svg">
-                <a href="/student/course/<%= course._id %>/analytics"><img class="analytics-icon" src="/images/analytics.svg" alt=""></a>
+                <img onclick="spinner();parent.location='/student/course/<%= course._id %>/analytics'" class="analytics-icon" src="/images/analytics.svg" alt="">
                 <img class="discussion-icon" src="/images/discussion-icon.svg" alt="">
             </div>
         </header>
@@ -56,7 +56,7 @@
             <% if(course.classes.length > 0) {%>
                 <% for (let classInfo of course.classes) {%>
                     <% if(classInfo.batches.includes(batch)) {%>
-                    <div class="class-card ripple" onclick="parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
+                    <div class="class-card ripple" onclick="spinner();parent.location='/student/course/<%= course._id %>/class/<%= classInfo.class._id %>'">
                         <div class="left">
                             <div class="month">
                                 <%= classInfo.class.schedule.month %>
