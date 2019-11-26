@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://eureka:LOL@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://eureka:eureka129@eureka-o1gai.mongodb.net/Eureka?retryWrites=true&w=majority';
 const csrf = require('csurf');
 
 
@@ -114,10 +114,10 @@ app.use('/invalid',(req,res,next) => {
     }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 mongoose.connect(MONGODB_URI).then(() => {
     console.log('Database Connected');
-    app.listen(3000);
+    app.listen(PORT);
 }).catch(err => {
     console.log('Database connection error');
 });
