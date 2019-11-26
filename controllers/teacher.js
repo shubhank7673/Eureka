@@ -338,7 +338,8 @@ exports.getClass = (req, res, next) => {
         .populate('classIncharge')
         .populate('inClassAct.quiz')
         .then(reqClass => {
-            res.render('teacher/class', {
+            res.render('teacher/class',{
+                classId:reqClass._id,
                 title: reqClass.title,
                 classIncharge: reqClass.classIncharge.name,
                 teacherAvatar: reqClass.classIncharge.avatar,
@@ -347,6 +348,13 @@ exports.getClass = (req, res, next) => {
             })
         }).catch(err => console.log(err));
 };
+
+module.exports.getClassReviews = (req,res,next) => {
+    Class.findById(req.params.classId)
+        .then(cls => {
+            res.render('teacher/classReviews',{reviews:cls.reviews});
+        })
+}
 
 module.exports.getCreateQuiz = (req, res, next) => {
     res.render('teacher/createQuiz');

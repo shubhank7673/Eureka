@@ -178,20 +178,69 @@ exports.getAnalytics = (req, res, next) => {
     });
 };
 
+
 module.exports.getClass = (req, res, next) => {
     Class.findById(req.params.classId)
         .populate('classIncharge')
         .populate('inClassAct.quiz')
         .then(reqClass => {
+            let studentReview = "";
+            let reviewed = "none";
+            let reviewDisplay = "flex";
+            reqClass.reviews.forEach(rev => {
+                if(rev.studentId.toString()===req.student._id.toString())
+                {
+                    reviewed = "flex";
+                    reviewDisplay = "none"
+                    studentReview = rev.review;
+                }
+            })
             res.render('student/class',{
             title: reqClass.title,
+            classId:reqClass._id,
             classIncharge: reqClass.classIncharge.name,
             teacherAvatar: reqClass.classIncharge.avatar,
             schedule: reqClass.schedule,
             quizes: reqClass.inClassAct.quiz,
+            reviewedDisplay:reviewed,
+            reviewDisplay:reviewDisplay,
+            studentReview:studentReview
         });
     }).catch(err => console.log(err));
 };
+
+module.exports.postReviewClass = (req,res,next) => {
+    // console.log(req.params.classId);
+    // console.log(req.body.review);
+    Class.findById(req.params.classId)
+         .then(cls=>{
+             cls.reviews.push({
+                 studentName:req.student.name,
+                 studentId:req.student._id,
+                 review:req.body.review
+             })
+             cls.save()
+                .then(clas => {
+                    let studentReview = "";
+                    let reviewed = "none";
+                    let reviewDisplay = "flex";
+                    clas.reviews.forEach(rev => {
+                        if(rev.studentId.toString()===req.student._id.toString())
+                        {
+                            reviewed = "flex";
+                            reviewDisplay = "none"
+                            studentReview = rev.review;
+                        }
+                    })
+                    res.send({
+                        reviewedDisplay:reviewed,
+                        reviewDisplay:reviewDisplay,
+                        studentReview:studentReview
+                    })
+                })
+                .catch(err => console.log(err));
+         }).catch(err => console.log(err));
+}
 
 module.exports.getQuiz = (req, res, next) => {
     let index = req.student.quiz.findIndex(ele => {

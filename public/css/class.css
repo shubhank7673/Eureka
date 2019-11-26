@@ -175,3 +175,36 @@ h3{
     height: 40px;
     width: 30px;
 }
+.review{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+}
+.review textarea{
+    resize: none;
+    width: 90%;
+    height: 70px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 10px;
+    outline: none;
+}
+.review button{
+    background: #665effff;
+    border: none;
+    font-size: 16px;
+    color: white;
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    outline: none;
+}
+.reviewed{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
+}

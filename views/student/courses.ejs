@@ -51,7 +51,6 @@
         font-size: 28px;
         font-weight: bold;
     }
-
     .close:hover,
     .close:focus {
         color: #000;
@@ -61,11 +60,11 @@
 </style>
 
 <body>
-    <%- include('../includes/loader.ejs') %>
-    <div id="screen" style="display: none;">
+    <%- include('../includes/spinner.ejs') %>
+    <div id="screen">
         <div class="header">
             <header>
-                <img onclick="parent.location='/student/settings'" class="settings-btn" src="images/settings.svg"
+                <img onclick="parent.location='/student/settings';" class="settings-btn" src="images/settings.svg"
                     alt="">
                 <div class="top-left-circle">
                     <img class="logo" src="images/eureka_logo.png" alt="">
@@ -75,7 +74,7 @@
         <div class="courses">
             <% for(let course of courseList) { %>
             <!-- <a href="course/<%= course._id %>" class="course-link"> -->
-            <div class="course ripple" onclick="parent.location='/student/course/<%= course._id %>'">
+            <div class="course ripple" onclick="spinner();parent.location='/student/course/<%= course._id %>'">
                 <!-- <p><%= course._id %></p> -->
                 <h3 class="course-courseCode" style="margin-bottom: 5px;"><%= course.courseCode %></h3>
                 <div class="course-tab-inner">
@@ -98,7 +97,7 @@
                 <form action="/student/joinCourse" method="POST">
                   <input type="text" placeholder="course code" required name="courseCode" id="">
                   <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button>Join</button>
+            <button onclick="spinner()">Join</button>
             </form>
         </div>
     </div>
@@ -111,10 +110,6 @@
     <div id="snackbar" class="<%= snackbar %>"><%= message %></div>
     </div>
     <script>
-        let loader = document.getElementById("loader");
-        loader.style.display = "none";
-        let screen = document.getElementById("screen");
-        screen.style.display = "block";
         function btnClick() {
             let e = document.querySelector(".content");
             // e.style.display = "block";

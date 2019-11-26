@@ -14,6 +14,7 @@ router.get('/course/:courseId',teacherControllers.getCourse);
 router.get('/course/:courseId/students',teacherControllers.getCourseStudents);
 router.get('/course/:courseId/students/:studentId',teacherControllers.getStudentInfo);
 router.get('/course/:courseId/class/:classId',teacherControllers.getClass);
+router.get('/class/:classId/reviews',teacherControllers.getClassReviews);
 router.get('/quiz/:quizId',teacherControllers.getQuiz);
 router.post('/quiz/:quizId/update',teacherControllers.postProblem);
 router.get('/quiz/:quizId/finishAdding',teacherControllers.getFinish);

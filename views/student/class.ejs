@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <%- include('../includes/loader.ejs') %>
-    <div id="screen" style="display: none;">
+    <%- include('../includes/spinner.ejs') %>
+    <div id="screen">
         <header>
             <div class="top-circle-container">
                 <div class="top-circle">
@@ -64,7 +64,7 @@
             </div>
             <hr>
             <% for(quiz of quizes){ %>
-                <div style="display: flex; align-items: center; justify-content: space-around;">
+                <div onclick="spinner()" style="display: flex; align-items: center; justify-content: space-around;">
                     <a href="/student/quiz/<%= quiz._id %>" style="text-decoration: none; color:#454f63;">
                         <div class="quiz ripple">
                             <img src="/images/quiz-icon.svg" alt="">
@@ -79,18 +79,54 @@
                 </div>
             <% } %>
         </div>
+        <div class="review class-activities" style="display:<%= reviewDisplay %>" >
+                <div class="top-heading" style="display: flex;">
+                        <h3>Review Class</h3>
+                </div>
+                <hr width="100%">
+                <div >
+                    <textarea name="reviewInput" id="reviewInput"></textarea>
+                    <button type="button" onclick="sendReview()" class="submit-review">Submit</button>
+                </div>
+        </div>
+        <div class="reviewed class-activities" style="display:<%= reviewedDisplay %>" >
+                <div class="top-heading" style="display: flex;">
+                        <h3>Review Class</h3>
+                        <img src="/images/done.svg" style="height: 30px; width: 30px;margin-left: 2px;" alt="">
+                </div>
+                <hr width="100%">
+                <div>
+                    <p style="font-weight: bold;" id="written">You wrote <%=studentReview%></p>
+                </div>
+        </div>
     </div>
+    <script>
+        function sendReview()
+        {
+                let xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        let responseData = JSON.parse(this.responseText);
+                        console.log(responseData); 
+                        document.querySelector(".review").style.display = "none";
+                        document.querySelector(".reviewed").style.display = "flex";
+                        document.querySelector("#written").textContent = "You wrote "+responseData.studentReview;
+                    }
+                }
+
+                let review = document.querySelector("#reviewInput").value;
+                xhttp.open('POST',"/student/class/<%= classId %>/review",true);
+                xhttp.setRequestHeader('Csrf-Token', "<%= csrfToken %>");
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("review="+review);
+        }
+    </script>
 </body>
 <script>
     function goBack() {
         window.history.back();
     }
-</script>
-<script>
-    let loader = document.getElementById("loader");
-    loader.style.display = "none";
-    let screen = document.getElementById("screen");
-    screen.style.display = "block";
 </script>
 
 </html>

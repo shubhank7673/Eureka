@@ -49,7 +49,8 @@ const classSchema = new Schema({
     classIncharge:{
         type:Schema.Types.ObjectId,
         ref:'Teacher'
-    }
+    },
+    reviews:[]
 });
 
 module.exports = mongoose.model('class', classSchema);
