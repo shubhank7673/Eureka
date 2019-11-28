@@ -10,7 +10,7 @@ for(let i = +actualOptions - 1; i < totalHr.length; i++){
     totalHr[i].style.display = "none";
 }
 
-if (currProblemNo + 1 == totalProblems) {
+if ((+currProblemNo + 1) == totalProblems) {
     document.querySelector("#submit-btn").style.display = "block";
 }
 
