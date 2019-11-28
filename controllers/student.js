@@ -273,7 +273,7 @@ module.exports.getQuiz = (req, res, next) => {
                         return req.student.save(() => {
                             res.render('student/quizEnd', {
                                 quizTitle: quiz.title,
-                                responses: req.student.quiz[index].responses,
+                                responses: req.student.quiz[req.student.quiz.responses.length - 1].responses,
                                 problems: quiz.problems,
                                 startTime: String(quiz.startTime).split("GMT")[0]
                             });
